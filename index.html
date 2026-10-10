@@ -1,0 +1,693 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LA BELLE 여정</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="LA BELLE">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="theme-color" content="#09060A">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-v2.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Nanum+Pen+Script&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<style>
+:root{
+  --bg:#09060A; --s1:#140D16; --s2:#1E1421; --s3:#2A1C2D; --line:#3A2433;
+  --text:#FFF4F9; --muted:#C3A9B9; --dim:#8E7486;
+  --pink:#FF2E8B; --pink2:#FF7CC0; --paper:#FFE6F1; --warm:#FFB37A;
+  --grad:linear-gradient(100deg,#FF2E8B 0%,#FF5FA8 55%,#FF8CC6 100%);
+  --ok:#5BE3A8; --warn:#FFC266;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;overflow-x:hidden;background:var(--bg);color:var(--text)}
+body{font-family:'Noto Sans KR',system-ui,sans-serif;font-size:15px;line-height:1.5;min-height:100vh;
+  padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+[hidden]{display:none!important}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+input,select,textarea{font:inherit;color:var(--text)}
+
+/* glows */
+.glow{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.glow i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55}
+.glow i:nth-child(1){width:340px;height:340px;left:-120px;top:-110px;background:#FF2E8B;opacity:.35}
+.glow i:nth-child(2){width:300px;height:300px;right:-120px;top:120px;background:#FFB37A;opacity:.22}
+.glow i:nth-child(3){width:380px;height:380px;left:20%;bottom:-200px;background:#B5177A;opacity:.3}
+
+.wrap{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:18px 16px 60px}
+
+/* header */
+.kicker{display:inline-block;position:relative;font-weight:700;font-size:13px;color:#fff;padding:3px 14px 4px;margin-bottom:6px}
+.kicker::before{content:"";position:absolute;inset:0;background:var(--grad);transform:skew(-10deg) rotate(-1.5deg);
+  border-radius:3px 10px 4px 12px;z-index:-1;box-shadow:0 0 22px rgba(255,46,139,.45)}
+.title{font-weight:900;font-size:40px;letter-spacing:.02em;line-height:1;margin:2px 0 0}
+.title .ol{color:transparent;-webkit-text-stroke:1.6px var(--pink2);margin-left:8px}
+.script{font-family:'Dancing Script',cursive;color:var(--pink2);font-size:24px;line-height:1.1;transform:rotate(-3deg);display:inline-block}
+.hrow{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.next{margin-top:10px;font-size:13px;color:var(--muted)}
+.next b{color:var(--text);font-weight:700}
+
+/* tabs */
+.tabs{display:flex;gap:8px;margin:18px 0 16px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;min-height:44px;padding:0 18px;border-radius:999px;background:var(--s2);border:1px solid var(--line);font-weight:700;font-size:14px;color:var(--muted)}
+.tab.on{background:var(--grad);color:#fff;border-color:transparent;box-shadow:0 6px 22px rgba(255,46,139,.35)}
+
+/* cards */
+.card{background:rgba(30,20,33,.72);border:1px solid var(--line);border-radius:20px;padding:16px;
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+.stack>*+*{margin-top:12px}
+.h2{font-weight:900;font-size:18px;margin:0 0 10px}
+.h3{font-weight:700;font-size:13px;color:var(--pink2);letter-spacing:.04em;margin:0 0 8px}
+.muted{color:var(--muted)} .dim{color:var(--dim)} .small{font-size:12.5px}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media(min-width:720px){.stats{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.stat{text-align:left;padding:14px;border-radius:18px;background:rgba(30,20,33,.72);border:1px solid var(--line);min-height:44px}
+.stat .n{font-weight:900;font-size:30px;line-height:1}
+.stat .l{font-size:12.5px;color:var(--muted);margin-top:6px}
+.stat.on{border-color:var(--pink);box-shadow:0 0 0 1px var(--pink) inset,0 8px 26px rgba(255,46,139,.25)}
+.stat.on .n{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* patient cards */
+.plist{display:grid;gap:10px;margin-top:14px}
+@media(min-width:720px){.plist{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.pc{text-align:left;width:100%;display:block}
+.pc .top{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.pc .nm{font-weight:900;font-size:18px}
+.code{font-size:11px;color:var(--dim);letter-spacing:.05em}
+.pill{display:inline-block;font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;background:rgba(255,46,139,.16);color:var(--pink2);border:1px solid rgba(255,46,139,.35);white-space:nowrap}
+.pill.gray{background:var(--s3);color:var(--muted);border-color:var(--line)}
+.pill.ok{background:rgba(91,227,168,.12);color:var(--ok);border-color:rgba(91,227,168,.35)}
+.meta{font-size:13px;color:var(--muted);margin-top:4px}
+.bar{height:6px;border-radius:9px;background:var(--s3);margin-top:12px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--grad);border-radius:9px}
+.nx{font-size:13px;margin-top:10px}
+.nx b{color:var(--pink2)}
+
+.empty{text-align:center;padding:30px 16px}
+.empty .pen{font-family:'Nanum Pen Script',cursive;font-size:30px;color:var(--pink2);line-height:1.15}
+
+/* buttons */
+.btn{min-height:46px;padding:0 20px;border-radius:999px;font-weight:700;background:var(--s3);border:1px solid var(--line)}
+.btn.pri{background:var(--grad);border-color:transparent;color:#fff;box-shadow:0 6px 22px rgba(255,46,139,.32)}
+.btn.ghost{background:transparent}
+.btn.danger{background:rgba(255,80,110,.12);border-color:rgba(255,80,110,.45);color:#FF8FA6}
+.btn.danger.arm{background:#E0244F;color:#fff;border-color:transparent}
+.btn.sm{min-height:38px;padding:0 14px;font-size:13px}
+.brow{display:flex;gap:8px;flex-wrap:wrap}
+.brow.end{justify-content:flex-end}
+
+/* forms */
+.f{margin-bottom:14px}
+.f label.lb{display:block;font-size:13px;font-weight:700;color:var(--muted);margin-bottom:6px}
+.f label.lb em{color:var(--pink);font-style:normal}
+.in{width:100%;min-height:46px;border-radius:14px;background:var(--s1);border:1px solid var(--line);padding:10px 14px;outline:none}
+.in:focus{border-color:var(--pink)}
+textarea.in{min-height:84px;resize:vertical}
+select.in{appearance:none;-webkit-appearance:none}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{min-height:44px;padding:0 15px;border-radius:999px;background:var(--s1);border:1px solid var(--line);font-size:14px;font-weight:500;color:var(--muted)}
+.chip.on{background:rgba(255,46,139,.18);border-color:var(--pink);color:#fff;font-weight:700}
+.chips.small .chip{min-height:38px;padding:0 12px;font-size:13px}
+.confirm{font-size:12.5px;color:var(--pink2);margin-top:5px;min-height:18px}
+.g2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+.g3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media(max-width:520px){.g3{grid-template-columns:minmax(0,1fr)}}
+.warnbox{background:rgba(255,194,102,.1);border:1px solid rgba(255,194,102,.4);color:var(--warn);border-radius:14px;padding:10px 12px;font-size:13px;margin-bottom:12px}
+
+/* detail */
+.back{display:inline-flex;align-items:center;gap:6px;min-height:44px;color:var(--muted);font-weight:700}
+.dhead .nm{font-weight:900;font-size:28px;line-height:1.15}
+.steps{display:flex;flex-wrap:wrap;gap:6px}
+.step{min-height:36px;padding:0 11px;border-radius:999px;font-size:12.5px;background:var(--s1);border:1px solid var(--line);color:var(--dim)}
+.step.done{color:var(--muted);border-color:#5a3049}
+.step.cur{background:var(--grad);color:#fff;border-color:transparent;font-weight:700}
+.kv{display:grid;grid-template-columns:96px minmax(0,1fr);gap:6px 10px;font-size:14px}
+.kv dt{color:var(--dim)} .kv dd{margin:0;word-break:break-word}
+.ev{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line)}
+.ev:first-child{border-top:0}
+.ev .dot{width:10px;height:10px;border-radius:50%;margin-top:6px;flex:0 0 10px;background:var(--pink)}
+.ev .body{flex:1;min-width:0;text-align:left}
+.ev .t1{font-weight:700}
+.ev .t2{font-size:13px;color:var(--muted)}
+.ev.done .t1{text-decoration:line-through;color:var(--dim)}
+.tick{min-width:44px;min-height:44px;border-radius:12px;border:1px solid var(--line);background:var(--s1);color:var(--dim);font-size:12px;font-weight:700}
+.tick.on{background:rgba(91,227,168,.14);border-color:rgba(91,227,168,.5);color:var(--ok)}
+.sched{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px}
+.sc{padding:10px 12px;border-radius:14px;background:var(--s1);border:1px solid var(--line);font-size:13px}
+.sc b{display:block;font-size:12px;color:var(--pink2)}
+.sc.past{opacity:.5}
+.sc.today{border-color:var(--pink);box-shadow:0 0 0 1px var(--pink) inset}
+.log{font-size:12.5px;color:var(--muted);max-height:220px;overflow:auto}
+.log div{padding:5px 0;border-top:1px dashed var(--line)}
+.log div:first-child{border-top:0}
+.money{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.money .m{background:var(--s1);border:1px solid var(--line);border-radius:14px;padding:10px}
+.money .m b{display:block;font-size:16px;font-weight:900}
+.money .m span{font-size:12px;color:var(--dim)}
+.dgrid{display:grid;gap:12px}
+@media(min-width:820px){.dgrid{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);align-items:start}}
+
+/* calendar */
+.calwrap{display:grid;gap:12px}
+@media(min-width:820px){.calwrap{grid-template-columns:330px minmax(0,1fr);align-items:start}}
+.cals{display:grid;gap:12px}
+@media(max-width:819px){.cals{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+@media(max-width:560px){.cals{grid-template-columns:minmax(0,1fr)}}
+.mcal .mh{font-weight:900;margin-bottom:6px}
+.mgrid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px;text-align:center;font-size:12.5px}
+.mgrid .wd{color:var(--dim);font-size:11px;padding:2px 0}
+.dcell{position:relative;min-height:36px;border-radius:10px;color:var(--muted)}
+.dcell.has::after{content:"";position:absolute;left:50%;bottom:4px;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;background:var(--pink)}
+.dcell.today{color:#fff;font-weight:900;box-shadow:0 0 0 1px var(--line) inset}
+.dcell.sel{background:var(--grad);color:#fff;font-weight:900}
+.dcell.sel::after{background:#fff}
+
+/* patient view */
+.pv{position:fixed;inset:0;z-index:20;background:#0B070C;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
+.pv .sky{position:absolute;left:0;right:0;top:0;height:300px;overflow:hidden;pointer-events:none;
+  background:linear-gradient(180deg,rgba(255,179,122,.32) 0%,rgba(255,46,139,.22) 45%,rgba(11,7,12,0) 100%)}
+.pv .in2{position:relative;max-width:440px;margin:0 auto;padding:calc(16px + env(safe-area-inset-top)) 16px 40px}
+.pv .hello{font-weight:900;font-size:26px;line-height:1.2;margin-top:4px}
+.pv .pen{font-family:'Nanum Pen Script',cursive;font-size:24px;color:var(--paper);line-height:1.15;margin-top:8px}
+.tl{position:relative;padding-left:22px}
+.tl::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--pink),rgba(255,46,139,.1))}
+.tli{position:relative;padding:0 0 14px}
+.tli::before{content:"";position:absolute;left:-21px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--bg);border:2px solid var(--pink)}
+.tli.done::before{background:var(--pink)}
+.tli .d{font-size:12px;color:var(--pink2);font-weight:700}
+.tli .w{font-weight:700}
+.tli .p{font-size:13px;color:var(--muted)}
+.chg{display:inline-block;margin-left:6px;font-size:11px;font-weight:700;color:#fff;background:#E0244F;border-radius:999px;padding:1px 8px;vertical-align:2px}
+.ring{display:flex;align-items:center;gap:14px}
+.ring .pct{font-weight:900;font-size:34px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* auth */
+.auth{max-width:400px;margin:8vh auto 0}
+.auth .pen{font-family:'Nanum Pen Script',cursive;font-size:28px;color:var(--pink2);line-height:1.15;margin:16px 0 18px}
+
+.toast{position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:40;
+  background:#fff;color:#1a0f17;font-weight:700;font-size:14px;padding:11px 18px;border-radius:999px;max-width:calc(100% - 32px);text-align:center;
+  box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.foot{margin-top:18px;font-size:12.5px;color:var(--dim)}
+.sep{height:1px;background:var(--line);margin:14px 0}
+</style>
+</head>
+<body>
+<div class="glow"><i></i><i></i><i></i></div>
+
+<div class="wrap">
+  <!-- AUTH -->
+  <section id="auth" class="auth" hidden>
+    <span class="kicker">글로벌 의료관광</span>
+    <h1 class="title">LA BELLE<span class="ol">LB</span></h1>
+    <div class="script">My Medical Journey</div>
+    <div class="pen">“새로운 나, 새로운 시작.”<br>환자 여정 통합관리</div>
+    <div class="card">
+      <div class="f"><label class="lb">이메일</label><input id="aEmail" class="in" type="email" autocomplete="username"></div>
+      <div class="f"><label class="lb">비밀번호</label><input id="aPass" class="in" type="password" autocomplete="current-password"></div>
+      <div id="aMsg" class="small" style="color:var(--pink2);min-height:20px;margin-bottom:8px"></div>
+      <div class="brow"><button id="aIn" class="btn pri" style="flex:1">로그인</button><button id="aUp" class="btn">계정 만들기</button></div>
+    </div>
+  </section>
+
+  <!-- APP -->
+  <section id="app" hidden>
+    <header>
+      <div class="hrow">
+        <div>
+          <span class="kicker">글로벌 의료관광</span>
+          <h1 class="title">LA BELLE<span class="ol">LB</span></h1>
+        </div>
+        <div class="script">Real Story · Real Change</div>
+      </div>
+      <div id="next" class="next"></div>
+    </header>
+    <nav class="tabs" id="tabs">
+      <button class="tab" data-t="home">환자 여정</button>
+      <button class="tab" data-t="new">+ 신규 환자</button>
+      <button class="tab" data-t="cal">일정</button>
+      <button class="tab" data-t="hist">기록</button>
+    </nav>
+    <main id="main"></main>
+  </section>
+</div>
+
+<div id="pv" class="pv" hidden></div>
+<div id="toast" class="toast" hidden></div>
+
+<script>
+const SB_URL="https://agdqlnaedojcgivwluty.supabase.co";
+const SB_KEY="sb_publishable_PKGxxrfpduzI7xY1_DWQyQ_cnJA9isP";
+const T="labelle_patients";
+const sb=window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:true,autoRefreshToken:true,storageKey:"labelle-auth"}});
+
+/* ---------- constants ---------- */
+const STAGES=["신규 상담","병원 상담","견적 확인","예약금 입금","수술 예약 확정","비자·입국 준비","한국 입국","병원 진료","수술·시술","회복관리","출국","장기 사후관리","완료"];
+const GROUPS=[
+  {k:"all",l:"전체 진행",f:s=>s<12},
+  {k:"consult",l:"상담·견적",f:s=>s<=3},
+  {k:"ready",l:"입국 예정",f:s=>s===4||s===5},
+  {k:"korea",l:"한국 체류",f:s=>s>=6&&s<=9},
+  {k:"after",l:"출국·사후관리",f:s=>s===10||s===11}
+];
+const NAT=["몽골","미국","캐나다","호주","중동","기타"];
+const LANG=["몽골어","영어","한국어","러시아어","기타"];
+const DEPT=["성형외과","피부과","치과","안과","건강검진","기타"];
+const SRC=["해외 파트너","홈페이지","SNS","지인 소개","기타"];
+const EVT=["항공 입국","공항 픽업","병원 상담","검사","수술·시술","통역","숙박 체크인","관광·체험","재진","공항 샌딩","항공 출국","기타"];
+const EVCOL={"항공 입국":"#FFB37A","항공 출국":"#FFB37A","공항 픽업":"#FFC266","공항 샌딩":"#FFC266","병원 상담":"#FF7CC0","검사":"#FF7CC0","수술·시술":"#FF2E8B","재진":"#FF7CC0","통역":"#C4A3FF","숙박 체크인":"#7FD1FF","관광·체험":"#5BE3A8","기타":"#C3A9B9"};
+const PRE=[[-14,"사전 준비사항·검사 안내"],[-7,"병원별 수술 준비사항"],[-3,"방문 일정·준비물"],[-1,"금식·복약 등 병원 지침"],[0,"병원 위치·담당자 안내"],[1,"퇴원·회복 안내"],[3,"초기 회복 확인"],[7,"경과·불편 증상 확인"],[14,"재진·경과 확인"]];
+const FU=[[1,"회복 상태·경과사진·불편 증상"],[3,"회복 경과·만족도·추가 상담"],[6,"장기 경과사진·상태 확인"],[12,"최종 경과 확인·재진 안내"]];
+const WD=["일","월","화","수","목","금","토"];
+
+/* ---------- state ---------- */
+const S={user:null,rows:[],tab:"home",group:"all",openId:null,editing:false,evEdit:null,evAdd:false,calSel:null,calBase:null,hist:"all",arm:null,dupArm:false};
+
+/* ---------- utils ---------- */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const pad=n=>String(n).padStart(2,"0");
+const iso=d=>d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
+const pd=s=>{const[a,b,c]=s.split("-").map(Number);return new Date(a,b-1,c)};
+const today=()=>iso(new Date());
+const addDays=(s,n)=>{const d=pd(s);d.setDate(d.getDate()+n);return iso(d)};
+const addMonths=(s,n)=>{const d=pd(s),day=d.getDate();d.setDate(1);d.setMonth(d.getMonth()+n);const last=new Date(d.getFullYear(),d.getMonth()+1,0).getDate();d.setDate(Math.min(day,last));return iso(d)};
+const fD=s=>{if(!s)return"";const d=pd(s);return`${d.getMonth()+1}월 ${d.getDate()}일 (${WD[d.getDay()]})`};
+const fFull=s=>{if(!s)return"";const d=pd(s);return`${d.getFullYear()}년 ${d.getMonth()+1}월 ${d.getDate()}일 ${WD[d.getDay()]}요일`};
+const fT=t=>{if(!t)return"";const[h,m]=t.split(":").map(Number);return`${h<12?"오전":"오후"} ${h%12||12}:${pad(m)}`};
+const man=n=>n||n===0?(n>=10000?(Math.round(n/1000)/10).toLocaleString("ko-KR")+"만원":Number(n).toLocaleString("ko-KR")+"원"):"—";
+const won=n=>n||n===0?"₩"+Number(n).toLocaleString("ko-KR"):"—";
+const dDiff=s=>Math.round((pd(s)-pd(today()))/864e5);
+const ddLabel=n=>n===0?"오늘":n>0?`D-${n}`:`D+${-n}`;
+const code=r=>{const c=(r.created_at||"").slice(2,10).replace(/-/g,"");return`LB-${c||"000000"}-${String(r.id||"").slice(0,4).toUpperCase()}`};
+const nowStamp=()=>{const d=new Date();return`${d.getMonth()+1}/${d.getDate()} ${fT(pad(d.getHours())+":"+pad(d.getMinutes()))}`};
+const uid=()=>Math.random().toString(36).slice(2,10);
+function toast(m){const t=$("#toast");t.textContent=m;t.hidden=false;clearTimeout(toast._);toast._=setTimeout(()=>t.hidden=true,2400)}
+const active=()=>S.rows.filter(r=>r.status!=="canceled");
+const byId=id=>S.rows.find(r=>r.id===id);
+const evSort=(a,b)=>(a.date+(a.time||"99")).localeCompare(b.date+(b.time||"99"));
+function nextEvent(r){const t=today();return (r.events||[]).filter(e=>!e.done&&e.date>=t).sort(evSort)[0]}
+
+/* ---------- auth ---------- */
+async function boot(){
+  const {data}=await sb.auth.getSession();
+  S.user=data?.session?.user||null;
+  if(S.user){showApp()}else{$("#auth").hidden=false;$("#app").hidden=true}
+}
+async function signIn(up){
+  const email=$("#aEmail").value.trim(),password=$("#aPass").value;
+  if(!email||!password){$("#aMsg").textContent="이메일과 비밀번호를 입력하세요.";return}
+  $("#aMsg").textContent="확인 중…";
+  const r=up?await sb.auth.signUp({email,password}):await sb.auth.signInWithPassword({email,password});
+  if(r.error){$("#aMsg").textContent=up?"계정을 만들 수 없습니다: "+r.error.message:"이메일 또는 비밀번호가 맞지 않습니다.";return}
+  S.user=r.data.user||r.data.session?.user;showApp();
+}
+$("#aIn").onclick=()=>signIn(false);
+$("#aUp").onclick=()=>signIn(true);
+$("#aPass").addEventListener("keydown",e=>{if(e.key==="Enter")signIn(false)});
+async function showApp(){$("#auth").hidden=true;$("#app").hidden=false;await load();render()}
+
+/* ---------- data ---------- */
+async function load(){
+  const {data,error}=await sb.from(T).select("*").order("created_at",{ascending:false});
+  if(error){toast("불러오기 실패: "+error.message);return}
+  S.rows=(data||[]).map(r=>({...r,events:r.events||[],log:r.log||[]}));
+}
+async function patch(r,p,logText){
+  if(logText){p.log=[{at:nowStamp(),text:logText},...(r.log||[])].slice(0,200)}
+  const {error}=await sb.from(T).update(p).eq("id",r.id);
+  if(error){toast("저장 실패: "+error.message);return false}
+  Object.assign(r,p);return true;
+}
+document.addEventListener("visibilitychange",async()=>{if(!document.hidden&&S.user&&!busy()){await load();render()}});
+setInterval(async()=>{if(S.user&&!document.hidden&&!busy()){await load();render()}},60000);
+function busy(){return S.tab==="new"||S.editing||S.evAdd||S.evEdit}
+
+/* ---------- render root ---------- */
+function render(){
+  document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("on",b.dataset.t===S.tab&&!S.openId));
+  renderNext();
+  const m=$("#main");
+  if(S.openId&&byId(S.openId)){m.innerHTML=detailHTML(byId(S.openId));bindDetail();return}
+  S.openId=null;
+  if(S.tab==="home")m.innerHTML=homeHTML();
+  else if(S.tab==="new")m.innerHTML=formHTML(null);
+  else if(S.tab==="cal")m.innerHTML=calHTML();
+  else m.innerHTML=histHTML();
+  bindMain();
+}
+function renderNext(){
+  const t=today();let best=null;
+  active().forEach(r=>(r.events||[]).forEach(e=>{if(!e.done&&e.date>=t&&(!best||evSort(e,best.e)<0))best={e,r}}));
+  $("#next").innerHTML=best?`다음 일정 · <b>${fD(best.e.date)} ${fT(best.e.time)}</b> ${esc(best.e.type)} · ${esc(best.r.name)}`:`오늘은 ${fFull(t)}`;
+}
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{S.tab=b.dataset.t;S.openId=null;S.editing=false;S.evAdd=false;S.evEdit=null;S.dupArm=false;render();scrollTo(0,0)});
+
+/* ---------- home ---------- */
+function homeHTML(){
+  const a=active();
+  const stats=GROUPS.slice(1).map(g=>`<button class="stat ${S.group===g.k?"on":""}" data-g="${g.k}"><div class="n">${a.filter(r=>g.f(r.stage||0)).length}</div><div class="l">${g.l}</div></button>`).join("");
+  const g=GROUPS.find(x=>x.k===S.group)||GROUPS[0];
+  const key=r=>{const e=nextEvent(r);return e?"0"+e.date+(e.time||"99"):r.status==="canceled"?"9":"5"+String(99-(r.stage||0)).padStart(2,"0")};
+  const list=a.filter(r=>g.f(r.stage||0)).sort((x,y)=>key(x).localeCompare(key(y)));
+  let body;
+  if(!a.length){
+    body=`<div class="card empty"><div class="pen">한 사람의 이야기가<br>새로운 시작이 됩니다.</div><p class="muted small">아직 등록된 환자가 없습니다.</p>
+    <div class="brow" style="justify-content:center"><button class="btn pri" data-go="new">+ 첫 환자 등록</button><button class="btn" id="seed">샘플 환자 보기</button></div></div>`;
+  }else if(!list.length){body=`<div class="card empty muted">이 단계의 환자가 없습니다.</div>`}
+  else body=`<div class="plist">${list.map(cardHTML).join("")}</div>`;
+  return `<div class="stats">${stats}</div>
+  ${S.group!=="all"?`<div style="margin-top:10px"><button class="chip" data-g="all">← 전체 보기</button></div>`:""}
+  ${body}`;
+}
+function cardHTML(r){
+  const s=r.stage||0,ne=nextEvent(r);
+  return `<button class="card pc" data-open="${r.id}">
+    <div class="top"><div><div class="nm">${esc(r.name)}</div><div class="code">${code(r)}</div></div><span class="pill ${s===12?"ok":""}">${STAGES[s]}</span></div>
+    <div class="meta">${[r.nationality,r.language,r.department,r.procedure].filter(Boolean).map(esc).join(" · ")||"정보 없음"}</div>
+    <div class="bar"><i style="width:${Math.round((s+1)/STAGES.length*100)}%"></i></div>
+    <div class="nx">${ne?`다음 · <b>${fD(ne.date)} ${fT(ne.time)}</b> ${esc(ne.type)}`:r.surgery_date?`수술일 · <b>${fD(r.surgery_date)}</b>`:`<span class="dim">예정된 일정 없음</span>`}</div>
+  </button>`;
+}
+
+/* ---------- form (new / edit) ---------- */
+function chips(field,opts,val,cls=""){return `<div class="chips ${cls}" data-field="${field}">${opts.map((o,i)=>`<button type="button" class="chip ${val===o||(field==="stage"&&val===i)?"on":""}" data-v="${field==="stage"?i:esc(o)}">${esc(o)}</button>`).join("")}</div>`}
+function dateField(id,label,val){return `<div class="f"><label class="lb">${label}</label><input class="in dt" type="date" id="${id}" value="${val||""}"><div class="confirm" data-for="${id}">${val?"→ "+fFull(val):""}</div></div>`}
+function formHTML(r){
+  const v=r||{stage:0};
+  return `<div class="card">
+   <h2 class="h2">${r?"환자 정보 수정":"신규 환자 등록"}</h2>
+   <div id="dupWarn"></div>
+   <div class="f"><label class="lb">이름 <em>*</em></label><input id="fName" class="in" value="${esc(v.name)}" placeholder="여권 영문명 또는 이름"></div>
+   <div class="f"><label class="lb">국적</label>${chips("nationality",NAT,v.nationality)}</div>
+   <div class="f"><label class="lb">사용 언어</label>${chips("language",LANG,v.language)}</div>
+   <div class="g2"><div class="f"><label class="lb">연락처·메신저</label><input id="fContact" class="in" value="${esc(v.contact)}" placeholder="+976 …"></div>
+   <div class="f"><label class="lb">담당 상담사</label><input id="fCounselor" class="in" value="${esc(v.counselor)}"></div></div>
+   <div class="f"><label class="lb">진료과목</label>${chips("department",DEPT,v.department)}</div>
+   <div class="g2"><div class="f"><label class="lb">시술·수술명</label><input id="fProc" class="in" value="${esc(v.procedure)}" placeholder="예: 코 성형"></div>
+   <div class="f"><label class="lb">병원</label><input id="fHosp" class="in" value="${esc(v.hospital)}"></div></div>
+   <div class="f"><label class="lb">유치 경로</label>${chips("source",SRC,v.source)}</div>
+   <div class="f"><label class="lb">해외 파트너명</label><input id="fPartner" class="in" value="${esc(v.partner)}" placeholder="예: 울란바토르 OO에이전시"></div>
+   <div class="f"><label class="lb">진행 단계</label>${chips("stage",STAGES,v.stage||0,"small")}</div>
+   <div class="g3">${dateField("fArr","한국 입국일",v.arrival_date)}${dateField("fSurg","수술일",v.surgery_date)}${dateField("fDep","출국일",v.departure_date)}</div>
+   <div class="g2"><div class="f"><label class="lb">견적 금액 (원)</label><input id="fQuote" class="in" inputmode="numeric" value="${v.quote_krw??""}"></div>
+   <div class="f"><label class="lb">당사 수납액 (원)</label><input id="fPaid" class="in" inputmode="numeric" value="${v.paid_krw??""}"></div></div>
+   <div class="f"><label class="lb">메모</label><textarea id="fNotes" class="in">${esc(v.notes)}</textarea></div>
+   <div class="brow end">${r?`<button class="btn ghost" id="fClose">닫기</button>`:""}<button class="btn pri" id="fSave">저장</button></div>
+  </div>`;
+}
+function readForm(){
+  const pick=f=>{const b=document.querySelector(`.chips[data-field="${f}"] .chip.on`);return b?b.dataset.v:null};
+  const num=id=>{const x=$(id).value.replace(/[^\d]/g,"");return x?Number(x):null};
+  return {name:$("#fName").value.trim(),nationality:pick("nationality"),language:pick("language"),contact:$("#fContact").value.trim()||null,
+    counselor:$("#fCounselor").value.trim()||null,department:pick("department"),procedure:$("#fProc").value.trim()||null,hospital:$("#fHosp").value.trim()||null,
+    source:pick("source"),partner:$("#fPartner").value.trim()||null,stage:Number(pick("stage")||0),
+    arrival_date:$("#fArr").value||null,surgery_date:$("#fSurg").value||null,departure_date:$("#fDep").value||null,
+    quote_krw:num("#fQuote"),paid_krw:num("#fPaid"),notes:$("#fNotes").value.trim()||null};
+}
+function bindForm(r){
+  document.querySelectorAll(".chips").forEach(g=>g.onclick=e=>{const b=e.target.closest(".chip");if(!b)return;
+    const was=b.classList.contains("on");g.querySelectorAll(".chip").forEach(x=>x.classList.remove("on"));
+    if(!was||g.dataset.field==="stage"||g.dataset.field==="evtype")b.classList.add("on")});
+  document.querySelectorAll("input.dt").forEach(i=>i.oninput=()=>{const c=document.querySelector(`.confirm[data-for="${i.id}"]`);if(c)c.textContent=i.value?"→ "+fFull(i.value):""});
+  const sv=$("#fSave");if(!sv)return;
+  sv.onclick=async()=>{
+    const v=readForm();
+    if(!v.name){toast("이름을 입력하세요.");$("#fName").focus();return}
+    if(!r){
+      const dup=active().find(x=>x.name.trim().toLowerCase()===v.name.toLowerCase()||(v.contact&&x.contact===v.contact));
+      if(dup&&!S.dupArm){S.dupArm=true;$("#dupWarn").innerHTML=`<div class="warnbox">이미 등록된 환자와 비슷합니다: <b>${esc(dup.name)}</b> (${code(dup)}). 그래도 등록하려면 저장을 한 번 더 누르세요.</div>`;scrollTo(0,0);return}
+      sv.disabled=true;
+      const {data,error}=await sb.from(T).insert({...v,events:[],log:[{at:nowStamp(),text:"환자 등록 · "+STAGES[v.stage]}],status:"active"}).select().single();
+      sv.disabled=false;
+      if(error){toast("저장 실패: "+error.message);return}
+      S.rows.unshift({...data,events:data.events||[],log:data.log||[]});S.dupArm=false;
+      toast("등록되었습니다.");S.tab="home";S.openId=data.id;render();scrollTo(0,0);
+    }else{
+      const ch=[];if(v.stage!==(r.stage||0))ch.push(`단계: ${STAGES[r.stage||0]} → ${STAGES[v.stage]}`);
+      [["surgery_date","수술일"],["arrival_date","입국일"],["departure_date","출국일"]].forEach(([k,l])=>{if((v[k]||null)!==(r[k]||null))ch.push(`${l}: ${r[k]?fD(r[k]):"없음"} → ${v[k]?fD(v[k]):"없음"}`)});
+      if(await patch(r,v,"정보 수정"+(ch.length?" · "+ch.join(", "):""))){S.editing=false;toast("저장되었습니다.");render()}
+    }
+  };
+  const c=$("#fClose");if(c)c.onclick=()=>{S.editing=false;render()};
+}
+
+/* ---------- detail ---------- */
+function detailHTML(r){
+  if(S.editing)return `<button class="back" id="dBack">← 목록</button>`+formHTML(r);
+  const s=r.stage||0,evs=(r.events||[]).slice().sort(evSort);
+  const due=(r.quote_krw||0)-(r.paid_krw||0);
+  const t=today();
+  const pre=r.surgery_date?PRE.map(([o,l])=>{const d=addDays(r.surgery_date,o);return `<div class="sc ${d<t?"past":""} ${d===t?"today":""}"><b>${o<0?"수술 "+(-o)+"일 전":o===0?"수술 당일":"수술 후 "+o+"일"}</b>${fD(d)}<div class="dim small">${l}</div></div>`}).join(""):"";
+  const fu=r.surgery_date?FU.map(([m,l])=>{const d=addMonths(r.surgery_date,m);return `<div class="sc ${d<t?"past":""} ${d===t?"today":""}"><b>${m}개월</b>${fD(d)}<div class="dim small">${l}</div></div>`}).join(""):"";
+  return `<button class="back" id="dBack">← 목록</button>
+  <div class="dgrid">
+   <div class="stack">
+    <div class="card dhead">
+      <div class="top" style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start">
+        <div><div class="code">${code(r)}</div><div class="nm">${esc(r.name)}</div>
+        <div class="meta">${[r.nationality,r.language,r.department,r.procedure].filter(Boolean).map(esc).join(" · ")}</div></div>
+        ${r.status==="canceled"?`<span class="pill gray">취소됨</span>`:`<span class="pill ${s===12?"ok":""}">${STAGES[s]}</span>`}
+      </div>
+      <div class="bar"><i style="width:${Math.round((s+1)/STAGES.length*100)}%"></i></div>
+      <div class="brow" style="margin-top:14px">
+        <button class="btn pri sm" id="pvOpen">환자 화면 보기</button>
+        ${s<12&&r.status!=="canceled"?`<button class="btn sm" id="stNext">다음 단계 → ${STAGES[s+1]}</button>`:""}
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="h3">환자 여정 단계 · 눌러서 변경</div>
+      <div class="steps">${STAGES.map((x,i)=>`<button class="step ${i<s?"done":""} ${i===s?"cur":""}" data-st="${i}">${i+1}. ${x}</button>`).join("")}</div>
+    </div>
+
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><div class="h3" style="margin:0">일정</div>${S.evAdd?"":`<button class="btn sm" id="evNew">+ 일정 추가</button>`}</div>
+      ${S.evAdd?evFormHTML(null):""}
+      <div style="margin-top:8px">${evs.length?evs.map(e=>S.evEdit===e.id?evFormHTML(e):evRow(e)).join(""):`<div class="dim small" style="padding:8px 0">아직 일정이 없습니다. 항공·픽업·병원·숙박 일정을 추가하세요.</div>`}</div>
+    </div>
+
+    ${r.surgery_date?`<div class="card"><div class="h3">수술 전후 안내 자동 발송 일정 · ${r.language||"환자 언어"}</div><div class="sched">${pre}</div>
+    <div class="h3" style="margin-top:14px">수술 후 12개월 사후관리</div><div class="sched">${fu}</div></div>`:
+    `<div class="card"><div class="h3">수술 전후 안내 · 사후관리</div><div class="dim small">수술일을 입력하면 D-14 ~ D+14 안내와 1·3·6·12개월 사후관리 일정이 자동으로 만들어집니다.</div></div>`}
+   </div>
+
+   <div class="stack">
+    <div class="card"><div class="h3">기본 정보</div>
+      <dl class="kv">
+        <dt>연락처</dt><dd>${esc(r.contact)||"—"}</dd>
+        <dt>병원</dt><dd>${esc(r.hospital)||"—"}</dd>
+        <dt>담당 상담사</dt><dd>${esc(r.counselor)||"—"}</dd>
+        <dt>유치 경로</dt><dd>${esc([r.source,r.partner].filter(Boolean).join(" · "))||"—"}</dd>
+        <dt>입국</dt><dd>${r.arrival_date?fD(r.arrival_date):"—"}</dd>
+        <dt>수술</dt><dd>${r.surgery_date?fD(r.surgery_date)+` <span class="pill" style="margin-left:4px">${ddLabel(dDiff(r.surgery_date))}</span>`:"—"}</dd>
+        <dt>출국</dt><dd>${r.departure_date?fD(r.departure_date):"—"}</dd>
+        <dt>메모</dt><dd>${esc(r.notes)||"—"}</dd>
+      </dl>
+    </div>
+    <div class="card"><div class="h3">결제·정산</div>
+      <div class="money"><div class="m"><span>견적</span><b>${man(r.quote_krw)}</b></div><div class="m"><span>당사 수납</span><b>${man(r.paid_krw)}</b></div><div class="m"><span>미수금</span><b style="color:${due>0?"var(--warn)":"var(--ok)"}">${r.quote_krw?man(due):"—"}</b></div></div>
+    </div>
+    <div class="card"><div class="h3">변경 이력</div><div class="log">${(r.log||[]).map(l=>`<div><span class="dim">${esc(l.at)}</span> · ${esc(l.text)}</div>`).join("")||"—"}</div></div>
+    <div class="brow end">
+      <button class="btn" id="dEdit">정보 수정</button>
+      ${r.status==="canceled"?`<button class="btn" id="dReact">다시 활성화</button>`:`<button class="btn danger ${S.arm===r.id?"arm":""}" id="dCancel">${S.arm===r.id?"한 번 더 누르면 취소":"여정 취소"}</button>`}
+    </div>
+   </div>
+  </div>`;
+}
+function evRow(e){
+  return `<div class="ev ${e.done?"done":""}"><span class="dot" style="background:${EVCOL[e.type]||"var(--pink)"}"></span>
+   <button class="body" data-ev="${e.id}"><div class="t1">${esc(e.type)}${e.changed&&!e.ack?`<span class="chg">변경됨</span>`:""}</div>
+   <div class="t2">${fD(e.date)} ${fT(e.time)}${e.place?" · "+esc(e.place):""}${e.staff?" · 담당 "+esc(e.staff):""}</div>${e.note?`<div class="t2 dim">${esc(e.note)}</div>`:""}</button>
+   <button class="tick ${e.done?"on":""}" data-done="${e.id}">${e.done?"완료":"체크"}</button></div>`;
+}
+function hourOpts(sel){let h=[];for(let i=8;i<24;i++)h.push(i);for(let i=0;i<8;i++)h.push(i);
+  return `<option value="">시간 없음</option>`+h.map(x=>`<option value="${pad(x)}" ${sel===pad(x)?"selected":""}>${x<12?"오전":"오후"} ${x%12||12}시</option>`).join("")}
+function evFormHTML(e){
+  const v=e||{type:"공항 픽업",date:"",time:""};const[hh,mm]=(v.time||":").split(":");
+  return `<div class="card" style="background:var(--s1);margin:10px 0" id="evForm" data-id="${e?e.id:""}">
+   <div class="f"><label class="lb">종류</label>${chips("evtype",EVT,v.type,"small")}</div>
+   ${dateField("evDate","날짜 *",v.date)}
+   <div class="f"><label class="lb">시간</label><div class="g2"><select id="evH" class="in">${hourOpts(hh||"")}</select>
+   <select id="evM" class="in">${["00","15","30","45"].map(x=>`<option ${mm===x?"selected":""}>${x}</option>`).join("")}</select></div></div>
+   <div class="g2"><div class="f"><label class="lb">장소</label><input id="evPlace" class="in" value="${esc(v.place)}" placeholder="예: 인천공항 T1"></div>
+   <div class="f"><label class="lb">담당자</label><input id="evStaff" class="in" value="${esc(v.staff)}" placeholder="예: 통역 김OO"></div></div>
+   <div class="f"><label class="lb">메모·준비물</label><input id="evNote" class="in" value="${esc(v.note)}"></div>
+   <div class="brow end">${e?`<button class="btn danger sm ${S.arm==="ev"+e.id?"arm":""}" id="evDel">${S.arm==="ev"+e.id?"한 번 더 누르면 삭제":"삭제"}</button>`:""}<button class="btn ghost sm" id="evClose">닫기</button><button class="btn pri sm" id="evSave">저장</button></div>
+  </div>`;
+}
+function bindDetail(){
+  const r=byId(S.openId);
+  $("#dBack").onclick=()=>{S.openId=null;S.editing=false;S.evAdd=false;S.evEdit=null;S.arm=null;render();scrollTo(0,0)};
+  if(S.editing){bindForm(r);return}
+  $("#pvOpen").onclick=()=>openPV(r);
+  const nx=$("#stNext");if(nx)nx.onclick=async()=>{const s=(r.stage||0)+1;if(await patch(r,{stage:s},`단계: ${STAGES[s-1]} → ${STAGES[s]}`)){toast(STAGES[s]);render()}};
+  document.querySelectorAll("[data-st]").forEach(b=>b.onclick=async()=>{const s=Number(b.dataset.st);if(s===(r.stage||0))return;if(await patch(r,{stage:s},`단계: ${STAGES[r.stage||0]} → ${STAGES[s]}`))render()});
+  $("#dEdit").onclick=()=>{S.editing=true;render();scrollTo(0,0)};
+  const c=$("#dCancel");if(c)c.onclick=async()=>{if(S.arm!==r.id){S.arm=r.id;render();return}S.arm=null;
+    if(await patch(r,{status:"canceled",canceled_at:new Date().toISOString()},"여정 취소")){toast("취소되었습니다. 기록 탭에서 다시 활성화할 수 있습니다.");render()}};
+  const ra=$("#dReact");if(ra)ra.onclick=async()=>{if(await patch(r,{status:"active",canceled_at:null},"다시 활성화")){toast("다시 활성화되었습니다.");render()}};
+  const en=$("#evNew");if(en)en.onclick=()=>{S.evAdd=true;S.evEdit=null;render()};
+  document.querySelectorAll("[data-ev]").forEach(b=>b.onclick=()=>{S.evEdit=b.dataset.ev;S.evAdd=false;render()});
+  document.querySelectorAll("[data-done]").forEach(b=>b.onclick=async()=>{
+    const evs=r.events.map(e=>e.id===b.dataset.done?{...e,done:!e.done}:e);const e=evs.find(x=>x.id===b.dataset.done);
+    if(await patch(r,{events:evs},`${e.done?"완료":"완료 취소"}: ${e.type} ${fD(e.date)}`))render()});
+  if(S.evAdd||S.evEdit){
+    bindForm(r);
+    $("#evClose").onclick=()=>{S.evAdd=false;S.evEdit=null;S.arm=null;render()};
+    const del=$("#evDel");if(del)del.onclick=async()=>{const id=S.evEdit;if(S.arm!=="ev"+id){S.arm="ev"+id;render();return}S.arm=null;
+      const e=r.events.find(x=>x.id===id);if(await patch(r,{events:r.events.filter(x=>x.id!==id)},`일정 삭제: ${e.type} ${fD(e.date)}`)){S.evEdit=null;render()}};
+    $("#evSave").onclick=async()=>{
+      const type=document.querySelector('.chips[data-field="evtype"] .chip.on')?.dataset.v||"기타";
+      const date=$("#evDate").value;if(!date){toast("날짜를 선택하세요.");return}
+      const time=$("#evH").value?$("#evH").value+":"+$("#evM").value:"";
+      const v={type,date,time,place:$("#evPlace").value.trim(),staff:$("#evStaff").value.trim(),note:$("#evNote").value.trim()};
+      let evs,msg;
+      if(S.evEdit){const old=r.events.find(x=>x.id===S.evEdit);
+        const moved=old.date!==date||old.time!==time||old.place!==v.place;
+        evs=r.events.map(x=>x.id===S.evEdit?{...x,...v,changed:moved?true:x.changed,ack:moved?false:x.ack}:x);
+        msg=`일정 변경: ${type} ${fD(old.date)} ${fT(old.time)} → ${fD(date)} ${fT(time)}`+(moved&&v.staff?` · ${v.staff}에게 알림`:"");
+      }else{evs=[...r.events,{id:uid(),...v,done:false}];msg=`일정 추가: ${type} ${fD(date)} ${fT(time)}`}
+      const wasEdit=!!S.evEdit;
+      if(await patch(r,{events:evs},msg)){S.evAdd=false;S.evEdit=null;toast(wasEdit?"변경되었습니다. 환자 화면에 반영됩니다.":"저장되었습니다.");render()}
+    };
+  }
+}
+
+/* ---------- patient view (My Medical Journey) ---------- */
+function openPV(r){
+  const pv=$("#pv"),t=today(),s=r.stage||0,pct=Math.round((s+1)/STAGES.length*100);
+  const evs=(r.events||[]).slice().sort(evSort);
+  const todays=evs.filter(e=>e.date===t),up=evs.filter(e=>e.date>=t);
+  const changed=evs.filter(e=>e.changed&&!e.ack);
+  let nextPre=null;if(r.surgery_date){for(const[o,l]of PRE){const d=addDays(r.surgery_date,o);if(d>=t){nextPre={d,l,o};break}}}
+  pv.innerHTML=`<div class="sky"></div><div class="in2">
+   <div style="display:flex;justify-content:space-between;align-items:center"><span class="kicker">LA BELLE LB</span><button class="btn sm" id="pvClose">닫기</button></div>
+   <div class="script" style="margin-top:10px">My Medical Journey</div>
+   <div class="hello">${esc(r.name)} 님,<br>환영합니다.</div>
+   <div class="pen">“새로운 나, 더 자신감 있는 미래…”</div>
+   <div class="card" style="margin-top:16px"><div class="ring"><div class="pct">${pct}%</div><div><div class="small dim">현재 단계</div><div style="font-weight:900;font-size:18px">${STAGES[s]}</div><div class="small muted">${s<12?"다음: "+STAGES[s+1]:"모든 여정을 마쳤습니다"}</div></div></div>
+   <div class="bar"><i style="width:${pct}%"></i></div></div>
+   ${changed.length?`<div class="card" style="margin-top:12px;border-color:#E0244F"><div class="h3" style="color:#FF8FA6">일정이 변경되었습니다</div>
+     ${changed.map(e=>`<div class="ev"><div class="body"><div class="t1">${esc(e.type)}</div><div class="t2">${fD(e.date)} ${fT(e.time)}${e.place?" · "+esc(e.place):""}</div></div><button class="btn pri sm" data-ack="${e.id}">확인</button></div>`).join("")}</div>`:""}
+   <div class="card" style="margin-top:12px"><div class="h3">오늘의 일정 · ${fD(t)}</div>
+     ${todays.length?todays.map(e=>`<div class="ev ${e.done?"done":""}"><span class="dot" style="background:${EVCOL[e.type]||"var(--pink)"}"></span><div class="body"><div class="t1">${fT(e.time)||"시간 미정"} · ${esc(e.type)}</div><div class="t2">${esc(e.place)||""}${e.staff?" · 담당 "+esc(e.staff):""}</div>${e.note?`<div class="t2 dim">${esc(e.note)}</div>`:""}</div></div>`).join(""):`<div class="dim small">오늘은 예정된 일정이 없습니다. 편안히 쉬세요.</div>`}
+   </div>
+   ${nextPre?`<div class="card" style="margin-top:12px"><div class="h3">병원 안내 · ${nextPre.o<0?"수술 "+(-nextPre.o)+"일 전":nextPre.o===0?"수술 당일":"수술 후 "+nextPre.o+"일"}</div><div style="font-weight:700">${nextPre.l}</div><div class="small muted">${fFull(nextPre.d)} 발송 · 병원 승인 안내문</div></div>`:""}
+   <div class="card" style="margin-top:12px"><div class="h3">나의 전체 일정</div>
+     ${up.length?`<div class="tl">${up.map(e=>`<div class="tli ${e.done?"done":""}"><div class="d">${fD(e.date)} ${fT(e.time)}</div><div class="w">${esc(e.type)}${e.changed&&!e.ack?`<span class="chg">변경됨</span>`:""}</div><div class="p">${[e.place,e.staff&&"담당 "+e.staff].filter(Boolean).map(esc).join(" · ")}</div></div>`).join("")}</div>`:`<div class="dim small">예정된 일정이 없습니다.</div>`}
+   </div>
+   ${r.surgery_date?`<div class="card" style="margin-top:12px"><div class="h3">사후관리 일정</div><div class="sched">${FU.map(([m,l])=>`<div class="sc"><b>${m}개월</b>${fD(addMonths(r.surgery_date,m))}</div>`).join("")}</div></div>`:""}
+   <div class="card" style="margin-top:12px;text-align:center"><div class="small muted">도움이 필요하세요?</div><div style="font-weight:900;font-size:17px;margin:2px 0 10px">담당 코디네이터 ${esc(r.counselor)||"LA BELLE"}</div>
+     <button class="btn pri" style="width:100%" id="pvSos">긴급 도움 요청 (SOS)</button></div>
+   <p class="small dim" style="text-align:center;margin-top:14px">의료적 판단은 담당 의료기관이 수행합니다.</p>
+  </div>`;
+  pv.hidden=false;pv.scrollTop=0;document.body.style.overflow="hidden";
+  $("#pvClose").onclick=()=>{pv.hidden=true;document.body.style.overflow="";render()};
+  $("#pvSos").onclick=()=>toast("데모: 담당자와 병원에 긴급 알림이 전송됩니다.");
+  pv.querySelectorAll("[data-ack]").forEach(b=>b.onclick=async()=>{
+    const evs=r.events.map(e=>e.id===b.dataset.ack?{...e,ack:true,changed:false}:e);const e=r.events.find(x=>x.id===b.dataset.ack);
+    if(await patch(r,{events:evs},`환자 확인: ${e.type} ${fD(e.date)} ${fT(e.time)}`)){toast("확인되었습니다.");openPV(r)}});
+}
+
+/* ---------- calendar ---------- */
+function allItems(){
+  const out=[];
+  active().forEach(r=>{(r.events||[]).forEach(e=>out.push({date:e.date,time:e.time,type:e.type,place:e.place,staff:e.staff,done:e.done,r}));
+    if(r.surgery_date)FU.forEach(([m])=>out.push({date:addMonths(r.surgery_date,m),time:"",type:`사후관리 ${m}개월`,place:"",staff:r.counselor,r,fu:true}));});
+  return out;
+}
+function monthHTML(y,m,days){
+  const first=new Date(y,m,1),start=first.getDay(),n=new Date(y,m+1,0).getDate(),t=today();
+  let c=WD.map(w=>`<div class="wd">${w}</div>`).join("");for(let i=0;i<start;i++)c+="<div></div>";
+  for(let d=1;d<=n;d++){const s=`${y}-${pad(m+1)}-${pad(d)}`;c+=`<button class="dcell ${days.has(s)?"has":""} ${s===t?"today":""} ${s===S.calSel?"sel":""}" data-day="${s}">${d}</button>`}
+  return `<div class="card mcal"><div class="mh">${y}년 ${m+1}월</div><div class="mgrid">${c}</div></div>`;
+}
+function calHTML(){
+  if(!S.calSel)S.calSel=today();
+  const base=S.calBase?pd(S.calBase):pd(today());base.setDate(1);
+  const items=allItems(),days=new Set(items.map(i=>i.date));
+  const b2=new Date(base.getFullYear(),base.getMonth()+1,1);
+  const list=items.filter(i=>i.date===S.calSel).sort(evSort);
+  const up=items.filter(i=>i.date>S.calSel&&!i.done).sort(evSort).slice(0,6);
+  const row=i=>`<button class="ev" style="width:100%" data-open="${i.r.id}"><span class="dot" style="background:${i.fu?"#5BE3A8":EVCOL[i.type]||"var(--pink)"}"></span><span class="body"><span class="t1" style="display:block">${fT(i.time)||"종일"} · ${esc(i.type)}</span><span class="t2" style="display:block">${esc(i.r.name)}${i.place?" · "+esc(i.place):""}${i.staff?" · 담당 "+esc(i.staff):""}</span></span></button>`;
+  return `<div class="calwrap">
+    <div><div class="brow" style="margin-bottom:10px"><button class="btn sm" id="cPrev">← 이전</button><button class="btn sm" id="cToday">오늘</button><button class="btn sm" id="cNext">다음 →</button></div>
+    <div class="cals">${monthHTML(base.getFullYear(),base.getMonth(),days)}${monthHTML(b2.getFullYear(),b2.getMonth(),days)}</div></div>
+    <div class="stack">
+      <div class="card"><div class="h3">${fFull(S.calSel)}</div>${list.length?list.map(row).join(""):`<div class="dim small">이 날은 일정이 없습니다.</div>`}</div>
+      <div class="card"><div class="h3">이후 일정</div>${up.length?up.map(i=>`<div class="dim small" style="margin-top:6px">${fD(i.date)}</div>`+row(i)).join(""):`<div class="dim small">예정된 일정이 없습니다.</div>`}</div>
+    </div></div>`;
+}
+
+/* ---------- history ---------- */
+function histHTML(){
+  const f={all:()=>true,on:r=>r.status!=="canceled"&&(r.stage||0)<12,done:r=>r.status!=="canceled"&&r.stage===12,canceled:r=>r.status==="canceled"}[S.hist];
+  const list=S.rows.filter(f);
+  return `<div class="chips" style="margin-bottom:12px">${[["all","전체"],["on","진행 중"],["done","완료"],["canceled","취소"]].map(([k,l])=>`<button class="chip ${S.hist===k?"on":""}" data-h="${k}">${l} ${S.rows.filter({all:()=>true,on:r=>r.status!=="canceled"&&(r.stage||0)<12,done:r=>r.status!=="canceled"&&r.stage===12,canceled:r=>r.status==="canceled"}[k]).length}</button>`).join("")}</div>
+  <div class="card">${list.length?list.map(r=>`<div class="ev"><div class="body" style="cursor:pointer" data-open="${r.id}"><div class="t1">${esc(r.name)} <span class="code">${code(r)}</span></div>
+    <div class="t2">${r.status==="canceled"?"취소됨 · "+(r.canceled_at?fD(r.canceled_at.slice(0,10)):""):STAGES[r.stage||0]} · 등록 ${r.created_at?fD(r.created_at.slice(0,10)):""}</div></div>
+    ${r.status==="canceled"?`<button class="btn sm" data-react="${r.id}">다시 활성화</button>`:""}</div>`).join(""):`<div class="dim small">기록이 없습니다.</div>`}</div>
+  <div class="foot">
+    <div>연결 계정 · ${esc(S.user?.email||"")}</div>
+    <div class="brow" style="margin-top:10px"><button class="btn sm" id="bk">백업 복사</button><button class="btn sm" id="seed">샘플 환자 추가</button><button class="btn sm ghost" id="lo">로그아웃</button></div>
+    <p class="small">샘플 환자는 모두 가상의 인물입니다. 실제 환자 개인정보·의료자료는 보안 설정을 갖춘 정식 버전에서만 입력하세요.</p>
+  </div>`;
+}
+
+/* ---------- main binds ---------- */
+function bindMain(){
+  document.querySelectorAll("[data-g]").forEach(b=>b.onclick=()=>{S.group=S.group===b.dataset.g?"all":b.dataset.g;render()});
+  document.querySelectorAll("[data-open]").forEach(b=>b.onclick=()=>{S.openId=b.dataset.open;S.editing=false;S.arm=null;render();scrollTo(0,0)});
+  document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{S.tab=b.dataset.go;render()});
+  if(S.tab==="new")bindForm(null);
+  if(S.tab==="cal"){
+    document.querySelectorAll("[data-day]").forEach(b=>b.onclick=()=>{S.calSel=b.dataset.day;render()});
+    const mv=n=>{const d=S.calBase?pd(S.calBase):pd(today());d.setDate(1);d.setMonth(d.getMonth()+n);S.calBase=iso(d);render()};
+    $("#cPrev").onclick=()=>mv(-1);$("#cNext").onclick=()=>mv(1);$("#cToday").onclick=()=>{S.calBase=null;S.calSel=today();render()};
+  }
+  if(S.tab==="hist"){
+    document.querySelectorAll("[data-h]").forEach(b=>b.onclick=()=>{S.hist=b.dataset.h;render()});
+    document.querySelectorAll("[data-react]").forEach(b=>b.onclick=async()=>{const r=byId(b.dataset.react);if(await patch(r,{status:"active",canceled_at:null},"다시 활성화")){toast("다시 활성화되었습니다.");render()}});
+    $("#bk").onclick=async()=>{const txt=JSON.stringify(S.rows,null,1);try{await navigator.clipboard.writeText(txt);toast("백업이 복사되었습니다.")}catch(e){toast("복사할 수 없습니다.")}};
+    $("#lo").onclick=async()=>{await sb.auth.signOut();S.user=null;S.rows=[];$("#app").hidden=true;$("#auth").hidden=false};
+  }
+  const sd=$("#seed");if(sd)sd.onclick=seed;
+}
+
+/* ---------- sample data (fictional) ---------- */
+async function seed(){
+  const t=today(),D=n=>addDays(t,n);
+  const E=(type,date,time,place,staff,note)=>({id:uid(),type,date,time,place,staff,note:note||"",done:date<t});
+  const L=x=>[{at:nowStamp(),text:"샘플 환자 등록 · "+x}];
+  const rows=[
+   {name:"Bat-Erdene Saruul",nationality:"몽골",language:"몽골어",contact:"+976 9911 0001",counselor:"김지은",department:"성형외과",procedure:"코 성형",hospital:"강남 A성형외과",source:"해외 파트너",partner:"울란바토르 Gerege 에이전시",stage:6,
+    arrival_date:D(0),surgery_date:D(2),departure_date:D(9),quote_krw:8500000,paid_krw:1700000,notes:"가상 환자 · 데모",
+    events:[E("항공 입국",D(0),"13:30","인천공항 T1 (OM301)","",""),E("공항 픽업",D(0),"14:30","인천공항 T1 → 강남 숙소","기사 박OO","입국장 A 게이트"),E("숙박 체크인",D(0),"17:00","강남 레지던스 1203호","숙박팀 이OO"),
+      E("병원 상담",D(1),"10:00","강남 A성형외과 3층","통역 Oyuna","공복 불필요"),E("수술·시술",D(2),"09:00","강남 A성형외과","통역 Oyuna","전날 밤 12시부터 금식"),E("재진",D(7),"11:00","강남 A성형외과","통역 Oyuna"),E("항공 출국",D(9),"15:00","인천공항 T1","기사 박OO")],log:L("한국 입국")},
+   {name:"Tsetseg Altantuya",nationality:"몽골",language:"몽골어",contact:"+976 8800 2002",counselor:"박서연",department:"피부과",procedure:"레이저 리프팅",hospital:"압구정 B피부과",source:"SNS",partner:"",stage:4,
+    arrival_date:D(12),surgery_date:D(13),departure_date:D(17),quote_krw:3200000,paid_krw:640000,notes:"가상 환자",
+    events:[E("항공 입국",D(12),"09:45","인천공항 T1","",""),E("공항 픽업",D(12),"10:45","인천공항 T1","기사 최OO"),E("수술·시술",D(13),"14:00","압구정 B피부과","통역 Saraa"),E("관광·체험",D(15),"10:00","한복 체험 · 경복궁","의전팀 정OO")],log:L("수술 예약 확정")},
+   {name:"Emily Carter",nationality:"미국",language:"영어",contact:"emily@example.com",counselor:"김지은",department:"치과",procedure:"라미네이트",hospital:"서초 C치과",source:"홈페이지",partner:"",stage:1,quote_krw:null,paid_krw:null,notes:"가상 환자 · 견적 대기",events:[],log:L("병원 상담")},
+   {name:"Ganbold Munkh",nationality:"몽골",language:"몽골어",contact:"+976 9500 3003",counselor:"박서연",department:"성형외과",procedure:"안검하수 교정",hospital:"강남 A성형외과",source:"해외 파트너",partner:"울란바토르 Gerege 에이전시",stage:11,
+    arrival_date:D(-40),surgery_date:D(-30),departure_date:D(-23),quote_krw:5400000,paid_krw:5400000,notes:"가상 환자",
+    events:[E("수술·시술",D(-30),"09:00","강남 A성형외과","통역 Oyuna"),E("항공 출국",D(-23),"12:00","인천공항 T1","")],log:L("장기 사후관리")}
+  ].map(r=>({...r,status:"active"}));
+  const {error}=await sb.from(T).insert(rows);
+  if(error){toast("샘플 추가 실패: "+error.message);return}
+  await load();S.tab="home";S.group="all";toast("샘플 환자 4명이 추가되었습니다.");render();
+}
+
+boot();
+</script>
+</body>
+</html>
