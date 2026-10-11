@@ -14,7 +14,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Nanum+Pen+Script&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Noto+Sans+Sinhala:wght@400;700&family=Nanum+Pen+Script&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <style>
 :root{
@@ -26,7 +26,7 @@
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;overflow-x:hidden;background:var(--bg);color:var(--text)}
-body{font-family:'Noto Sans KR',system-ui,sans-serif;font-size:15px;line-height:1.5;min-height:100vh;
+body{font-family:'Noto Sans KR','Noto Sans Sinhala',system-ui,sans-serif;font-size:15px;line-height:1.5;min-height:100vh;
   padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
 [hidden]{display:none!important}
 button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
@@ -347,7 +347,7 @@ const SB_URL="https://agdqlnaedojcgivwluty.supabase.co";
 const SB_KEY="sb_publishable_PKGxxrfpduzI7xY1_DWQyQ_cnJA9isP";
 const T="labelle_patients";
 const LOGIN_DOMAIN="@labelle.app";
-const VERSION="v1.7";
+const VERSION="v1.8";
 const sb=window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:true,autoRefreshToken:true,storageKey:"labelle-auth"}});
 
 /* ---------- constants ---------- */
@@ -359,8 +359,8 @@ const GROUPS=[
   {k:"korea",l:"한국 체류",f:s=>s>=6&&s<=9},
   {k:"after",l:"출국·사후관리",f:s=>s===10||s===11}
 ];
-const NAT=["몽골","중국","미국","캐나다","호주","중동","기타"];
-const LANG=["몽골어","영어","중국어","한국어","러시아어","기타"];
+const NAT=["몽골","스리랑카","중국","미국","캐나다","호주","중동","기타"];
+const LANG=["몽골어","싱할라어","영어","중국어","한국어","러시아어","기타"];
 const DEPT=["성형외과","피부과","치과","안과","건강검진","기타"];
 const SRC=["해외 파트너","상담 링크","홈페이지","SNS","지인 소개","기타"];
 const EVT=["항공 입국","공항 픽업","병원 상담","검사","수술·시술","통역","숙박 체크인","관광·체험","재진","공항 샌딩","항공 출국","기타"];
@@ -369,7 +369,7 @@ const PRE=[[-14,"사전 준비사항·검사 안내"],[-7,"병원별 수술 준�
 const FU=[[1,"회복 상태·경과사진·불편 증상"],[3,"회복 경과·만족도·추가 상담"],[6,"장기 경과사진·상태 확인"],[12,"최종 경과 확인·재진 안내"]];
 const WD=["일","월","화","수","목","금","토"];
 const BUCKET="labelle-files";
-const CC={"몽골":"MN","중국":"CN","미국":"US","캐나다":"CA","호주":"AU","중동":"ME","기타":"ET"};
+const CC={"몽골":"MN","스리랑카":"LK","중국":"CN","미국":"US","캐나다":"CA","호주":"AU","중동":"ME","기타":"ET"};
 const PAY=["카드","현금","계좌이체","해외송금","온라인 결제","병원 직접 결제","기타"];
 const MAXMB=50;
 const FKIND=["수술 전 사진","수술 후 사진","경과사진","CT·MRI·X-ray","혈액검사","진단서·소견서","여권·신분증","비자","항공권","환자 정보 기록지","개인정보 동의서","수술 동의서","견적서·영수증","기타"];
@@ -1317,7 +1317,7 @@ function leadCard(l){
      l.patient_id&&byId(l.patient_id)?`<div class="brow" style="margin-top:10px"><button class="btn sm" data-openp="${l.patient_id}">환자 보기</button></div>`:""}
   </div>`;
 }
-const FORM_LANG_NAME={ko:"한국어",en:"영어",zh:"중국어",mn:"몽골어"};
+const FORM_LANG_NAME={ko:"한국어",en:"영어",zh:"중국어",mn:"몽골어",si:"싱할라어"};
 async function updLead(l,p){const {error}=await sb.from("labelle_leads").update(p).eq("id",l.id);if(error){needSql();return false}Object.assign(l,p);return true}
 function bindLeads(){
   document.querySelectorAll("[data-lf]").forEach(b=>b.onclick=()=>{S.leadF=b.dataset.lf;render()});
@@ -1331,7 +1331,7 @@ function bindLeads(){
 }
 async function convertLead(l){
   const o=leadOwner(l)||meName();
-  const lang={mn:"몽골어",en:"영어",zh:"중국어",ko:"한국어"}[l.form_lang]||null;
+  const lang={mn:"몽골어",si:"싱할라어",en:"영어",zh:"중국어",ko:"한국어"}[l.form_lang]||null;
   const consent={privacy:l.consent_privacy,sensitive:l.consent_sensitive,third:l.consent_third,overseas:!!l.consent_overseas,marketing:!!l.consent_marketing,version:l.consent_version,at:l.created_at,lead_id:l.id};
   const v={name:l.name,nationality:l.nationality||null,language:lang,contact:[l.phone,l.messenger&&`${l.messenger} ${l.messenger_id||""}`.trim(),l.email].filter(Boolean).join(" / ")||null,
     department:l.department||null,procedure:l.procedure||null,counselor:o,source:l.coord_slug?"상담 링크":"홈페이지",stage:0,notes:[l.message,l.birth&&"생년월일 "+l.birth,l.gender,l.visit_month&&"희망 방문 "+l.visit_month].filter(Boolean).join(" · ")||null,
@@ -1369,7 +1369,7 @@ const FT={
   t_third:"제공받는 자: 주식회사 라벨르엘비 제휴 의료기관 · 제공 항목: 상담 시 입력한 정보 및 의료 자료 · 목적: 진료 상담·견적·예약 · 보유 기간: 해당 기관의 법정 보존 기간",
   t_overseas:"이전받는 자: 고객의 국가에 있는 제휴 에이전시 · 항목: 이름, 연락처, 진행 일정 · 목적: 현지 안내·출국 지원 · 거부해도 상담은 가능합니다.",
   t_marketing:"이벤트·할인 정보를 메신저·이메일로 받습니다. 언제든지 철회할 수 있습니다.",
-  depts:["성형외과","피부과","치과","안과","건강검진","기타"],nats:[["몽골","몽골"],["중국","중국"],["미국","미국"],["캐나다","캐나다"],["호주","호주"],["중동","중동"],["기타","기타"]]},
+  depts:["성형외과","피부과","치과","안과","건강검진","기타"],nats:[["몽골","몽골"],["스리랑카","스리랑카"],["중국","중국"],["미국","미국"],["캐나다","캐나다"],["호주","호주"],["중동","중동"],["기타","기타"]]},
  en:{title:"Consultation request",sub:"Fill in the form and your coordinator will contact you.",coord:"Your coordinator",name:"Full name (as in passport)",birth:"Date of birth",gender:"Gender",genders:["Female","Male","Other"],nat:"Nationality",phone:"Phone",msgr:"Messenger",msgrId:"Messenger ID",email:"Email",dept:"Treatment of interest",proc:"Desired procedure",visit:"Preferred visit month",msg:"Message",req:"Required",opt:"Optional",agreeAll:"Agree to all",view:"View",submit:"Send request",thanks:"Request sent",thanks2:"Your coordinator will contact you soon.",errName:"Please enter your name.",errContact:"Please enter a phone number, messenger or email.",errConsent:"Please agree to all required items.",sending:"Sending…",again:"New request",
   c_privacy:"Collection and use of personal information",c_sensitive:"Processing of sensitive (health) information",c_third:"Provision to partner medical institutions",c_overseas:"Transfer to partner agency abroad",c_marketing:"Receive event and marketing messages",
   t_privacy:"Items: name, date of birth, gender, nationality, phone, messenger, email, message · Purpose: medical tourism consultation, hospital booking, schedule guidance · Retention: 3 years after consultation ends or until you withdraw consent · You may refuse, but we cannot consult without it.",
@@ -1377,7 +1377,7 @@ const FT={
   t_third:"Recipient: partner medical institutions of LABELLE LB Co., Ltd. · Items: information you enter and medical documents · Purpose: consultation, quotation, booking · Retention: as required by law for that institution.",
   t_overseas:"Recipient: partner agency in your country · Items: name, contact, schedule · Purpose: local support and departure assistance · You can still consult if you refuse.",
   t_marketing:"Receive events and discounts by messenger or email. You can withdraw at any time.",
-  depts:["Plastic surgery","Dermatology","Dental","Eye","Health check-up","Other"],nats:[["몽골","Mongolia"],["중국","China"],["미국","USA"],["캐나다","Canada"],["호주","Australia"],["중동","Middle East"],["기타","Other"]]},
+  depts:["Plastic surgery","Dermatology","Dental","Eye","Health check-up","Other"],nats:[["몽골","Mongolia"],["스리랑카","Sri Lanka"],["중국","China"],["미국","USA"],["캐나다","Canada"],["호주","Australia"],["중동","Middle East"],["기타","Other"]]},
  zh:{title:"咨询申请",sub:"请填写以下信息，专属顾问将与您联系。",coord:"专属顾问",name:"姓名（与护照一致）",birth:"出生日期",gender:"性别",genders:["女","男","其他"],nat:"国籍",phone:"电话",msgr:"即时通讯",msgrId:"通讯账号",email:"电子邮箱",dept:"感兴趣的科目",proc:"希望的手术/项目",visit:"希望访问时间",msg:"咨询内容",req:"必选",opt:"可选",agreeAll:"全部同意",view:"查看",submit:"提交咨询",thanks:"申请已提交",thanks2:"专属顾问将尽快与您联系。",errName:"请输入姓名。",errContact:"请输入电话、通讯账号或邮箱中的一项。",errConsent:"请同意所有必选项目。",sending:"提交中…",again:"新的申请",
   c_privacy:"同意收集和使用个人信息",c_sensitive:"同意处理敏感信息（健康信息）",c_third:"同意向合作医疗机构提供信息",c_overseas:"同意向海外合作机构转移信息",c_marketing:"同意接收活动及营销信息",
   t_privacy:"收集项目：姓名、出生日期、性别、国籍、电话、通讯账号、邮箱、咨询内容 · 目的：医疗旅游咨询、医院预约、行程通知 · 保存期限：咨询结束后3年或撤回同意时为止 · 您可以拒绝，但拒绝后将无法进行咨询。",
@@ -1385,7 +1385,7 @@ const FT={
   t_third:"接收方：LABELLE LB株式会社的合作医疗机构 · 提供项目：您填写的信息及医疗资料 · 目的：诊疗咨询、报价、预约 · 保存期限：按该机构法定保存期限",
   t_overseas:"接收方：您所在国家的合作机构 · 项目：姓名、联系方式、行程 · 目的：当地服务及出境协助 · 拒绝也可以进行咨询。",
   t_marketing:"通过通讯软件或邮件接收活动及优惠信息，可随时撤回。",
-  depts:["整形外科","皮肤科","牙科","眼科","健康体检","其他"],nats:[["몽골","蒙古"],["중국","中国"],["미국","美国"],["캐나다","加拿大"],["호주","澳大利亚"],["중동","中东"],["기타","其他"]]},
+  depts:["整形外科","皮肤科","牙科","眼科","健康体检","其他"],nats:[["몽골","蒙古"],["스리랑카","斯里兰卡"],["중국","中国"],["미국","美国"],["캐나다","加拿大"],["호주","澳大利亚"],["중동","中东"],["기타","其他"]]},
  mn:{title:"Зөвлөгөө авах хүсэлт",sub:"Доорх мэдээллийг бөглөвөл таны зохицуулагч тантай холбогдоно.",coord:"Таны зохицуулагч",name:"Овог нэр (паспортын дагуу)",birth:"Төрсөн огноо",gender:"Хүйс",genders:["Эмэгтэй","Эрэгтэй","Бусад"],nat:"Иргэншил",phone:"Утас",msgr:"Мессенжер",msgrId:"Мессенжер ID",email:"И-мэйл",dept:"Сонирхож буй эмчилгээ",proc:"Хүсэж буй мэс засал / процедур",visit:"Ирэхийг хүсэж буй сар",msg:"Асуулт, хүсэлт",req:"Заавал",opt:"Сонголтоор",agreeAll:"Бүгдийг зөвшөөрөх",view:"Харах",submit:"Хүсэлт илгээх",thanks:"Хүсэлт илгээгдлээ",thanks2:"Таны зохицуулагч удахгүй холбогдоно.",errName:"Нэрээ оруулна уу.",errContact:"Утас, мессенжер эсвэл и-мэйлийн аль нэгийг оруулна уу.",errConsent:"Заавал зөвшөөрөх зүйлсийг бүгдийг зөвшөөрнө үү.",sending:"Илгээж байна…",again:"Шинэ хүсэлт",
   c_privacy:"Хувийн мэдээлэл цуглуулах, ашиглахыг зөвшөөрөх",c_sensitive:"Эмзэг (эрүүл мэндийн) мэдээлэл боловсруулахыг зөвшөөрөх",c_third:"Хамтрагч эмнэлэгт мэдээлэл өгөхийг зөвшөөрөх",c_overseas:"Гадаад дахь хамтрагч агентлагт шилжүүлэхийг зөвшөөрөх",c_marketing:"Арга хэмжээ, маркетингийн мэдээлэл авахыг зөвшөөрөх",
   t_privacy:"Цуглуулах мэдээлэл: нэр, төрсөн огноо, хүйс, иргэншил, утас, мессенжер, и-мэйл, асуулт · Зорилго: эмчилгээний аялалын зөвлөгөө, эмнэлгийн цаг захиалга, хуваарийн мэдээлэл · Хадгалах хугацаа: зөвлөгөө дууссанаас хойш 3 жил эсвэл зөвшөөрлөө цуцлах хүртэл · Та татгалзаж болно, гэхдээ тэгвэл зөвлөгөө өгөх боломжгүй.",
@@ -1393,15 +1393,23 @@ const FT={
   t_third:"Хүлээн авагч: LABELLE LB ХХК-ийн хамтрагч эмнэлгүүд · Мэдээлэл: таны оруулсан мэдээлэл, эмнэлгийн материал · Зорилго: зөвлөгөө, үнийн санал, цаг захиалга · Хадгалах хугацаа: тухайн байгууллагын хуулиар тогтоосон хугацаа",
   t_overseas:"Хүлээн авагч: таны улс дахь хамтрагч агентлаг · Мэдээлэл: нэр, холбоо барих, хуваарь · Зорилго: орон нутгийн туслалцаа, буцах үеийн дэмжлэг · Татгалзсан ч зөвлөгөө авах боломжтой.",
   t_marketing:"Арга хэмжээ, хөнгөлөлтийн мэдээллийг мессенжер эсвэл и-мэйлээр авна. Хэзээ ч цуцалж болно.",
-  depts:["Гоо сайхны мэс засал","Арьс судлал","Шүд","Нүд","Эрүүл мэндийн үзлэг","Бусад"],nats:[["몽골","Монгол"],["중국","Хятад"],["미국","АНУ"],["캐나다","Канад"],["호주","Австрали"],["중동","Ойрхи Дорнод"],["기타","Бусад"]]}
+  depts:["Гоо сайхны мэс засал","Арьс судлал","Шүд","Нүд","Эрүүл мэндийн үзлэг","Бусад"],nats:[["몽골","Монгол"],["스리랑카","Шри Ланка"],["중국","Хятад"],["미국","АНУ"],["캐나다","Канад"],["호주","Австрали"],["중동","Ойрхи Дорнод"],["기타","Бусад"]]},
+ si:{title:"උපදේශන ඉල්ලීම",sub:"පහත තොරතුරු පුරවන්න. ඔබේ සම්බන්ධීකාරක ඔබව සම්බන්ධ කර ගනු ඇත.",coord:"ඔබේ සම්බන්ධීකාරක",name:"සම්පූර්ණ නම (ගමන් බලපත්‍රයේ පරිදි)",birth:"උපන් දිනය",gender:"ස්ත්‍රී/පුරුෂ භාවය",genders:["ස්ත්‍රී","පුරුෂ","වෙනත්"],nat:"ජාතිකත්වය",phone:"දුරකථන අංකය",msgr:"මැසෙන්ජර්",msgrId:"මැසෙන්ජර් ID",email:"ඊමේල්",dept:"උනන්දුවක් දක්වන ප්‍රතිකාරය",proc:"අපේක්ෂිත ශල්‍යකර්මය / ප්‍රතිකාරය",visit:"පැමිණීමට කැමති මාසය",msg:"පණිවිඩය",req:"අනිවාර්ය",opt:"විකල්ප",agreeAll:"සියල්ලට එකඟ වෙමි",view:"බලන්න",submit:"ඉල්ලීම යවන්න",thanks:"ඉල්ලීම යවන ලදී",thanks2:"ඔබේ සම්බන්ධීකාරක ඉක්මනින් ඔබව සම්බන්ධ කර ගනු ඇත.",errName:"කරුණාකර ඔබේ නම ඇතුළත් කරන්න.",errContact:"කරුණාකර දුරකථන අංකය, මැසෙන්ජර් හෝ ඊමේල් එකක් ඇතුළත් කරන්න.",errConsent:"කරුණාකර සියලු අනිවාර්ය අයිතමවලට එකඟ වන්න.",sending:"යවමින්…",again:"නව ඉල්ලීමක්",
+  c_privacy:"පුද්ගලික තොරතුරු එකතු කිරීමට සහ භාවිතයට එකඟතාව",c_sensitive:"සංවේදී (සෞඛ්‍ය) තොරතුරු සැකසීමට එකඟතාව",c_third:"හවුල්කාර වෛද්‍ය ආයතනවලට තොරතුරු ලබා දීමට එකඟතාව",c_overseas:"විදේශයේ හවුල්කාර නියෝජිත ආයතනයට තොරතුරු මාරු කිරීමට එකඟතාව",c_marketing:"සිදුවීම් සහ අලෙවිකරණ පණිවිඩ ලැබීමට එකඟතාව",
+  t_privacy:"එකතු කරන තොරතුරු: නම, උපන් දිනය, ස්ත්‍රී/පුරුෂ භාවය, ජාතිකත්වය, දුරකථනය, මැසෙන්ජර්, ඊමේල්, පණිවිඩය · අරමුණ: වෛද්‍ය සංචාරක උපදේශනය, රෝහල් වෙන්කිරීම, කාලසටහන් දැනුම්දීම · රඳවා තබා ගන්නා කාලය: උපදේශනය අවසන් වී වසර 3ක් හෝ එකඟතාව ඉවත් කරන තෙක් · ඔබට ප්‍රතික්ෂේප කළ හැකි නමුත්, එවිට උපදේශනය ලබා දිය නොහැක.",
+  t_sensitive:"එකතු කරන තොරතුරු: අපේක්ෂිත ප්‍රතිකාරය, සෞඛ්‍ය සම්බන්ධ උපදේශන විස්තර, ඡායාරූප සහ පරීක්ෂණ වාර්තා · අරමුණ: රෝහල් උපදේශනය සහ ප්‍රතිකාර සූදානම · රඳවා තබා ගන්නා කාලය: උපදේශනය අවසන් වී වසර 3ක් හෝ එකඟතාව ඉවත් කරන තෙක් · ප්‍රතික්ෂේප කළහොත් වෛද්‍ය උපදේශනය කළ නොහැක.",
+  t_third:"ලබන්නා: LABELLE LB සමාගමේ හවුල්කාර වෛද්‍ය ආයතන · තොරතුරු: ඔබ ඇතුළත් කළ තොරතුරු සහ වෛද්‍ය ලේඛන · අරමුණ: උපදේශනය, මිල ගණන්, වෙන්කිරීම · රඳවා තබා ගන්නා කාලය: එම ආයතනයට නීතියෙන් නියම කළ කාලය",
+  t_overseas:"ලබන්නා: ඔබේ රටේ හවුල්කාර නියෝජිත ආයතනය · තොරතුරු: නම, සම්බන්ධතා තොරතුරු, කාලසටහන · අරමුණ: දේශීය සහාය සහ ආපසු ගමන් සහාය · ප්‍රතික්ෂේප කළත් උපදේශනය ලබා ගත හැක.",
+  t_marketing:"සිදුවීම් සහ වට්ටම් පිළිබඳ තොරතුරු මැසෙන්ජර් හෝ ඊමේල් මගින් ලැබේ. ඕනෑම වේලාවක ඉවත් කළ හැක.",
+  depts:["රූපලාවණ්‍ය ශල්‍යකර්ම","චර්ම රෝග","දන්ත","ඇස්","සෞඛ්‍ය පරීක්ෂාව","වෙනත්"],nats:[["스리랑카","ශ්‍රී ලංකාව"],["몽골","මොන්ගෝලියාව"],["중국","චීනය"],["미국","ඇමරිකාව"],["캐나다","කැනඩාව"],["호주","ඕස්ට්‍රේලියාව"],["중동","මැද පෙරදිග"],["기타","වෙනත්"]]}
 };
 const DEPT_KO=["성형외과","피부과","치과","안과","건강검진","기타"];
 const MSGRS=["WhatsApp","Facebook Messenger","WeChat","KakaoTalk","Telegram","Viber","LINE","기타"];
 const IN={lang:"mn",coord:null,done:false};
-function pickFormLang(){const p=new URLSearchParams(location.search).get("l");if(p&&FT[p])return p;const n=(navigator.language||"").toLowerCase();return n.startsWith("mn")?"mn":n.startsWith("zh")?"zh":n.startsWith("ko")?"ko":n.startsWith("en")?"en":"mn"}
+function pickFormLang(){const p=new URLSearchParams(location.search).get("l");if(p&&FT[p])return p;const n=(navigator.language||"").toLowerCase();return n.startsWith("mn")?"mn":n.startsWith("si")||n.startsWith("ta")?"si":n.startsWith("zh")?"zh":n.startsWith("ko")?"ko":n.startsWith("en")?"en":"mn"}
 function intakeHTML(){
   const t=FT[IN.lang];
-  const langs=`<div class="chips small" style="justify-content:center;margin-bottom:14px">${[["mn","Монгол"],["ko","한국어"],["en","English"],["zh","中文"]].map(([k,l])=>`<button class="chip ${IN.lang===k?"on":""}" data-il="${k}">${l}</button>`).join("")}</div>`;
+  const langs=`<div class="chips small" style="justify-content:center;margin-bottom:14px">${[["mn","Монгол"],["si","සිංහල"],["ko","한국어"],["en","English"],["zh","中文"]].map(([k,l])=>`<button class="chip ${IN.lang===k?"on":""}" data-il="${k}">${l}</button>`).join("")}</div>`;
   const head=`<div style="text-align:center"><span class="kicker">LA BELLE LB</span><h1 class="title" style="font-size:34px">LA BELLE<span class="ol">LB</span></h1><div class="script">My Medical Journey</div></div>`;
   if(IN.done)return `${langs}${head}<div class="card" style="margin-top:18px;text-align:center"><div class="pen" style="font-family:'Nanum Pen Script',cursive;font-size:30px;color:var(--pink2)">${esc(t.thanks)}</div><p class="muted">${esc(t.thanks2)}</p>${IN.coord?`<p><span class="who"><i style="background:${IN.coord.color||"#FF2E8B"}"></i>${esc(IN.coord.name)}</span></p>`:""}<button class="btn" id="inAgain">${esc(t.again)}</button></div>`;
   const cons=["privacy","sensitive","third","overseas","marketing"];const reqd=["privacy","sensitive","third"];
@@ -1412,8 +1420,8 @@ function intakeHTML(){
    <div class="f"><label class="lb">${esc(t.name)} <em>*</em></label><input id="iName" class="in" autocomplete="name"></div>
    <div class="g2"><div class="f"><label class="lb">${esc(t.birth)}</label><input id="iBirth" class="in" type="date"></div>
    <div class="f"><label class="lb">${esc(t.gender)}</label><select id="iGender" class="in"><option value=""></option>${t.genders.map(g=>`<option>${esc(g)}</option>`).join("")}</select></div></div>
-   <div class="f"><label class="lb">${esc(t.nat)}</label><div class="chips small" data-field="inat">${t.nats.map(([k,l])=>`<button type="button" class="chip ${k==="몽골"&&IN.lang==="mn"?"on":""}" data-v="${k}">${esc(l)}</button>`).join("")}</div></div>
-   <div class="f"><label class="lb">${esc(t.phone)}</label><input id="iPhone" class="in" type="tel" placeholder="+976 …" autocomplete="tel"></div>
+   <div class="f"><label class="lb">${esc(t.nat)}</label><div class="chips small" data-field="inat">${t.nats.map(([k,l])=>`<button type="button" class="chip ${(k==="몽골"&&IN.lang==="mn")||(k==="스리랑카"&&IN.lang==="si")?"on":""}" data-v="${k}">${esc(l)}</button>`).join("")}</div></div>
+   <div class="f"><label class="lb">${esc(t.phone)}</label><input id="iPhone" class="in" type="tel" placeholder="${IN.lang==="si"?"+94 …":IN.lang==="zh"?"+86 …":IN.lang==="mn"?"+976 …":"+…"}" autocomplete="tel"></div>
    <div class="g2"><div class="f"><label class="lb">${esc(t.msgr)}</label><select id="iMsgr" class="in"><option value=""></option>${MSGRS.map(m=>`<option>${m}</option>`).join("")}</select></div>
    <div class="f"><label class="lb">${esc(t.msgrId)}</label><input id="iMsgrId" class="in" autocapitalize="none"></div></div>
    <div class="f"><label class="lb">${esc(t.email)}</label><input id="iEmail" class="in" type="email" autocomplete="email"></div>
@@ -1481,6 +1489,7 @@ const I18N_PAT=[
  [/\s?님,/g,",","，"],[/\s?님/g,"",""]
 ];
 const I18N_EXACT={en:{"일":"Sun","월":"Mon","화":"Tue","수":"Wed","목":"Thu","금":"Fri","토":"Sat","오전":"AM","오후":"PM"},zh:{"일":"日","월":"一","화":"二","수":"三","목":"四","금":"五","토":"六","오전":"上午","오후":"下午"}};
+Object.assign(I18N.en,{"스리랑카":"Sri Lanka","싱할라어":"Sinhala"});Object.assign(I18N.zh,{"스리랑카":"斯里兰卡","싱할라어":"僧伽罗语"});
 I18N.en["샘플 환자가 추가되었습니다."]="Sample patients added.";I18N.zh["샘플 환자가 추가되었습니다."]="已添加示例患者。";
 let I18N_RE=null;
 function trText(t){
