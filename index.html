@@ -239,6 +239,54 @@ select.in{appearance:none;-webkit-appearance:none}
 .agnew{background:var(--s1);border:1px dashed var(--line);border-radius:14px;padding:10px;margin-top:8px}
 .fileline{font-size:12.5px;color:var(--muted);margin-top:6px}
 .fc .th.doc{object-fit:cover}
+/* v1.7 */
+.who{display:inline-flex;align-items:center;gap:5px;font-weight:700;cursor:pointer;white-space:nowrap}
+.who i{width:9px;height:9px;border-radius:50%;display:inline-block;flex:0 0 9px}
+.who:hover{text-decoration:underline}
+.lnk{cursor:pointer;text-decoration:underline;text-decoration-color:rgba(255,124,192,.55)}
+.sec .secb{display:none;margin-top:12px}.sec.open .secb{display:block}
+.sech{width:100%;display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:36px;text-align:left;padding:0}
+.pm{flex:0 0 32px;width:32px;height:32px;border-radius:50%;background:var(--s3);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:19px;color:var(--pink2)}
+.sec.open .pm{background:var(--grad);color:#fff}
+.cnt{display:inline-block;min-width:20px;padding:0 6px;border-radius:999px;background:var(--s3);color:var(--muted);font-size:11px;margin-left:4px;text-align:center}
+.qs{min-height:38px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:var(--s1);font-size:13px;font-weight:700;color:var(--muted);white-space:nowrap}
+.qs b{color:var(--pink2);font-size:15px;margin-right:2px}
+.qs.on{border-color:var(--pink);color:#fff}
+.clock{min-height:30px;padding:0 12px;border-radius:999px;border:1px solid var(--line);background:var(--s2);font-size:12px;font-weight:700;margin-left:6px;white-space:nowrap}
+.clock.on{background:rgba(91,227,168,.14);border-color:rgba(91,227,168,.5);color:var(--ok)}
+.kp4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-top:12px;text-align:center}
+.kp4 b{display:block;font-size:17px;font-weight:900}.kp4 span{font-size:11px;color:var(--dim)}
+.linkrow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:10px}
+.linkrow code{font-size:11.5px;background:var(--s1);border:1px solid var(--line);border-radius:8px;padding:5px 8px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1 1 150px;min-width:0}
+.stats.six{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(min-width:720px){.stats.six{grid-template-columns:repeat(6,minmax(0,1fr))}}
+.stats.six .n{font-size:24px}
+.pgrid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.pgrid .wd{text-align:center;font-size:11px;color:var(--dim)}
+.pcell{min-height:58px;border-radius:10px;background:var(--s1);border:1px solid var(--line);display:flex;flex-direction:column;align-items:center;padding:4px 2px;gap:1px;min-width:0}
+.pcell .dn{font-size:11px;color:var(--muted)}
+.pcell b{font-size:17px;font-weight:900;color:#fff;line-height:1.1}
+.pcell .hrs{font-size:10px;color:var(--muted)}
+.pcell.today{box-shadow:0 0 0 1px var(--pink2) inset}
+.pcell.sel{outline:2px solid #fff;outline-offset:-1px}
+.chip.sw{width:40px;min-width:40px;padding:0;background:var(--c);border-color:transparent}
+.chip.sw.on{outline:3px solid #fff;outline-offset:2px;background:var(--c)}
+.consents{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:11.5px;margin-top:8px}
+.okc{color:var(--ok)}.noc{color:var(--dim)}
+.consentbox{border:1px solid var(--line);border-radius:14px;padding:4px 12px;background:var(--s1)}
+.cons{padding:9px 0;border-top:1px solid var(--line);font-size:13.5px}
+.cons:first-child{border-top:0}
+.cons label{display:flex;gap:8px;align-items:flex-start;cursor:pointer}
+.cons input{width:20px;height:20px;accent-color:#FF2E8B;flex:0 0 auto;margin-top:1px}
+.cons details{margin:4px 0 0 28px;font-size:12px;color:var(--muted)}
+.cons summary{cursor:pointer;color:var(--pink2)}
+.tag{font-size:10.5px;font-weight:700;padding:1px 6px;border-radius:6px;background:var(--s3);color:var(--muted);white-space:nowrap}
+.tag.rq2{background:rgba(255,46,139,.18);color:var(--pink2)}
+.intakewrap{max-width:560px;margin:0 auto}
+.tab .bdg{display:inline-block;min-width:18px;padding:0 5px;margin-left:4px;border-radius:999px;background:#fff;color:#E0244F;font-size:11px;line-height:18px}
+.langsw{display:inline-flex;gap:4px}
+.langsw button{font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:999px;color:var(--dim);border:1px solid var(--line);min-height:28px}
+.langsw button.on{color:#fff;background:var(--s3);border-color:var(--pink)}
 .toast{position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:40;
   background:#fff;color:#1a0f17;font-weight:700;font-size:14px;padding:11px 18px;border-radius:999px;max-width:calc(100% - 32px);text-align:center;
   box-shadow:0 10px 30px rgba(0,0,0,.4)}
@@ -259,12 +307,14 @@ select.in{appearance:none;-webkit-appearance:none}
     <div class="card">
       <div class="f"><label class="lb">아이디 또는 이메일</label><input id="aEmail" class="in" type="text" autocapitalize="none" autocorrect="off" autocomplete="username"></div>
       <div class="f"><label class="lb">비밀번호</label><input id="aPass" class="in" type="password" autocomplete="current-password"></div>
-      <div class="dim small" style="margin:-4px 0 8px">앱 버전 <span id="aVer"></span></div><div id="aMsg" class="small" style="color:var(--pink2);min-height:20px;margin-bottom:8px"></div>
+      <div class="dim small" style="margin:-4px 0 8px">앱 버전 <span id="aVer"></span></div><div class="langsw" data-notr style="margin-bottom:10px"><button data-uil="ko">KO</button><button data-uil="en">EN</button><button data-uil="zh">中文</button></div><div id="aMsg" class="small" style="color:var(--pink2);min-height:20px;margin-bottom:8px"></div>
       <div class="brow"><button id="aIn" class="btn pri" style="flex:1">로그인</button><button id="aUp" class="btn">계정 만들기</button></div>
     </div>
   </section>
 
   <!-- APP -->
+  <section id="intake" class="intakewrap" hidden></section>
+
   <section id="app" hidden>
     <header>
       <div class="hrow">
@@ -274,12 +324,14 @@ select.in{appearance:none;-webkit-appearance:none}
         </a>
         <div class="script">Real Story · Real Change</div>
       </div>
-      <div id="me" class="next" style="margin-top:4px"></div><div id="next" class="next"></div>
+      <div class="hrow" style="align-items:center;margin-top:4px"><div id="me" class="next" style="margin-top:0"></div><div class="langsw" data-notr><button data-uil="ko">KO</button><button data-uil="en">EN</button><button data-uil="zh">中文</button></div></div><div id="next" class="next"></div>
     </header>
     <nav class="tabs" id="tabs">
       <button class="tab" data-t="home">환자 여정</button>
+      <button class="tab" data-t="leads">신규 상담<span class="bdg" id="leadBdg" hidden></span></button>
       <button class="tab" data-t="new">+ 신규 환자</button>
       <button class="tab" data-t="cal">일정</button>
+      <button class="tab" data-t="staff">직원</button>
       <button class="tab" data-t="hist">기록</button>
     </nav>
     <main id="main"></main>
@@ -295,7 +347,7 @@ const SB_URL="https://agdqlnaedojcgivwluty.supabase.co";
 const SB_KEY="sb_publishable_PKGxxrfpduzI7xY1_DWQyQ_cnJA9isP";
 const T="labelle_patients";
 const LOGIN_DOMAIN="@labelle.app";
-const VERSION="v1.6";
+const VERSION="v1.7";
 const sb=window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:true,autoRefreshToken:true,storageKey:"labelle-auth"}});
 
 /* ---------- constants ---------- */
@@ -307,17 +359,17 @@ const GROUPS=[
   {k:"korea",l:"한국 체류",f:s=>s>=6&&s<=9},
   {k:"after",l:"출국·사후관리",f:s=>s===10||s===11}
 ];
-const NAT=["몽골","미국","캐나다","호주","중동","기타"];
-const LANG=["몽골어","영어","한국어","러시아어","기타"];
+const NAT=["몽골","중국","미국","캐나다","호주","중동","기타"];
+const LANG=["몽골어","영어","중국어","한국어","러시아어","기타"];
 const DEPT=["성형외과","피부과","치과","안과","건강검진","기타"];
-const SRC=["해외 파트너","홈페이지","SNS","지인 소개","기타"];
+const SRC=["해외 파트너","상담 링크","홈페이지","SNS","지인 소개","기타"];
 const EVT=["항공 입국","공항 픽업","병원 상담","검사","수술·시술","통역","숙박 체크인","관광·체험","재진","공항 샌딩","항공 출국","기타"];
 const EVCOL={"항공 입국":"#FFB37A","항공 출국":"#FFB37A","공항 픽업":"#FFC266","공항 샌딩":"#FFC266","병원 상담":"#FF7CC0","검사":"#FF7CC0","수술·시술":"#FF2E8B","재진":"#FF7CC0","통역":"#C4A3FF","숙박 체크인":"#7FD1FF","관광·체험":"#5BE3A8","기타":"#C3A9B9"};
 const PRE=[[-14,"사전 준비사항·검사 안내"],[-7,"병원별 수술 준비사항"],[-3,"방문 일정·준비물"],[-1,"금식·복약 등 병원 지침"],[0,"병원 위치·담당자 안내"],[1,"퇴원·회복 안내"],[3,"초기 회복 확인"],[7,"경과·불편 증상 확인"],[14,"재진·경과 확인"]];
 const FU=[[1,"회복 상태·경과사진·불편 증상"],[3,"회복 경과·만족도·추가 상담"],[6,"장기 경과사진·상태 확인"],[12,"최종 경과 확인·재진 안내"]];
 const WD=["일","월","화","수","목","금","토"];
 const BUCKET="labelle-files";
-const CC={"몽골":"MN","미국":"US","캐나다":"CA","호주":"AU","중동":"ME","기타":"ET"};
+const CC={"몽골":"MN","중국":"CN","미국":"US","캐나다":"CA","호주":"AU","중동":"ME","기타":"ET"};
 const PAY=["카드","현금","계좌이체","해외송금","온라인 결제","병원 직접 결제","기타"];
 const MAXMB=50;
 const FKIND=["수술 전 사진","수술 후 사진","경과사진","CT·MRI·X-ray","혈액검사","진단서·소견서","여권·신분증","비자","항공권","환자 정보 기록지","개인정보 동의서","수술 동의서","견적서·영수증","기타"];
@@ -369,10 +421,16 @@ const pd=s=>{const[a,b,c]=s.split("-").map(Number);return new Date(a,b-1,c)};
 const today=()=>iso(new Date());
 const addDays=(s,n)=>{const d=pd(s);d.setDate(d.getDate()+n);return iso(d)};
 const addMonths=(s,n)=>{const d=pd(s),day=d.getDate();d.setDate(1);d.setMonth(d.getMonth()+n);const last=new Date(d.getFullYear(),d.getMonth()+1,0).getDate();d.setDate(Math.min(day,last));return iso(d)};
-const fD=s=>{if(!s)return"";const d=pd(s);return`${d.getMonth()+1}월 ${d.getDate()}일 (${WD[d.getDay()]})`};
-const fFull=s=>{if(!s)return"";const d=pd(s);return`${d.getFullYear()}년 ${d.getMonth()+1}월 ${d.getDate()}일 ${WD[d.getDay()]}요일`};
-const fT=t=>{if(!t)return"";const[h,m]=t.split(":").map(Number);return`${h<12?"오전":"오후"} ${h%12||12}:${pad(m)}`};
-const man=n=>n||n===0?(n>=10000?(Math.round(n/1000)/10).toLocaleString("ko-KR")+"만원":Number(n).toLocaleString("ko-KR")+"원"):"—";
+let UIL="ko";try{UIL=localStorage.getItem("lb-lang")||"ko"}catch(e){}
+const MON_EN=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],MONF_EN=["January","February","March","April","May","June","July","August","September","October","November","December"];
+const WD_EN=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],WDF_EN=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],WD_ZH=["日","一","二","三","四","五","六"];
+const fD=s=>{if(!s)return"";const d=pd(s),m=d.getMonth(),dd=d.getDate(),w=d.getDay();
+  return UIL==="en"?`${MON_EN[m]} ${dd} (${WD_EN[w]})`:UIL==="zh"?`${m+1}月${dd}日 (周${WD_ZH[w]})`:`${m+1}월 ${dd}일 (${WD[w]})`};
+const fFull=s=>{if(!s)return"";const d=pd(s),y=d.getFullYear(),m=d.getMonth(),dd=d.getDate(),w=d.getDay();
+  return UIL==="en"?`${WDF_EN[w]}, ${MONF_EN[m]} ${dd}, ${y}`:UIL==="zh"?`${y}年${m+1}月${dd}日 星期${WD_ZH[w]}`:`${y}년 ${m+1}월 ${dd}일 ${WD[w]}요일`};
+const fT=t=>{if(!t)return"";const[h,m]=t.split(":").map(Number);
+  return UIL==="en"?`${h%12||12}:${pad(m)} ${h<12?"AM":"PM"}`:UIL==="zh"?`${h<12?"上午":"下午"} ${h%12||12}:${pad(m)}`:`${h<12?"오전":"오후"} ${h%12||12}:${pad(m)}`};
+const man=n=>(UIL==="en"&&(n||n===0))?(n>=1e6?"₩"+(Math.round(n/1e5)/10)+"M":"₩"+Number(n).toLocaleString("en-US")):(UIL==="zh"&&(n||n===0))?(n>=10000?(Math.round(n/1000)/10)+"万韩元":n+"韩元"):n||n===0?(n>=10000?(Math.round(n/1000)/10).toLocaleString("ko-KR")+"만원":Number(n).toLocaleString("ko-KR")+"원"):"—";
 const won=n=>n||n===0?"₩"+Number(n).toLocaleString("ko-KR"):"—";
 const dDiff=s=>Math.round((pd(s)-pd(today()))/864e5);
 const ddLabel=n=>n===0?"오늘":n>0?`D-${n}`:`D+${-n}`;
@@ -431,6 +489,7 @@ async function setProfile(r,file){
 
 /* ---------- auth ---------- */
 async function boot(){
+  if(isIntake())return bootIntake();
   const {data}=await sb.auth.getSession();
   S.user=data?.session?.user||null;
   if(S.user){showApp()}else{$("#auth").hidden=false;$("#app").hidden=true}
@@ -466,6 +525,7 @@ async function load(){
   S.rows=(data||[]).map(r=>({...r,events:r.events||[],log:r.log||[],files:r.files||[]}));
   const ag=await sb.from("labelle_agencies").select("*").order("name",{ascending:true});
   S.agencies=ag.error?[]:(ag.data||[]);
+  await loadExtra();
 }
 async function patch(r,p,logText){
   if(logText){p.log=[{at:nowStamp(),text:logText+(S.user?" · "+who():"")},...(r.log||[])].slice(0,200)}
@@ -475,7 +535,7 @@ async function patch(r,p,logText){
 }
 document.addEventListener("visibilitychange",async()=>{if(!document.hidden&&S.user&&!busy()){await load();render()}});
 setInterval(async()=>{if(S.user&&!document.hidden&&!busy()){await load();render()}},60000);
-function busy(){return S.tab==="new"||S.editing||S.evAdd||S.evEdit||S.fAdd||!$("#lbx").hidden}
+function busy(){return S.tab==="new"||S.editing||S.evAdd||S.evEdit||S.fAdd||S.coAdd||S.leadCo||(S.stEdit!=null)||!$("#lbx").hidden||isIntake()}
 
 /* ---------- render root ---------- */
 function render(){
@@ -487,19 +547,21 @@ function render(){
   if(S.tab==="home")m.innerHTML=homeHTML();
   else if(S.tab==="new")m.innerHTML=formHTML(null);
   else if(S.tab==="cal")m.innerHTML=calHTML();
+  else if(S.tab==="leads"){m.innerHTML=leadsHTML();bindLeads();wantUrls();return}
+  else if(S.tab==="staff"){m.innerHTML=staffHTML();bindStaff();return}
   else m.innerHTML=histHTML();
   bindMain();wantUrls();
 }
-function renderMe(){$("#me").innerHTML=S.me?`<span class="pill" style="margin-right:6px">${esc(S.me.role||"ADM")}</span>${esc(who())}`:`<span class="pill gray" style="margin-right:6px">권한 없음</span>${esc(who())} · 관리자에게 권한을 요청하세요`}
-function renderNext(){renderMe();
+function renderMe(){$("#me").innerHTML=S.me?`<span class="pill" style="margin-right:6px">${esc(S.me.role||"ADM")}</span>${S.me.name?staffChip(S.me.name):esc(who())}${clockHTML()}`:`<span class="pill gray" style="margin-right:6px">권한 없음</span>${esc(who())} · 관리자에게 권한을 요청하세요`}
+function renderNext(){renderMe();const n=pool().length,bd=$("#leadBdg");if(bd){bd.hidden=!n;bd.textContent=n}
   const t=today();let best=null;
   active().forEach(r=>(r.events||[]).forEach(e=>{if(!e.done&&e.date>=t&&(!best||evSort(e,best.e)<0))best={e,r}}));
   $("#next").innerHTML=best?`다음 일정 · <b>${fD(best.e.date)} ${fT(best.e.time)}</b> ${esc(best.e.type)} · ${esc(best.r.name)}`:`오늘은 ${fFull(t)}`;
 }
 function goHome(e){if(e)e.preventDefault();const pv=$("#pv");pv.hidden=true;document.body.style.overflow="";
-  $("#lbx").hidden=true;S.fAdd=false;S.fGroup="전체";S.cmpAfter=null;S.tab="home";S.group="all";S.openId=null;S.editing=false;S.evAdd=false;S.evEdit=null;S.arm=null;S.dupArm=false;render();scrollTo(0,0)}
+  $("#lbx").hidden=true;S.fAdd=false;S.coAdd=false;S.leadCo=null;S.staffSel=null;S.stEdit=null;S.fGroup="전체";S.cmpAfter=null;S.tab="home";S.group="all";S.openId=null;S.editing=false;S.evAdd=false;S.evEdit=null;S.arm=null;S.dupArm=false;render();scrollTo(0,0)}
 $("#logo").onclick=goHome;
-document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{S.agNew=false;S.tab=b.dataset.t;S.openId=null;S.editing=false;S.evAdd=false;S.evEdit=null;S.dupArm=false;render();scrollTo(0,0)});
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{S.agNew=false;S.staffSel=null;S.stEdit=null;S.coAdd=false;S.leadCo=null;S.arm=null;S.tab=b.dataset.t;S.openId=null;S.editing=false;S.evAdd=false;S.evEdit=null;S.dupArm=false;render();scrollTo(0,0)});
 
 /* ---------- home ---------- */
 function homeHTML(){
@@ -520,9 +582,10 @@ function homeHTML(){
 }
 function cardHTML(r){
   const s=r.stage||0,ne=nextEvent(r);
-  return `<button class="card pc" data-open="${r.id}">
+  return `<button class="card pc" data-open="${r.id}" style="${r.counselor?`border-left:4px solid ${colorOf(r.counselor)}`:""}">
     <div class="top"><div class="pchead">${avatar(r)}<div style="min-width:0"><div class="nm">${esc(r.name)}</div><div class="code">${esc(code(r))}</div></div></div><span class="pill ${s===12?"ok":""}">${s+1} · ${STAGES[s]}</span></div>
     <div class="meta">${[r.nationality,r.language,r.department,r.procedure].filter(Boolean).map(esc).join(" · ")||"정보 없음"}</div>
+    ${r.counselor?`<div class="meta" style="margin-top:6px">코디 ${staffChip(r.counselor)}</div>`:""}
     <div class="bar"><i style="width:${Math.round((s+1)/STAGES.length*100)}%"></i></div>
     <div class="nx">${ne?`다음 · <b>${fD(ne.date)} ${fT(ne.time)}</b> ${esc(ne.type)}`:r.surgery_date?`수술일 · <b>${fD(r.surgery_date)}</b>`:`<span class="dim">예정된 일정 없음</span>`}</div>
   </button>`;
@@ -552,7 +615,8 @@ function formHTML(r){
      <div class="small dim" style="margin-top:5px">${r&&r.patient_code?"등록된 코드는 바뀌지 않습니다.":"국가-에이전시-연월-순번으로 저장 시 자동 발급됩니다."}</div></div>
    ${r?"":`<div class="f"><label class="lb">프로필 사진</label><input id="fPhoto" class="in" type="file" accept="image/*"></div>`}
    <div class="g2"><div class="f"><label class="lb">연락처·메신저</label><input id="fContact" class="in" value="${esc(v.contact)}" placeholder="+976 …"></div>
-   <div class="f"><label class="lb">담당 코디네이터</label><input id="fCounselor" class="in" value="${esc(v.counselor)}"></div></div>
+   <div class="f"><label class="lb">담당 코디네이터</label><input id="fCounselor" class="in" value="${esc(v.counselor)}" placeholder="이름"></div></div>
+   ${S.staff.length?`<div class="f" style="margin-top:-6px"><div class="chips small" data-field="coord">${S.staff.filter(x=>x.active!==false).map(x=>`<button type="button" class="chip ${v.counselor===x.name?"on":""}" data-v="${esc(x.name)}"><span class="who" style="pointer-events:none"><i style="background:${colorOf(x.name)}"></i>${esc(x.name)}</span></button>`).join("")}</div></div>`:""}
    <div class="g2"><div class="f"><label class="lb">담당 통역사</label><input id="fInterp" class="in" value="${esc(v.interpreter)}" placeholder="예: Oyuna"></div>
    <div class="f"><label class="lb">관광 프로그램</label><input id="fProgram" class="in" value="${esc(v.program)}" placeholder="예: 한복 체험 + 성수동 투어"></div></div>
    <div class="f"><label class="lb">진료과목</label>${chips("department",DEPT,v.department)}</div>
@@ -566,7 +630,7 @@ function formHTML(r){
    <div class="f"><label class="lb">결제 방식 (여러 개 선택 가능)</label>${chips("payment_method",PAY,v.payment_method,"multi")}</div>
    <div class="f"><label class="lb">메모</label><textarea id="fNotes" class="in">${esc(v.notes)}</textarea></div>
    <div class="f"><label class="lb">파일 첨부</label><div class="g2"><input id="fAttach" class="in" type="file" multiple>
-     <select id="fAttKind" class="in">${FKIND.map(k=>`<option ${k==="기타"?"selected":""}>${k}</option>`).join("")}</select></div>
+     <select id="fAttKind" class="in">${FKIND.map(k=>`<option value="${k}" ${k==="기타"?"selected":""}>${k}</option>`).join("")}</select></div>
      <div class="small dim" style="margin-top:5px">사진·PDF·동의서 등 · 파일당 최대 ${MAXMB}MB · 의료자료에 함께 보관됩니다</div></div>
    <div class="brow end">${r?`<button class="btn ghost" id="fClose">닫기</button>`:""}<button class="btn pri" id="fSave">저장</button></div>
   </div>`;
@@ -591,7 +655,8 @@ function bindForm(r){
   const bindChips=()=>document.querySelectorAll(".chips").forEach(g=>g.onclick=e=>{const b=e.target.closest(".chip");if(!b)return;
     if(g.classList.contains("multi")){b.classList.toggle("on");return}
     const was=b.classList.contains("on");g.querySelectorAll(".chip").forEach(x=>x.classList.remove("on"));
-    if(!was||always.includes(g.dataset.field))b.classList.add("on");prev()});
+    if(!was||always.includes(g.dataset.field))b.classList.add("on");
+    if(g.dataset.field==="coord"&&$("#fCounselor"))$("#fCounselor").value=b.classList.contains("on")?b.dataset.v:"";prev()});
   bindChips();prev();
   const bindAg=()=>{
     const o=$("#agOpen");if(o)o.onclick=()=>{S.agNew=true;redrawAg()};
@@ -649,59 +714,58 @@ function detailHTML(r){
   const t=today();
   const pre=r.surgery_date?PRE.map(([o,l])=>{const d=addDays(r.surgery_date,o);return `<div class="sc ${d<t?"past":""} ${d===t?"today":""}"><b>${o<0?"수술 "+(-o)+"일 전":o===0?"수술 당일":"수술 후 "+o+"일"}</b>${fD(d)}<div class="dim small">${l}</div></div>`}).join(""):"";
   const fu=r.surgery_date?FU.map(([m,l])=>{const d=addMonths(r.surgery_date,m);return `<div class="sc ${d<t?"past":""} ${d===t?"today":""}"><b>${m}개월</b>${fD(d)}<div class="dim small">${l}</div></div>`}).join(""):"";
-  return `<button class="back" id="dBack">← 목록</button>
-  <div class="dgrid">
-   <div class="stack">
-    <div class="card dhead">
-      <div class="top" style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start">
-        <div class="pchead"><label class="avwrap" title="프로필 사진">${avatar(r,1)}<span class="cam">사진</span><input type="file" accept="image/*" id="pfFile" hidden></label>
-        <div style="min-width:0"><div class="codebox" style="font-size:12px;padding:2px 8px">${esc(code(r))}</div><div class="nm" style="margin-top:4px">${esc(r.name)}</div>
-        <div class="meta">${[r.nationality,r.language,r.department,r.procedure].filter(Boolean).map(esc).join(" · ")}</div></div></div>
-        ${r.status==="canceled"?`<span class="pill gray">취소됨</span>`:""}
-      </div>
-      <div class="stp">${STAGES.map((x,i)=>`<button class="sn ${i<s?"done":""} ${i===s?"cur":""}" data-st="${i}" title="${i+1}. ${x}" aria-label="${i+1}. ${x}">${i+1}</button>`).join("")}</div>
-      <div class="stpl"><b>${s+1}</b><span class="dim"> / 13</span> · ${STAGES[s]}${s<12?` <span class="dim small">→ ${s+2} ${STAGES[s+1]}</span>`:""}</div>
-      <div class="brow" style="margin-top:14px">
-        <button class="btn pri sm" id="pvOpen">환자 화면 보기</button>
-        ${s<12&&r.status!=="canceled"?`<button class="btn sm" id="stNext">다음 단계 →</button>`:""}
-      </div>
-    </div>
-
-
-    <div class="card">
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><div class="h3" style="margin:0">일정</div>${S.evAdd?"":`<button class="btn sm" id="evNew">+ 일정 추가</button>`}</div>
-      ${S.evAdd?evFormHTML(null):""}
-      <div style="margin-top:8px">${evs.length?evs.map(e=>S.evEdit===e.id?evFormHTML(e):evRow(e)).join(""):`<div class="dim small" style="padding:8px 0">아직 일정이 없습니다. 항공·픽업·병원·숙박 일정을 추가하세요.</div>`}</div>
-    </div>
-
-    ${filesHTML(r)}
-
-    ${r.surgery_date?`<div class="card"><div class="h3">수술 전후 안내 자동 발송 일정 · ${r.language||"환자 언어"}</div><div class="sched">${pre}</div>
-    <div class="h3" style="margin-top:14px">수술 후 12개월 사후관리</div><div class="sched">${fu}</div></div>`:
-    `<div class="card"><div class="h3">수술 전후 안내 · 사후관리</div><div class="dim small">수술일을 입력하면 D-14 ~ D+14 안내와 1·3·6·12개월 사후관리 일정이 자동으로 만들어집니다.</div></div>`}
-   </div>
-
-   <div class="stack">
-    <div class="card"><div class="h3">기본 정보</div>
-      <dl class="kv">
-        <dt>연락처</dt><dd>${esc(r.contact)||"—"}</dd>
-        <dt>병원</dt><dd>${esc(r.hospital)||"—"}</dd>
+  const co=consultsHTML(r);
+  const nFiles=(r.files||[]).length;
+  const cons=r.consent?`✓ 개인정보 ✓ 민감정보 ✓ 제3자 ${r.consent.overseas?"✓":"✕"} 국외이전 ${r.consent.marketing?"✓":"✕"} 마케팅 · ${r.consent.at?fD(iso(new Date(r.consent.at))):""}`:"";
+  const schedBody=`${S.evAdd?evFormHTML(null):`<div class="brow end"><button class="btn sm pri" id="evNew">+ 일정 추가</button></div>`}
+      <div style="margin-top:8px">${evs.length?evs.map(e=>S.evEdit===e.id?evFormHTML(e):evRow(e)).join(""):`<div class="dim small" style="padding:8px 0">아직 일정이 없습니다. 항공·픽업·병원·숙박 일정을 추가하세요.</div>`}</div>`;
+  const infoBody=`<dl class="kv">
         <dt>환자 코드</dt><dd>${esc(code(r))}</dd>
-        <dt>담당 코디네이터</dt><dd>${esc(r.counselor)||"—"}</dd>
+        <dt>연락처</dt><dd>${esc(r.contact)||"—"}</dd>
+        <dt>담당 코디네이터</dt><dd>${r.counselor?staffChip(r.counselor):"—"}</dd>
+        <dt>담당 통역사</dt><dd>${r.interpreter?(staffBy(r.interpreter)?staffChip(r.interpreter):esc(r.interpreter)):"—"}</dd>
         <dt>관광 프로그램</dt><dd>${esc(r.program)||"—"}</dd>
-        <dt>담당 통역사</dt><dd>${esc(r.interpreter)||"—"}</dd>
+        <dt>병원</dt><dd>${esc(r.hospital)||"—"}</dd>
         <dt>유치 경로</dt><dd>${esc([r.source,r.agency?r.agency+" ("+(r.agency_code||agCode(r.agency))+")":r.partner].filter(Boolean).join(" · "))||"—"}</dd>
         <dt>입국</dt><dd>${r.arrival_date?fD(r.arrival_date):"—"}</dd>
         <dt>수술</dt><dd>${r.surgery_date?fD(r.surgery_date)+` <span class="pill" style="margin-left:4px">${ddLabel(dDiff(r.surgery_date))}</span>`:"—"}</dd>
         <dt>출국</dt><dd>${r.departure_date?fD(r.departure_date):"—"}</dd>
+        ${cons?`<dt>동의</dt><dd class="small">${cons}</dd>`:""}
         <dt>메모</dt><dd>${esc(r.notes)||"—"}</dd>
-      </dl>
-    </div>
-    <div class="card"><div class="h3">결제·정산</div>
-      <div class="money"><div class="m"><span>견적</span><b>${man(r.quote_krw)}</b></div><div class="m"><span>당사 수납</span><b>${man(r.paid_krw)}</b></div><div class="m"><span>미수금</span><b style="color:${due>0?"var(--warn)":"var(--ok)"}">${r.quote_krw?man(due):"—"}</b></div></div>
-      <div class="small" style="margin-top:10px"><span class="dim">결제 방식 · </span>${esc(r.payment_method)||"—"}</div>
-    </div>
-    <div class="card"><div class="h3">변경 이력</div><div class="log">${(r.log||[]).map(l=>`<div><span class="dim">${esc(l.at)}</span> · ${esc(l.text)}</div>`).join("")||"—"}</div></div>
+      </dl>`;
+  const payBody=`<div class="money"><div class="m"><span>견적</span><b>${man(r.quote_krw)}</b></div><div class="m"><span>당사 수납</span><b>${man(r.paid_krw)}</b></div><div class="m"><span>미수금</span><b style="color:${due>0?"var(--warn)":"var(--ok)"}">${r.quote_krw?man(due):"—"}</b></div></div>
+      <div class="small" style="margin-top:10px"><span class="dim">결제 방식 · </span>${esc(r.payment_method)||"—"}</div>`;
+  const careBody=r.surgery_date?`<div class="h3">수술 전후 안내 자동 발송 · ${r.language||"환자 언어"}</div><div class="sched">${pre}</div>
+    <div class="h3" style="margin-top:14px">수술 후 12개월 사후관리</div><div class="sched">${fu}</div>`:`<div class="dim small">수술일을 입력하면 D-14 ~ D+14 안내와 1·3·6·12개월 사후관리 일정이 자동으로 만들어집니다.</div>`;
+  const logBody=`<div class="log">${(r.log||[]).map(l=>`<div><span class="dim">${esc(l.at)}</span> · ${esc(l.text)}</div>`).join("")||"—"}</div>`;
+  return `<button class="back" id="dBack">← 목록</button>
+  <div class="card dhead" style="${r.counselor?`border-left:4px solid ${colorOf(r.counselor)}`:""}">
+      <div class="top" style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start">
+        <div class="pchead"><label class="avwrap" title="프로필 사진">${avatar(r,1)}<span class="cam">사진</span><input type="file" accept="image/*" id="pfFile" hidden></label>
+        <div style="min-width:0"><div class="codebox" style="font-size:12px;padding:2px 8px">${esc(code(r))}</div><div class="nm" style="margin-top:4px">${esc(r.name)}</div>
+        <div class="meta">${[r.nationality,r.language,r.department,r.procedure].filter(Boolean).map(esc).join(" · ")}</div>
+        ${r.counselor?`<div class="meta" style="margin-top:4px">코디 ${staffChip(r.counselor)}${r.interpreter?` · 통역 ${esc(r.interpreter)}`:""}</div>`:""}</div></div>
+        ${r.status==="canceled"?`<span class="pill gray">취소됨</span>`:""}
+      </div>
+      <div class="stp">${STAGES.map((x,i)=>`<button class="sn ${i<s?"done":""} ${i===s?"cur":""}" data-st="${i}" title="${i+1}. ${x}" aria-label="${i+1}. ${x}">${i+1}</button>`).join("")}</div>
+      <div class="stpl"><b>${s+1}</b><span class="dim"> / 13</span> · ${STAGES[s]}${s<12?` <span class="dim small">→ ${s+2} ${STAGES[s+1]}</span>`:""}</div>
+      <div class="brow" style="margin-top:12px">${qsec("sched","일정")}${qsec("info","기본 정보")}</div>
+      <div class="brow" style="margin-top:8px">
+        <button class="btn pri sm" id="pvOpen">환자 화면 보기</button>
+        ${s<12&&r.status!=="canceled"?`<button class="btn sm" id="stNext">다음 단계 →</button>`:""}
+      </div>
+  </div>
+  <div class="dgrid" style="margin-top:12px">
+   <div class="stack">
+    ${sec("sched","일정",schedBody,evs.length)}
+    ${sec("consult","상담 기록",co.body,co.count)}
+    ${sec("files","의료자료 · 서류 · 파일",filesHTML(r),nFiles)}
+    ${sec("care","수술 전후 안내 · 사후관리",careBody,"")}
+   </div>
+   <div class="stack">
+    ${sec("info","기본 정보",infoBody,"")}
+    ${sec("pay","결제·정산",payBody,"")}
+    ${sec("log","변경 이력",logBody,(r.log||[]).length)}
     <div class="brow end">
       <button class="btn" id="dEdit">정보 수정</button>
       ${r.status==="canceled"?`<button class="btn" id="dReact">다시 활성화</button>`:`<button class="btn danger ${S.arm===r.id?"arm":""}" id="dCancel">${S.arm===r.id?"한 번 더 누르면 취소":"여정 취소"}</button>`}
@@ -755,8 +819,8 @@ function filesHTML(r){
     <input type="range" min="0" max="100" value="${S.cmpX??50}" id="cmpR" aria-label="전후 비교"></div>
     <div class="small dim" style="text-align:center;margin-top:6px">${fD(b0.date)} → ${fD(a0.date)}</div>`;
   }
-  return `<div class="card">
-    <div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><div class="h3" style="margin:0">의료자료 · 서류 · 파일</div>${S.fAdd?"":`<button class="btn sm pri" id="fNew">+ 파일 첨부</button>`}</div>
+  return `<div>
+    <div class="brow end">${S.fAdd?"":`<button class="btn sm pri" id="fNew">+ 파일 첨부</button>`}</div>
     ${S.fAdd?fFormHTML():""}
     <div class="h3" style="margin-top:12px">필수 서류</div>
     <div class="req">${FREQ.map(k=>have.has(k)?`<span class="rq ok">✓ ${k}</span>`:`<span class="rq miss">${k} 미제출 <button data-req="${k}">요청</button></span>`).join("")}</div>
@@ -850,17 +914,17 @@ function bindFiles(r){
 }
 function bindDetail(){
   const r=byId(S.openId);
-  $("#dBack").onclick=()=>{S.openId=null;S.editing=false;S.evAdd=false;S.evEdit=null;S.fAdd=false;S.fGroup="전체";S.cmpAfter=null;S.showEx=null;S.arm=null;render();scrollTo(0,0)};
+  $("#dBack").onclick=()=>{S.coAdd=false;S.openId=null;S.editing=false;S.evAdd=false;S.evEdit=null;S.fAdd=false;S.fGroup="전체";S.cmpAfter=null;S.showEx=null;S.arm=null;render();scrollTo(0,0)};
   if(S.editing){bindForm(r);return}
   $("#pvOpen").onclick=()=>openPV(r);
-  bindFiles(r);
+  bindSecs();bindFiles(r);bindConsultForm({patient_id:r.id,subject:r.name});
   const nx=$("#stNext");if(nx)nx.onclick=async()=>{const s=(r.stage||0)+1;if(await patch(r,{stage:s},`단계: ${STAGES[s-1]} → ${STAGES[s]}`)){toast(STAGES[s]);render()}};
   document.querySelectorAll("[data-st]").forEach(b=>b.onclick=async()=>{const s=Number(b.dataset.st);if(s===(r.stage||0)){toast(`${s+1}. ${STAGES[s]}`);return}if(await patch(r,{stage:s},`단계: ${(r.stage||0)+1} ${STAGES[r.stage||0]} → ${s+1} ${STAGES[s]}`)){toast(`${s+1}. ${STAGES[s]}`);render()}});
   $("#dEdit").onclick=()=>{S.agNew=false;S.editing=true;render();scrollTo(0,0)};
   const c=$("#dCancel");if(c)c.onclick=async()=>{if(S.arm!==r.id){S.arm=r.id;render();return}S.arm=null;
     if(await patch(r,{status:"canceled",canceled_at:new Date().toISOString()},"여정 취소")){toast("취소되었습니다. 기록 탭에서 다시 활성화할 수 있습니다.");render()}};
   const ra=$("#dReact");if(ra)ra.onclick=async()=>{if(await patch(r,{status:"active",canceled_at:null},"다시 활성화")){toast("다시 활성화되었습니다.");render()}};
-  const en=$("#evNew");if(en)en.onclick=()=>{S.evAdd=true;S.evEdit=null;render()};
+  const en=$("#evNew");if(en)en.onclick=()=>{S.secOpen.add("sched");S.evAdd=true;S.evEdit=null;render()};
   document.querySelectorAll("[data-ev]").forEach(b=>b.onclick=()=>{S.evEdit=b.dataset.ev;S.evAdd=false;render()});
   document.querySelectorAll("[data-done]").forEach(b=>b.onclick=async()=>{
     const evs=r.events.map(e=>e.id===b.dataset.done?{...e,done:!e.done}:e);const e=evs.find(x=>x.id===b.dataset.done);
@@ -936,7 +1000,7 @@ function monthHTML(y,m,days){
   const first=new Date(y,m,1),start=first.getDay(),n=new Date(y,m+1,0).getDate(),t=today();
   let c=WD.map(w=>`<div class="wd">${w}</div>`).join("");for(let i=0;i<start;i++)c+="<div></div>";
   for(let d=1;d<=n;d++){const s=`${y}-${pad(m+1)}-${pad(d)}`;c+=`<button class="dcell ${days.has(s)?"has":""} ${s===t?"today":""} ${s===S.calSel?"sel":""}" data-day="${s}">${d}</button>`}
-  return `<div class="card mcal"><div class="mh">${y}년 ${m+1}월</div><div class="mgrid">${c}</div></div>`;
+  return `<div class="card mcal"><div class="mh">${fMonth(y+"-"+pad(m+1))}</div><div class="mgrid">${c}</div></div>`;
 }
 function calHTML(){
   if(!S.calSel)S.calSel=today();
@@ -945,7 +1009,7 @@ function calHTML(){
   const b2=new Date(base.getFullYear(),base.getMonth()+1,1);
   const list=items.filter(i=>i.date===S.calSel).sort(evSort);
   const up=items.filter(i=>i.date>S.calSel&&!i.done).sort(evSort).slice(0,6);
-  const row=i=>`<button class="ev" style="width:100%" data-open="${i.r.id}"><span class="dot" style="background:${i.fu?"#5BE3A8":EVCOL[i.type]||"var(--pink)"}"></span><span class="body"><span class="t1" style="display:block">${fT(i.time)||"종일"} · ${esc(i.type)}</span><span class="t2" style="display:block">${esc(i.r.name)}${i.place?" · "+esc(i.place):""}${i.staff?" · 담당 "+esc(i.staff):""}</span></span></button>`;
+  const row=i=>`<button class="ev" style="width:100%" data-open="${i.r.id}"><span class="dot" style="background:${i.fu?"#5BE3A8":EVCOL[i.type]||"var(--pink)"}"></span><span class="body"><span class="t1" style="display:block">${fT(i.time)||"종일"} · ${esc(i.type)}</span><span class="t2" style="display:block">${esc(i.r.name)}${i.place?" · "+esc(i.place):""}${i.r.counselor?" · "+staffChip(i.r.counselor):""}${i.staff?" · 담당 "+esc(i.staff):""}</span></span></button>`;
   return `<div class="calwrap">
     <div><div class="brow" style="margin-bottom:10px"><button class="btn sm" id="cPrev">← 이전</button><button class="btn sm" id="cToday">오늘</button><button class="btn sm" id="cNext">다음 →</button></div>
     <div class="cals">${monthHTML(base.getFullYear(),base.getMonth(),days)}${monthHTML(b2.getFullYear(),b2.getMonth(),days)}</div></div>
@@ -985,7 +1049,7 @@ function bindMain(){
     document.querySelectorAll("[data-h]").forEach(b=>b.onclick=()=>{S.hist=b.dataset.h;render()});
     document.querySelectorAll("[data-react]").forEach(b=>b.onclick=async()=>{const r=byId(b.dataset.react);if(await patch(r,{status:"active",canceled_at:null},"다시 활성화")){toast("다시 활성화되었습니다.");render()}});
     $("#bk").onclick=async()=>{const txt=JSON.stringify(S.rows,null,1);try{await navigator.clipboard.writeText(txt);toast("백업이 복사되었습니다.")}catch(e){toast("복사할 수 없습니다.")}};
-    $("#lo").onclick=async()=>{await sb.auth.signOut();S.user=null;S.me=null;S.rows=[];$("#app").hidden=true;$("#auth").hidden=false;$("#aMsg").textContent=""};
+    $("#lo").onclick=async()=>{await sb.auth.signOut();S.user=null;S.me=null;S.rows=[];S.staff=[];S.consults=[];S.work=[];S.leads=[];$("#app").hidden=true;$("#auth").hidden=false;$("#aMsg").textContent=""};
   }
   const sd=$("#seed");if(sd)sd.onclick=seed;
 }
@@ -1013,8 +1077,432 @@ async function seed(){
     r.interpreter=r.language==="몽골어"?"Oyuna (가상)":"Jenny (가상)";r.program=r.stage>=4?"한복 체험 + 성수동 투어":null;r.payment_method=r.paid_krw?"해외송금, 카드":null});
   const {error}=await sb.from(T).insert(rows);
   if(error){toast("샘플 추가 실패: "+error.message);return}
-  await load();S.tab="home";S.group="all";toast("샘플 환자 4명이 추가되었습니다.");render();
+  await load();S.tab="home";S.group="all";toast("샘플 환자가 추가되었습니다.");render();
 }
+
+/* ================= v1.7 module ================= */
+const PALETTE=["#FF2E8B","#5BE3A8","#7FD1FF","#FFB37A","#C4A3FF","#FFD84D","#FF6B6B","#4DD4C6","#9BE15D","#F48FB1"];
+const ROLES=["ADM","코디네이터","통역사","직원"];
+const CHANNELS=["전화","메신저","영상통화","방문","이메일"];
+const MINS=[10,20,30,60];
+S.staff=[];S.consults=[];S.work=[];S.leads=[];S.v17=true;
+S.secOpen=new Set((()=>{try{return JSON.parse(localStorage.getItem("lb-sec")||"[]")}catch(e){return[]}})());
+const saveSec=()=>{try{localStorage.setItem("lb-sec",JSON.stringify([...S.secOpen]))}catch(e){}};
+const ym=d=>(d||today()).slice(0,7);
+const hashColor=n=>{let h=0;for(const c of String(n||""))h=(h*31+c.charCodeAt(0))>>>0;return PALETTE[h%PALETTE.length]};
+const staffBy=n=>S.staff.find(x=>x.name===n);
+const colorOf=n=>staffBy(n)?.color||hashColor(n);
+const meName=()=>S.me?.name||who();
+function staffChip(n,opt=""){if(!n)return "—";return `<span class="who" role="button" tabindex="0" data-staff="${esc(n)}" ${opt}><i style="background:${colorOf(n)}"></i>${esc(n)}</span>`}
+const baseURL=()=>location.origin+location.pathname;
+const coordLink=slug=>baseURL()+(slug?`?c=${encodeURIComponent(slug)}`:"?form=1");
+
+async function loadExtra(){
+  const [st,co,wk,ld]=await Promise.all([
+    sb.from("labelle_staff").select("*").order("name",{ascending:true}),
+    sb.from("labelle_consults").select("*").order("at_date",{ascending:false}),
+    sb.from("labelle_worklog").select("*").order("start_at",{ascending:false}),
+    sb.from("labelle_leads").select("*").order("created_at",{ascending:false})]);
+  S.v17=!(co.error||wk.error||ld.error);
+  S.staff=st.error?[]:(st.data||[]);S.consults=co.error?[]:(co.data||[]);S.work=wk.error?[]:(wk.data||[]);S.leads=ld.error?[]:(ld.data||[]);
+  if(S.me){const m=S.staff.find(x=>(x.email||"").toLowerCase()===(S.me.email||"").toLowerCase());if(m)S.me=m}
+}
+const needSql=()=>toast("Supabase에 labelle_v17.sql을 먼저 실행해 주세요.");
+
+/* ---------- clock in / out ---------- */
+const myShift=()=>S.work.find(w=>!w.end_at&&(w.email||"").toLowerCase()===(S.user?.email||"").toLowerCase());
+const hm=min=>{min=Math.max(0,Math.round(min));const h=Math.floor(min/60),m=min%60;return h?`${h}시간 ${m}분`:`${m}분`};
+const hShort=min=>(min/60).toFixed(1)+"h";
+function clockHTML(){
+  if(!S.me)return "";const sh=myShift();
+  return sh?`<button class="clock on" id="clockBtn">근무 중 ${hm((Date.now()-new Date(sh.start_at))/6e4)} · 퇴근</button>`:`<button class="clock" id="clockBtn">출근</button>`;
+}
+async function toggleClock(){
+  const sh=myShift();
+  if(sh){const end=new Date().toISOString();const {error}=await sb.from("labelle_worklog").update({end_at:end}).eq("id",sh.id);if(error)return needSql();sh.end_at=end;toast(`퇴근 · 오늘 ${hm(dayMinutes(meName(),today()))}`)}
+  else{const {data,error}=await sb.from("labelle_worklog").insert({staff:meName(),email:S.user.email,start_at:new Date().toISOString()}).select().single();if(error)return needSql();S.work.unshift(data);toast("출근했습니다.")}
+  render();
+}
+function shiftsOn(name,day){return S.work.filter(w=>w.staff===name&&iso(new Date(w.start_at))===day)}
+function dayMinutes(name,day){return shiftsOn(name,day).reduce((a,w)=>a+((w.end_at?new Date(w.end_at):new Date())-new Date(w.start_at))/6e4,0)}
+function monthMinutes(name,m){return S.work.filter(w=>w.staff===name&&iso(new Date(w.start_at)).startsWith(m)).reduce((a,w)=>a+((w.end_at?new Date(w.end_at):new Date())-new Date(w.start_at))/6e4,0)}
+const consultsOf=(name,m)=>S.consults.filter(c=>c.staff===name&&(!m||(c.at_date||"").startsWith(m)));
+
+/* ---------- collapsible sections ---------- */
+function sec(id,title,body,count){const o=S.secOpen.has(id);
+  return `<div class="card sec ${o?"open":""}" id="sec-${id}"><button class="sech" data-sec="${id}"><span class="h3" style="margin:0">${title}${count!=null&&count!==""?` <span class="cnt">${count}</span>`:""}</span><span class="pm">${o?"−":"+"}</span></button><div class="secb">${body}</div></div>`}
+function setSec(id,open){const el=$("#sec-"+id);if(open)S.secOpen.add(id);else S.secOpen.delete(id);saveSec();
+  if(el){el.classList.toggle("open",open);el.querySelector(".pm").textContent=open?"−":"+"}
+  document.querySelectorAll(`[data-qsec="${id}"]`).forEach(b=>{b.classList.toggle("on",open);b.querySelector("b").textContent=open?"−":"+"})}
+function bindSecs(){
+  document.querySelectorAll("[data-sec]").forEach(b=>b.onclick=()=>setSec(b.dataset.sec,!S.secOpen.has(b.dataset.sec)));
+  document.querySelectorAll("[data-qsec]").forEach(b=>b.onclick=()=>{const id=b.dataset.qsec,o=!S.secOpen.has(id);setSec(id,o);if(o)$("#sec-"+id)?.scrollIntoView({behavior:"smooth",block:"start"})});
+}
+const qsec=(id,label)=>`<button class="qs ${S.secOpen.has(id)?"on":""}" data-qsec="${id}"><b>${S.secOpen.has(id)?"−":"+"}</b> ${label}</button>`;
+
+/* ---------- consult records (patient) ---------- */
+function consultForm(defStaff){
+  const staffNames=S.staff.filter(x=>x.active!==false).map(x=>x.name);
+  const def=defStaff||meName();
+  return `<div class="card" style="background:var(--s1);margin:10px 0" id="coForm">
+   ${dateField("coDate","상담일 *",today())}
+   <div class="f"><label class="lb">시간</label><div class="g2"><select id="coH" class="in">${hourOpts(pad(new Date().getHours()))}</select><select id="coM" class="in">${["00","15","30","45"].map(x=>`<option>${x}</option>`).join("")}</select></div></div>
+   <div class="f"><label class="lb">상담한 직원</label>${chips("costaff",staffNames.length?staffNames:[def],staffNames.includes(def)?def:(staffNames[0]||def),"small")}</div>
+   <div class="f"><label class="lb">채널</label>${chips("cochan",CHANNELS,"메신저","small")}</div>
+   <div class="f"><label class="lb">소요 시간 (분)</label>${chips("comin",MINS.map(String),"20","small")}</div>
+   <div class="f"><label class="lb">상담 내용</label><textarea id="coNote" class="in" placeholder="예: 코 성형 견적 문의, 11월 방문 희망"></textarea></div>
+   <div class="brow end"><button class="btn ghost sm" id="coClose">닫기</button><button class="btn pri sm" id="coSave">저장</button></div></div>`;
+}
+function readConsult(){
+  const pick=f=>document.querySelector(`.chips[data-field="${f}"] .chip.on`)?.dataset.v;
+  const date=$("#coDate").value;if(!date){toast("날짜를 선택하세요.");return null}
+  return {at_date:date,at_time:$("#coH").value?$("#coH").value+":"+$("#coM").value:null,staff:pick("costaff")||meName(),channel:pick("cochan")||"메신저",minutes:Number(pick("comin")||0)||null,note:$("#coNote").value.trim()||null,created_by:meName()};
+}
+function consultRows(list,showSubject){
+  return list.length?list.map(c=>`<div class="ev"><span class="dot" style="background:${colorOf(c.staff)}"></span><div class="body"><div class="t1">${fD(c.at_date)} ${fT(c.at_time||"")} · ${esc(c.channel||"")}${c.minutes?` · ${c.minutes}분`:""}</div>
+    <div class="t2">${showSubject&&c.subject?`${c.patient_id?`<span class="lnk" data-openp="${c.patient_id}">${esc(c.subject)}</span>`:esc(c.subject)} · `:""}${staffChip(c.staff)}</div>${c.note?`<div class="t2 dim">${esc(c.note)}</div>`:""}</div></div>`).join("")
+  :`<div class="dim small" style="padding:6px 0">상담 기록이 없습니다.</div>`;
+}
+function consultsHTML(r){
+  const list=S.consults.filter(c=>c.patient_id===r.id).sort((a,b)=>(b.at_date+(b.at_time||"")).localeCompare(a.at_date+(a.at_time||"")));
+  return {count:list.length,body:`${S.coAdd?consultForm(r.counselor):`<div class="brow end"><button class="btn sm pri" id="coNew">+ 상담 기록</button></div>`}<div style="margin-top:6px">${consultRows(list)}</div>`};
+}
+function bindConsultForm(ctx){
+  const n=$("#coNew");if(n)n.onclick=()=>{S.coAdd=true;render()};
+  if(!$("#coForm"))return;
+  bindForm(null);
+  $("#coClose").onclick=()=>{S.coAdd=false;S.leadCo=null;render()};
+  $("#coSave").onclick=async()=>{const c=readConsult();if(!c)return;Object.assign(c,ctx);
+    const {data,error}=await sb.from("labelle_consults").insert(c).select().single();if(error)return needSql();
+    S.consults.unshift(data);
+    if(ctx.patient_id){const r=byId(ctx.patient_id);if(r)await patch(r,{},`상담 기록: ${fD(c.at_date)} ${c.channel} ${c.minutes?c.minutes+"분":""} (${c.staff})`)}
+    S.coAdd=false;S.leadCo=null;toast("상담이 기록되었습니다.");render()};
+}
+
+/* ---------- staff tab ---------- */
+function staffStats(n,m){
+  const cs=consultsOf(n,m),min=monthMinutes(n,m);
+  const pts=active().filter(r=>r.counselor===n);
+  return {cs:cs.length,min,per:min>=30?(cs.length/(min/60)):0,pts:pts.filter(r=>(r.stage||0)<12).length,
+    newPts:active().filter(r=>r.counselor===n&&(r.created_at||"").startsWith(m)).length,
+    ops:pts.filter(r=>r.surgery_date&&r.surgery_date.startsWith(m)&&r.surgery_date<=today()).length,
+    leads:S.leads.filter(l=>(l.claimed_by===n||l.coordinator===n)&&(l.created_at||"").startsWith(m)).length};
+}
+function monthNav(){const m=S.month||ym();const [y,mo]=m.split("-").map(Number);
+  return `<div class="brow" style="align-items:center;margin:4px 0 12px"><button class="btn sm" data-mon="-1">←</button><b style="min-width:110px;text-align:center">${fMonth(m)}</b><button class="btn sm" data-mon="1">→</button>${m!==ym()?`<button class="btn sm ghost" data-mon="0">이번 달</button>`:""}</div>`}
+function fMonth(m){const [y,mo]=m.split("-").map(Number);return UIL==="en"?`${MONF_EN[mo-1]} ${y}`:UIL==="zh"?`${y}年${mo}月`:`${y}년 ${mo}월`}
+function staffListHTML(){
+  const m=S.month||ym(),isAdm=S.me?.role==="ADM";
+  const list=S.staff.filter(x=>x.active!==false||isAdm);
+  const tot={cs:0,min:0};list.forEach(x=>{const st=staffStats(x.name,m);tot.cs+=st.cs;tot.min+=st.min});
+  return `${monthNav()}
+  <div class="stats" style="margin-bottom:12px"><div class="stat"><div class="n">${list.length}</div><div class="l">직원</div></div><div class="stat"><div class="n">${tot.cs}</div><div class="l">이번 달 상담</div></div>
+   <div class="stat"><div class="n">${hShort(tot.min)}</div><div class="l">총 근무 시간</div></div><div class="stat"><div class="n">${tot.min>=30?(tot.cs/(tot.min/60)).toFixed(1):"—"}</div><div class="l">시간당 상담</div></div></div>
+  ${!S.v17?`<div class="warnbox">직원 실적·출퇴근·신규 상담 기능을 쓰려면 Supabase에 <b>labelle_v17.sql</b>을 실행해 주세요.</div>`:""}
+  ${isAdm?(S.stEdit!==undefined&&S.stEdit!==null?staffForm(S.stEdit==="new"?null:S.staff.find(x=>x.email===S.stEdit)):`<div class="brow end" style="margin-bottom:10px"><button class="btn sm pri" id="stNew">+ 직원 추가</button></div>`):""}
+  <div class="plist" style="margin-top:0">${list.map(x=>{const st=staffStats(x.name,m),on=S.work.some(w=>w.staff===x.name&&!w.end_at);
+    return `<div class="card pc stc" data-staffcard="${esc(x.name)}" style="border-left:4px solid ${colorOf(x.name)}">
+      <div class="top"><div class="pchead"><span class="av" style="border-color:${colorOf(x.name)};color:${colorOf(x.name)}">${esc((x.name||"?").slice(0,1))}</span><div><div class="nm">${esc(x.name)}</div><div class="code">${esc(x.role||"")}${x.active===false?" · 비활성":""}</div></div></div>
+      <span class="pill ${on?"ok":"gray"}">${on?"근무 중":"퇴근"}</span></div>
+      <div class="kp4"><div><b>${st.cs}</b><span>상담</span></div><div><b>${hShort(st.min)}</b><span>근무</span></div><div><b>${st.min>=30?st.per.toFixed(1):"—"}</b><span>시간당</span></div><div><b>${st.pts}</b><span>담당 환자</span></div></div>
+      ${x.slug?`<div class="linkrow"><span class="small dim">상담 링크</span><code>${esc(coordLink(x.slug).replace(/^https?:\/\//,""))}</code><button class="btn sm" data-copy="${esc(coordLink(x.slug))}">복사</button></div>`:""}
+      ${isAdm?`<div class="brow end" style="margin-top:8px"><button class="btn sm ghost" data-stedit="${esc(x.email)}">편집</button></div>`:""}
+    </div>`}).join("")||`<div class="card empty muted">등록된 직원이 없습니다.</div>`}</div>`;
+}
+function staffForm(x){
+  const v=x||{role:"코디네이터",color:PALETTE[S.staff.length%PALETTE.length],active:true};
+  const idv=x?(x.email.endsWith(LOGIN_DOMAIN)?x.email.slice(0,-LOGIN_DOMAIN.length):x.email):"";
+  return `<div class="card" style="margin-bottom:12px"><h2 class="h2">${x?"직원 정보 수정":"직원 추가"}</h2>
+   <div class="g2"><div class="f"><label class="lb">이름 *</label><input id="sName" class="in" value="${esc(v.name)}"></div>
+   <div class="f"><label class="lb">로그인 아이디 또는 이메일 *</label><input id="sId" class="in" value="${esc(idv)}" ${x?"disabled":""} autocapitalize="none"></div></div>
+   <div class="f"><label class="lb">역할</label>${chips("srole",ROLES,v.role)}</div>
+   <div class="f"><label class="lb">표시 색상</label><div class="chips" data-field="scolor">${PALETTE.map(c=>`<button type="button" class="chip sw ${v.color===c?"on":""}" data-v="${c}" style="--c:${c}" aria-label="${c}"></button>`).join("")}</div></div>
+   <div class="f"><label class="lb">상담 링크 ID (영문)</label><input id="sSlug" class="in" value="${esc(v.slug||"")}" placeholder="예: jieun" autocapitalize="none"><div class="small dim" style="margin-top:5px">고객용 링크: ${esc(baseURL())}?c=<b>ID</b></div></div>
+   ${x?`<div class="f"><label class="lb">상태</label>${chips("sactive",["활성","비활성"],v.active===false?"비활성":"활성","small")}</div>`:""}
+   <div class="small dim" style="margin-bottom:10px">처음 로그인할 때 이 아이디와 비밀번호(6자 이상)로 ‘계정 만들기’를 누르면 됩니다.</div>
+   <div class="brow end"><button class="btn ghost sm" id="sClose">닫기</button><button class="btn pri sm" id="sSave">저장</button></div></div>`;
+}
+function staffDetailHTML(n){
+  const m=S.month||ym(),st=staffStats(n,m),x=staffBy(n),col=colorOf(n);
+  const [y,mo]=m.split("-").map(Number),first=new Date(y,mo-1,1),days=new Date(y,mo,0).getDate();
+  const cs=consultsOf(n,m),byDay={};cs.forEach(c=>{byDay[c.at_date]=(byDay[c.at_date]||0)+1});
+  const max=Math.max(1,...Object.values(byDay));
+  let cells=WD.map(w=>`<div class="wd">${w}</div>`).join("");for(let i=0;i<first.getDay();i++)cells+="<div></div>";
+  for(let d=1;d<=days;d++){const s=`${m}-${pad(d)}`,c=byDay[s]||0,mn=dayMinutes(n,s);
+    cells+=`<button class="pcell ${s===S.staffDay?"sel":""} ${s===today()?"today":""}" data-sday="${s}" style="${c?`background:color-mix(in srgb, ${col} ${Math.round(18+60*c/max)}%, transparent)`:""}"><span class="dn">${d}</span>${c?`<b>${c}</b>`:""}${mn>0?`<span class="hrs">${hShort(mn)}</span>`:""}</button>`}
+  const sel=S.staffDay&&S.staffDay.startsWith(m)?S.staffDay:null;
+  const dayC=sel?S.consults.filter(c=>c.staff===n&&c.at_date===sel).sort((a,b)=>(a.at_time||"").localeCompare(b.at_time||"")):[];
+  const dayW=sel?shiftsOn(n,sel):[];
+  const pts=active().filter(r=>r.counselor===n&&(r.stage||0)<12);
+  return `<button class="back" id="stBack">← 직원 목록</button>
+  <div class="card" style="border-left:4px solid ${col}"><div class="pchead"><span class="av lg" style="border-color:${col};color:${col}">${esc(n.slice(0,1))}</span>
+   <div style="min-width:0"><div class="nm" style="font-size:24px;font-weight:900">${esc(n)}</div><div class="meta">${esc(x?.role||"")}${x?.email?` · ${esc(x.email.endsWith(LOGIN_DOMAIN)?x.email.slice(0,-LOGIN_DOMAIN.length):x.email)}`:""}</div></div></div>
+   ${x?.slug?`<div class="linkrow"><span class="small dim">상담 링크</span><code>${esc(coordLink(x.slug).replace(/^https?:\/\//,""))}</code><button class="btn sm" data-copy="${esc(coordLink(x.slug))}">복사</button><button class="btn sm" data-share="${esc(coordLink(x.slug))}">공유</button></div>`:""}
+  </div>
+  ${monthNav()}
+  <div class="stats six"><div class="stat"><div class="n">${st.cs}</div><div class="l">상담 건수</div></div><div class="stat"><div class="n">${hShort(st.min)}</div><div class="l">근무 시간</div></div>
+   <div class="stat"><div class="n">${st.min>=30?st.per.toFixed(1):"—"}</div><div class="l">시간당 상담</div></div><div class="stat"><div class="n">${st.leads}</div><div class="l">신규 문의 배정</div></div>
+   <div class="stat"><div class="n">${st.newPts}</div><div class="l">신규 환자 등록</div></div><div class="stat"><div class="n">${st.ops}</div><div class="l">수술 완료</div></div></div>
+  <div class="card" style="margin-top:12px"><div class="h3">날짜별 상담 건수 · 근무 시간</div><div class="pgrid">${cells}</div>
+   <div class="small dim" style="margin-top:8px">숫자 = 상담 건수 · 아래 = 근무 시간 · 날짜를 누르면 상세</div></div>
+  ${sel?`<div class="card" style="margin-top:12px"><div class="h3">${fFull(sel)}</div>
+   <div class="small muted" style="margin-bottom:6px">${dayW.length?dayW.map(w=>`출근 ${fT(hhmm(w.start_at))} – ${w.end_at?"퇴근 "+fT(hhmm(w.end_at)):"근무 중"}`).join(" · ")+` · 합계 ${hm(dayMinutes(n,sel))}`:"근무 기록 없음"}</div>
+   ${consultRows(dayC,true)}</div>`:""}
+  <div class="card" style="margin-top:12px"><div class="h3">담당 환자 (진행 중) ${pts.length}</div>${pts.length?pts.map(r=>`<div class="ev"><span class="dot" style="background:${col}"></span><div class="body"><span class="t1 lnk" data-openp="${r.id}">${esc(r.name)}</span><div class="t2">${esc(code(r))} · ${(r.stage||0)+1} ${STAGES[r.stage||0]}</div></div></div>`).join(""):`<div class="dim small">없음</div>`}</div>`;
+}
+const hhmm=t=>{const d=new Date(t);return pad(d.getHours())+":"+pad(d.getMinutes())};
+function staffHTML(){return S.staffSel?staffDetailHTML(S.staffSel):staffListHTML()}
+function bindStaff(){
+  document.querySelectorAll("[data-mon]").forEach(b=>b.onclick=()=>{const k=Number(b.dataset.mon);if(!k){S.month=ym();render();return}const [y,mo]=(S.month||ym()).split("-").map(Number);const d=new Date(y,mo-1+k,1);S.month=d.getFullYear()+"-"+pad(d.getMonth()+1);render()});
+  document.querySelectorAll("[data-staffcard]").forEach(b=>b.onclick=e=>{if(e.target.closest("button"))return;S.staffSel=b.dataset.staffcard;S.staffDay=null;render();scrollTo(0,0)});
+  document.querySelectorAll("[data-sday]").forEach(b=>b.onclick=()=>{S.staffDay=b.dataset.sday;render()});
+  const bk=$("#stBack");if(bk)bk.onclick=()=>{S.staffSel=null;render();scrollTo(0,0)};
+  const nw=$("#stNew");if(nw)nw.onclick=()=>{S.stEdit="new";render()};
+  document.querySelectorAll("[data-stedit]").forEach(b=>b.onclick=()=>{S.stEdit=b.dataset.stedit;render();scrollTo(0,0)});
+  if($("#sSave")){
+    bindForm(null);
+    $("#sClose").onclick=()=>{S.stEdit=null;render()};
+    $("#sSave").onclick=async()=>{
+      const pick=f=>document.querySelector(`.chips[data-field="${f}"] .chip.on`)?.dataset.v;
+      const name=$("#sName").value.trim();let id=$("#sId").value.trim().toLowerCase();
+      if(!name||!id){toast("이름과 아이디를 입력하세요.");return}
+      if(!id.includes("@"))id+=LOGIN_DOMAIN;
+      const slug=$("#sSlug").value.trim().toLowerCase().replace(/[^a-z0-9_-]/g,"")||null;
+      if(slug&&S.staff.some(x=>x.slug===slug&&x.email!==id)){toast("이미 사용 중인 링크 ID입니다.");return}
+      const row={email:id,name,role:pick("srole")||"코디네이터",color:pick("scolor")||PALETTE[0],slug,active:(pick("sactive")||"활성")==="활성"};
+      const {error}=await sb.from("labelle_staff").upsert(row,{onConflict:"email"});
+      if(error){toast(/column|schema|policy|row-level/i.test(error.message)?"Supabase에 labelle_v17.sql을 먼저 실행해 주세요.":"저장 실패: "+error.message);return}
+      const i=S.staff.findIndex(x=>x.email===id);if(i>=0)S.staff[i]={...S.staff[i],...row};else S.staff.push(row);
+      if(S.me&&S.me.email===id)S.me={...S.me,...row};
+      S.stEdit=null;toast("저장되었습니다.");render()};
+  }
+}
+
+/* ---------- leads (신규 상담) ---------- */
+const LSTAT={new:"대기",claimed:"상담 중",converted:"환자 등록",closed:"종료"};
+const leadOwner=l=>l.claimed_by||l.coordinator||null;
+const pool=()=>S.leads.filter(l=>l.status==="new"&&!leadOwner(l));
+function leadsHTML(){
+  const f=S.leadF||"pool",me=meName();
+  const sets={pool:pool(),mine:S.leads.filter(l=>leadOwner(l)===me&&(l.status==="new"||l.status==="claimed")),all:S.leads.filter(l=>l.status==="new"||l.status==="claimed"),done:S.leads.filter(l=>l.status==="converted"||l.status==="closed")};
+  const list=sets[f];
+  const mySlug=S.me?.slug;
+  return `${!S.v17?`<div class="warnbox">신규 상담 기능을 쓰려면 Supabase에 <b>labelle_v17.sql</b>을 실행해 주세요.</div>`:""}
+  <div class="card" style="margin-bottom:12px"><div class="h3">고객 상담 링크</div>
+   ${mySlug?`<div class="linkrow" style="margin-top:0"><span class="small dim">내 링크</span><code>${esc(coordLink(mySlug).replace(/^https?:\/\//,""))}</code><button class="btn sm" data-copy="${esc(coordLink(mySlug))}">복사</button><button class="btn sm" data-share="${esc(coordLink(mySlug))}">공유</button></div>`:`<div class="small dim">내 상담 링크 ID가 없습니다. 직원 탭에서 ADM이 설정할 수 있습니다.</div>`}
+   <div class="linkrow"><span class="small dim">공용 링크</span><code>${esc(coordLink(null).replace(/^https?:\/\//,""))}</code><button class="btn sm" data-copy="${esc(coordLink(null))}">복사</button></div>
+   <div class="small dim" style="margin-top:6px">고객이 링크를 열어 개인정보와 동의서를 직접 입력합니다. 내 링크로 들어온 문의는 나에게, 공용 링크는 대기 목록으로 들어옵니다.</div></div>
+  <div class="chips" style="margin-bottom:12px">${[["pool","대기"],["mine","내 상담"],["all","진행 전체"],["done","완료"]].map(([k,l])=>`<button class="chip ${f===k?"on":""}" data-lf="${k}">${l} ${sets[k].length}</button>`).join("")}</div>
+  <div class="plist" style="margin-top:0">${list.length?list.map(leadCard).join(""):`<div class="card empty muted">${f==="pool"?"대기 중인 신규 문의가 없습니다.":"해당 문의가 없습니다."}</div>`}</div>`;
+}
+function leadCard(l){
+  const o=leadOwner(l),me=meName(),mine=o===me;
+  const cons=[["consent_privacy","개인정보"],["consent_sensitive","민감정보"],["consent_third","제3자 제공"],["consent_overseas","국외 이전"],["consent_marketing","마케팅"]].map(([k,t])=>`<span class="${l[k]?"okc":"noc"}">${l[k]?"✓":"✕"} ${t}</span>`).join(" ");
+  const t=new Date(l.created_at);
+  return `<div class="card" style="${o?`border-left:4px solid ${colorOf(o)}`:""}">
+   <div class="top" style="display:flex;justify-content:space-between;gap:8px"><div><div class="nm" style="font-weight:900;font-size:18px">${esc(l.name)}</div>
+   <div class="meta">${[l.nationality,FORM_LANG_NAME[l.form_lang]||l.form_lang,l.department,l.procedure].filter(Boolean).map(esc).join(" · ")}</div></div>
+   <span class="pill ${l.status==="converted"?"ok":l.status==="closed"?"gray":""}">${LSTAT[l.status]||l.status}</span></div>
+   <div class="small" style="margin-top:8px;line-height:1.7">
+    ${l.phone?`<div><span class="dim">전화</span> ${esc(l.phone)}</div>`:""}${l.messenger?`<div><span class="dim">${esc(l.messenger)}</span> ${esc(l.messenger_id||"")}</div>`:""}${l.email?`<div><span class="dim">이메일</span> ${esc(l.email)}</div>`:""}
+    ${l.birth?`<div><span class="dim">생년월일</span> ${esc(l.birth)}${l.gender?" · "+esc(l.gender):""}</div>`:""}${l.visit_month?`<div><span class="dim">희망 방문</span> ${esc(l.visit_month)}</div>`:""}
+    ${l.message?`<div class="muted" style="margin-top:4px">“${esc(l.message)}”</div>`:""}</div>
+   <div class="consents">${cons}</div>
+   <div class="small dim" style="margin-top:6px">접수 ${fD(iso(t))} ${fT(hhmm(l.created_at))} · 담당 ${o?staffChip(o):"미배정"}</div>
+   ${S.leadCo===l.id?consultForm(o||me):""}
+   ${l.status==="new"||l.status==="claimed"?`<div class="brow" style="margin-top:10px">
+     ${!o?`<button class="btn pri sm" data-claim="${l.id}">내가 상담하기</button>`:""}
+     ${o&&!S.leadCo?`<button class="btn sm" data-lco="${l.id}">+ 상담 기록</button><button class="btn pri sm" data-conv="${l.id}">환자로 등록</button>`:""}
+     <button class="btn sm danger ${S.arm==="l"+l.id?"arm":""}" data-lclose="${l.id}">${S.arm==="l"+l.id?"한 번 더 누르면 종료":"종료"}</button></div>`:
+     l.patient_id&&byId(l.patient_id)?`<div class="brow" style="margin-top:10px"><button class="btn sm" data-openp="${l.patient_id}">환자 보기</button></div>`:""}
+  </div>`;
+}
+const FORM_LANG_NAME={ko:"한국어",en:"영어",zh:"중국어",mn:"몽골어"};
+async function updLead(l,p){const {error}=await sb.from("labelle_leads").update(p).eq("id",l.id);if(error){needSql();return false}Object.assign(l,p);return true}
+function bindLeads(){
+  document.querySelectorAll("[data-lf]").forEach(b=>b.onclick=()=>{S.leadF=b.dataset.lf;render()});
+  document.querySelectorAll("[data-claim]").forEach(b=>b.onclick=async()=>{const l=S.leads.find(x=>x.id===b.dataset.claim);
+    if(await updLead(l,{claimed_by:meName(),claimed_at:new Date().toISOString(),status:"claimed",coordinator:l.coordinator||meName()})){toast("내 상담으로 가져왔습니다.");S.leadF="mine";render()}});
+  document.querySelectorAll("[data-lco]").forEach(b=>b.onclick=()=>{S.leadCo=b.dataset.lco;render()});
+  if(S.leadCo){const l=S.leads.find(x=>x.id===S.leadCo);if(l)bindConsultForm({lead_id:l.id,patient_id:l.patient_id||null,subject:l.name})}
+  document.querySelectorAll("[data-lclose]").forEach(b=>b.onclick=async()=>{const id=b.dataset.lclose;if(S.arm!=="l"+id){S.arm="l"+id;render();return}S.arm=null;
+    const l=S.leads.find(x=>x.id===id);if(await updLead(l,{status:"closed"})){toast("종료되었습니다.");render()}});
+  document.querySelectorAll("[data-conv]").forEach(b=>b.onclick=()=>convertLead(S.leads.find(x=>x.id===b.dataset.conv)));
+}
+async function convertLead(l){
+  const o=leadOwner(l)||meName();
+  const lang={mn:"몽골어",en:"영어",zh:"중국어",ko:"한국어"}[l.form_lang]||null;
+  const consent={privacy:l.consent_privacy,sensitive:l.consent_sensitive,third:l.consent_third,overseas:!!l.consent_overseas,marketing:!!l.consent_marketing,version:l.consent_version,at:l.created_at,lead_id:l.id};
+  const v={name:l.name,nationality:l.nationality||null,language:lang,contact:[l.phone,l.messenger&&`${l.messenger} ${l.messenger_id||""}`.trim(),l.email].filter(Boolean).join(" / ")||null,
+    department:l.department||null,procedure:l.procedure||null,counselor:o,source:l.coord_slug?"상담 링크":"홈페이지",stage:0,notes:[l.message,l.birth&&"생년월일 "+l.birth,l.gender,l.visit_month&&"희망 방문 "+l.visit_month].filter(Boolean).join(" · ")||null,
+    consent,lead_id:l.id,status:"active",events:[],files:[]};
+  const prefix=codePrefix(v.nationality,"LB");let data,error;
+  for(let k=0;k<4;k++){v.patient_code=nextCode(prefix,k);v.log=[{at:nowStamp(),text:`신규 문의에서 환자 등록 · ${v.patient_code} · 개인정보 동의 ${fD(iso(new Date(l.created_at)))} · ${who()}`}];
+    ({data,error}=await sb.from(T).insert(v).select().single());if(!error||!/duplicate|unique/i.test(error.message||""))break}
+  if(error){toast(/column|schema/i.test(error.message||"")?"Supabase에 labelle_v17.sql을 먼저 실행해 주세요.":"저장 실패: "+error.message);return}
+  S.rows.unshift({...data,events:data.events||[],log:data.log||[],files:data.files||[]});
+  await updLead(l,{status:"converted",patient_id:data.id,claimed_by:l.claimed_by||o});
+  sb.from("labelle_consults").update({patient_id:data.id}).eq("lead_id",l.id).then(()=>{});S.consults.forEach(c=>{if(c.lead_id===l.id)c.patient_id=data.id});
+  toast(`환자로 등록되었습니다 · ${data.patient_code}`);S.tab="home";S.openId=data.id;S.secOpen.add("info");render();scrollTo(0,0);
+}
+
+/* ---------- copy / share / delegated clicks ---------- */
+document.addEventListener("click",async e=>{
+  const st=e.target.closest("[data-staff]");
+  if(st){e.preventDefault();e.stopPropagation();$("#pv").hidden=true;$("#lbx").hidden=true;document.body.style.overflow="";S.tab="staff";S.staffSel=st.dataset.staff;S.staffDay=null;S.openId=null;S.month=ym();render();scrollTo(0,0);return}
+  const op=e.target.closest("[data-openp]");
+  if(op){e.preventDefault();e.stopPropagation();S.openId=op.dataset.openp;S.editing=false;render();scrollTo(0,0);return}
+  const cp=e.target.closest("[data-copy]");
+  if(cp){e.preventDefault();e.stopPropagation();try{await navigator.clipboard.writeText(cp.dataset.copy);toast("링크가 복사되었습니다.")}catch(err){toast(cp.dataset.copy)}return}
+  const sh=e.target.closest("[data-share]");
+  if(sh){e.preventDefault();e.stopPropagation();const url=sh.dataset.share;if(navigator.share){try{await navigator.share({title:"LA BELLE 상담",url})}catch(err){}}else{try{await navigator.clipboard.writeText(url);toast("링크가 복사되었습니다.")}catch(err){}}return}
+  const ck=e.target.closest("#clockBtn");
+  if(ck){e.preventDefault();toggleClock();return}
+},true);
+
+/* ================= public intake form ================= */
+const FT={
+ ko:{title:"상담 신청",sub:"아래 정보를 입력해 주시면 담당 코디네이터가 연락드립니다.",coord:"담당 코디네이터",name:"이름 (여권 영문)",birth:"생년월일",gender:"성별",genders:["여성","남성","기타"],nat:"국적",phone:"전화번호",msgr:"메신저",msgrId:"메신저 아이디",email:"이메일",dept:"관심 진료",proc:"희망 시술·수술",visit:"희망 방문 시기",msg:"문의 내용",req:"필수",opt:"선택",agreeAll:"전체 동의",view:"내용 보기",submit:"상담 신청하기",thanks:"신청이 완료되었습니다",thanks2:"담당 코디네이터가 곧 연락드리겠습니다.",errName:"이름을 입력해 주세요.",errContact:"전화번호, 메신저, 이메일 중 하나를 입력해 주세요.",errConsent:"필수 동의 항목에 모두 동의해 주세요.",sending:"보내는 중…",again:"새 신청",
+  c_privacy:"개인정보 수집·이용 동의",c_sensitive:"민감정보(건강정보) 처리 동의",c_third:"제휴 의료기관 제3자 제공 동의",c_overseas:"해외 에이전시 국외 이전 동의",c_marketing:"이벤트·마케팅 정보 수신 동의",
+  t_privacy:"수집 항목: 이름, 생년월일, 성별, 국적, 연락처, 메신저, 이메일, 문의 내용 · 목적: 의료관광 상담, 병원 예약, 일정 안내 · 보유 기간: 상담 종료 후 3년 또는 동의 철회 시까지 · 동의를 거부할 수 있으나, 거부 시 상담이 어렵습니다.",
+  t_sensitive:"수집 항목: 희망 시술, 건강 관련 상담 내용, 사진·검사 자료 · 목적: 병원 상담 및 진료 준비 · 보유 기간: 상담 종료 후 3년 또는 동의 철회 시까지 · 거부 시 의료 상담이 어렵습니다.",
+  t_third:"제공받는 자: 주식회사 라벨르엘비 제휴 의료기관 · 제공 항목: 상담 시 입력한 정보 및 의료 자료 · 목적: 진료 상담·견적·예약 · 보유 기간: 해당 기관의 법정 보존 기간",
+  t_overseas:"이전받는 자: 고객의 국가에 있는 제휴 에이전시 · 항목: 이름, 연락처, 진행 일정 · 목적: 현지 안내·출국 지원 · 거부해도 상담은 가능합니다.",
+  t_marketing:"이벤트·할인 정보를 메신저·이메일로 받습니다. 언제든지 철회할 수 있습니다.",
+  depts:["성형외과","피부과","치과","안과","건강검진","기타"],nats:[["몽골","몽골"],["중국","중국"],["미국","미국"],["캐나다","캐나다"],["호주","호주"],["중동","중동"],["기타","기타"]]},
+ en:{title:"Consultation request",sub:"Fill in the form and your coordinator will contact you.",coord:"Your coordinator",name:"Full name (as in passport)",birth:"Date of birth",gender:"Gender",genders:["Female","Male","Other"],nat:"Nationality",phone:"Phone",msgr:"Messenger",msgrId:"Messenger ID",email:"Email",dept:"Treatment of interest",proc:"Desired procedure",visit:"Preferred visit month",msg:"Message",req:"Required",opt:"Optional",agreeAll:"Agree to all",view:"View",submit:"Send request",thanks:"Request sent",thanks2:"Your coordinator will contact you soon.",errName:"Please enter your name.",errContact:"Please enter a phone number, messenger or email.",errConsent:"Please agree to all required items.",sending:"Sending…",again:"New request",
+  c_privacy:"Collection and use of personal information",c_sensitive:"Processing of sensitive (health) information",c_third:"Provision to partner medical institutions",c_overseas:"Transfer to partner agency abroad",c_marketing:"Receive event and marketing messages",
+  t_privacy:"Items: name, date of birth, gender, nationality, phone, messenger, email, message · Purpose: medical tourism consultation, hospital booking, schedule guidance · Retention: 3 years after consultation ends or until you withdraw consent · You may refuse, but we cannot consult without it.",
+  t_sensitive:"Items: desired procedure, health-related consultation details, photos and test results · Purpose: hospital consultation and treatment preparation · Retention: 3 years after consultation ends or until you withdraw consent · Without it, medical consultation is not possible.",
+  t_third:"Recipient: partner medical institutions of LABELLE LB Co., Ltd. · Items: information you enter and medical documents · Purpose: consultation, quotation, booking · Retention: as required by law for that institution.",
+  t_overseas:"Recipient: partner agency in your country · Items: name, contact, schedule · Purpose: local support and departure assistance · You can still consult if you refuse.",
+  t_marketing:"Receive events and discounts by messenger or email. You can withdraw at any time.",
+  depts:["Plastic surgery","Dermatology","Dental","Eye","Health check-up","Other"],nats:[["몽골","Mongolia"],["중국","China"],["미국","USA"],["캐나다","Canada"],["호주","Australia"],["중동","Middle East"],["기타","Other"]]},
+ zh:{title:"咨询申请",sub:"请填写以下信息，专属顾问将与您联系。",coord:"专属顾问",name:"姓名（与护照一致）",birth:"出生日期",gender:"性别",genders:["女","男","其他"],nat:"国籍",phone:"电话",msgr:"即时通讯",msgrId:"通讯账号",email:"电子邮箱",dept:"感兴趣的科目",proc:"希望的手术/项目",visit:"希望访问时间",msg:"咨询内容",req:"必选",opt:"可选",agreeAll:"全部同意",view:"查看",submit:"提交咨询",thanks:"申请已提交",thanks2:"专属顾问将尽快与您联系。",errName:"请输入姓名。",errContact:"请输入电话、通讯账号或邮箱中的一项。",errConsent:"请同意所有必选项目。",sending:"提交中…",again:"新的申请",
+  c_privacy:"同意收集和使用个人信息",c_sensitive:"同意处理敏感信息（健康信息）",c_third:"同意向合作医疗机构提供信息",c_overseas:"同意向海外合作机构转移信息",c_marketing:"同意接收活动及营销信息",
+  t_privacy:"收集项目：姓名、出生日期、性别、国籍、电话、通讯账号、邮箱、咨询内容 · 目的：医疗旅游咨询、医院预约、行程通知 · 保存期限：咨询结束后3年或撤回同意时为止 · 您可以拒绝，但拒绝后将无法进行咨询。",
+  t_sensitive:"收集项目：希望的项目、健康相关咨询内容、照片及检查资料 · 目的：医院咨询及就诊准备 · 保存期限：咨询结束后3年或撤回同意时为止 · 拒绝后将无法进行医疗咨询。",
+  t_third:"接收方：LABELLE LB株式会社的合作医疗机构 · 提供项目：您填写的信息及医疗资料 · 目的：诊疗咨询、报价、预约 · 保存期限：按该机构法定保存期限",
+  t_overseas:"接收方：您所在国家的合作机构 · 项目：姓名、联系方式、行程 · 目的：当地服务及出境协助 · 拒绝也可以进行咨询。",
+  t_marketing:"通过通讯软件或邮件接收活动及优惠信息，可随时撤回。",
+  depts:["整形外科","皮肤科","牙科","眼科","健康体检","其他"],nats:[["몽골","蒙古"],["중국","中国"],["미국","美国"],["캐나다","加拿大"],["호주","澳大利亚"],["중동","中东"],["기타","其他"]]},
+ mn:{title:"Зөвлөгөө авах хүсэлт",sub:"Доорх мэдээллийг бөглөвөл таны зохицуулагч тантай холбогдоно.",coord:"Таны зохицуулагч",name:"Овог нэр (паспортын дагуу)",birth:"Төрсөн огноо",gender:"Хүйс",genders:["Эмэгтэй","Эрэгтэй","Бусад"],nat:"Иргэншил",phone:"Утас",msgr:"Мессенжер",msgrId:"Мессенжер ID",email:"И-мэйл",dept:"Сонирхож буй эмчилгээ",proc:"Хүсэж буй мэс засал / процедур",visit:"Ирэхийг хүсэж буй сар",msg:"Асуулт, хүсэлт",req:"Заавал",opt:"Сонголтоор",agreeAll:"Бүгдийг зөвшөөрөх",view:"Харах",submit:"Хүсэлт илгээх",thanks:"Хүсэлт илгээгдлээ",thanks2:"Таны зохицуулагч удахгүй холбогдоно.",errName:"Нэрээ оруулна уу.",errContact:"Утас, мессенжер эсвэл и-мэйлийн аль нэгийг оруулна уу.",errConsent:"Заавал зөвшөөрөх зүйлсийг бүгдийг зөвшөөрнө үү.",sending:"Илгээж байна…",again:"Шинэ хүсэлт",
+  c_privacy:"Хувийн мэдээлэл цуглуулах, ашиглахыг зөвшөөрөх",c_sensitive:"Эмзэг (эрүүл мэндийн) мэдээлэл боловсруулахыг зөвшөөрөх",c_third:"Хамтрагч эмнэлэгт мэдээлэл өгөхийг зөвшөөрөх",c_overseas:"Гадаад дахь хамтрагч агентлагт шилжүүлэхийг зөвшөөрөх",c_marketing:"Арга хэмжээ, маркетингийн мэдээлэл авахыг зөвшөөрөх",
+  t_privacy:"Цуглуулах мэдээлэл: нэр, төрсөн огноо, хүйс, иргэншил, утас, мессенжер, и-мэйл, асуулт · Зорилго: эмчилгээний аялалын зөвлөгөө, эмнэлгийн цаг захиалга, хуваарийн мэдээлэл · Хадгалах хугацаа: зөвлөгөө дууссанаас хойш 3 жил эсвэл зөвшөөрлөө цуцлах хүртэл · Та татгалзаж болно, гэхдээ тэгвэл зөвлөгөө өгөх боломжгүй.",
+  t_sensitive:"Цуглуулах мэдээлэл: хүсэж буй процедур, эрүүл мэндийн зөвлөгөөний агуулга, зураг, шинжилгээний материал · Зорилго: эмнэлгийн зөвлөгөө, эмчилгээний бэлтгэл · Хадгалах хугацаа: зөвлөгөө дууссанаас хойш 3 жил эсвэл зөвшөөрлөө цуцлах хүртэл · Татгалзвал эмнэлгийн зөвлөгөө өгөх боломжгүй.",
+  t_third:"Хүлээн авагч: LABELLE LB ХХК-ийн хамтрагч эмнэлгүүд · Мэдээлэл: таны оруулсан мэдээлэл, эмнэлгийн материал · Зорилго: зөвлөгөө, үнийн санал, цаг захиалга · Хадгалах хугацаа: тухайн байгууллагын хуулиар тогтоосон хугацаа",
+  t_overseas:"Хүлээн авагч: таны улс дахь хамтрагч агентлаг · Мэдээлэл: нэр, холбоо барих, хуваарь · Зорилго: орон нутгийн туслалцаа, буцах үеийн дэмжлэг · Татгалзсан ч зөвлөгөө авах боломжтой.",
+  t_marketing:"Арга хэмжээ, хөнгөлөлтийн мэдээллийг мессенжер эсвэл и-мэйлээр авна. Хэзээ ч цуцалж болно.",
+  depts:["Гоо сайхны мэс засал","Арьс судлал","Шүд","Нүд","Эрүүл мэндийн үзлэг","Бусад"],nats:[["몽골","Монгол"],["중국","Хятад"],["미국","АНУ"],["캐나다","Канад"],["호주","Австрали"],["중동","Ойрхи Дорнод"],["기타","Бусад"]]}
+};
+const DEPT_KO=["성형외과","피부과","치과","안과","건강검진","기타"];
+const MSGRS=["WhatsApp","Facebook Messenger","WeChat","KakaoTalk","Telegram","Viber","LINE","기타"];
+const IN={lang:"mn",coord:null,done:false};
+function pickFormLang(){const p=new URLSearchParams(location.search).get("l");if(p&&FT[p])return p;const n=(navigator.language||"").toLowerCase();return n.startsWith("mn")?"mn":n.startsWith("zh")?"zh":n.startsWith("ko")?"ko":n.startsWith("en")?"en":"mn"}
+function intakeHTML(){
+  const t=FT[IN.lang];
+  const langs=`<div class="chips small" style="justify-content:center;margin-bottom:14px">${[["mn","Монгол"],["ko","한국어"],["en","English"],["zh","中文"]].map(([k,l])=>`<button class="chip ${IN.lang===k?"on":""}" data-il="${k}">${l}</button>`).join("")}</div>`;
+  const head=`<div style="text-align:center"><span class="kicker">LA BELLE LB</span><h1 class="title" style="font-size:34px">LA BELLE<span class="ol">LB</span></h1><div class="script">My Medical Journey</div></div>`;
+  if(IN.done)return `${langs}${head}<div class="card" style="margin-top:18px;text-align:center"><div class="pen" style="font-family:'Nanum Pen Script',cursive;font-size:30px;color:var(--pink2)">${esc(t.thanks)}</div><p class="muted">${esc(t.thanks2)}</p>${IN.coord?`<p><span class="who"><i style="background:${IN.coord.color||"#FF2E8B"}"></i>${esc(IN.coord.name)}</span></p>`:""}<button class="btn" id="inAgain">${esc(t.again)}</button></div>`;
+  const cons=["privacy","sensitive","third","overseas","marketing"];const reqd=["privacy","sensitive","third"];
+  return `${langs}${head}
+  <div class="card" style="margin-top:16px">
+   <h2 class="h2">${esc(t.title)}</h2><p class="muted small" style="margin-top:-4px">${esc(t.sub)}</p>
+   ${IN.coord?`<div class="small" style="margin-bottom:12px">${esc(t.coord)} · <span class="who"><i style="background:${IN.coord.color||"#FF2E8B"}"></i>${esc(IN.coord.name)}</span></div>`:""}
+   <div class="f"><label class="lb">${esc(t.name)} <em>*</em></label><input id="iName" class="in" autocomplete="name"></div>
+   <div class="g2"><div class="f"><label class="lb">${esc(t.birth)}</label><input id="iBirth" class="in" type="date"></div>
+   <div class="f"><label class="lb">${esc(t.gender)}</label><select id="iGender" class="in"><option value=""></option>${t.genders.map(g=>`<option>${esc(g)}</option>`).join("")}</select></div></div>
+   <div class="f"><label class="lb">${esc(t.nat)}</label><div class="chips small" data-field="inat">${t.nats.map(([k,l])=>`<button type="button" class="chip ${k==="몽골"&&IN.lang==="mn"?"on":""}" data-v="${k}">${esc(l)}</button>`).join("")}</div></div>
+   <div class="f"><label class="lb">${esc(t.phone)}</label><input id="iPhone" class="in" type="tel" placeholder="+976 …" autocomplete="tel"></div>
+   <div class="g2"><div class="f"><label class="lb">${esc(t.msgr)}</label><select id="iMsgr" class="in"><option value=""></option>${MSGRS.map(m=>`<option>${m}</option>`).join("")}</select></div>
+   <div class="f"><label class="lb">${esc(t.msgrId)}</label><input id="iMsgrId" class="in" autocapitalize="none"></div></div>
+   <div class="f"><label class="lb">${esc(t.email)}</label><input id="iEmail" class="in" type="email" autocomplete="email"></div>
+   <div class="f"><label class="lb">${esc(t.dept)}</label><div class="chips small" data-field="idept">${t.depts.map((d,i)=>`<button type="button" class="chip" data-v="${DEPT_KO[i]}">${esc(d)}</button>`).join("")}</div></div>
+   <div class="f"><label class="lb">${esc(t.proc)}</label><input id="iProc" class="in"></div>
+   <div class="f"><label class="lb">${esc(t.visit)}</label><input id="iVisit" class="in" type="month"></div>
+   <div class="f"><label class="lb">${esc(t.msg)}</label><textarea id="iMsg" class="in"></textarea></div>
+   <div class="consentbox">
+    <label class="cons all"><input type="checkbox" id="cAll"> <b>${esc(t.agreeAll)}</b></label>
+    ${cons.map(k=>`<div class="cons"><label><input type="checkbox" data-cons="${k}"> <span class="tag ${reqd.includes(k)?"rq2":""}">${reqd.includes(k)?esc(t.req):esc(t.opt)}</span> ${esc(t["c_"+k])}</label>
+      <details><summary>${esc(t.view)}</summary><p>${esc(t["t_"+k])}</p></details></div>`).join("")}
+   </div>
+   <div id="iErr" class="small" style="color:var(--pink2);min-height:20px;margin:8px 0"></div>
+   <button class="btn pri" style="width:100%" id="iSend">${esc(t.submit)}</button>
+  </div>
+  <p class="small dim" style="text-align:center;margin-top:14px">주식회사 라벨르엘비 (LABELLE LB) · labellelb.com</p>`;
+}
+function renderIntake(){
+  const box=$("#intake");box.innerHTML=intakeHTML();box.hidden=false;
+  box.querySelectorAll("[data-il]").forEach(b=>b.onclick=()=>{IN.lang=b.dataset.il;renderIntake()});
+  const ag=$("#inAgain");if(ag)ag.onclick=()=>{IN.done=false;renderIntake()};
+  box.querySelectorAll(".chips").forEach(g=>g.onclick=e=>{const b=e.target.closest(".chip");if(!b)return;const was=b.classList.contains("on");g.querySelectorAll(".chip").forEach(x=>x.classList.remove("on"));if(!was)b.classList.add("on")});
+  const all=$("#cAll");if(all){all.onchange=()=>box.querySelectorAll("[data-cons]").forEach(c=>c.checked=all.checked);
+    box.querySelectorAll("[data-cons]").forEach(c=>c.onchange=()=>{all.checked=[...box.querySelectorAll("[data-cons]")].every(x=>x.checked)})}
+  const sd=$("#iSend");if(!sd)return;
+  sd.onclick=async()=>{
+    const t=FT[IN.lang],err=$("#iErr");const v=id=>$(id).value.trim();
+    const c=k=>box.querySelector(`[data-cons="${k}"]`).checked;
+    if(!v("#iName")){err.textContent=t.errName;return}
+    if(!v("#iPhone")&&!v("#iMsgrId")&&!v("#iEmail")){err.textContent=t.errContact;return}
+    if(!c("privacy")||!c("sensitive")||!c("third")){err.textContent=t.errConsent;return}
+    err.textContent="";sd.disabled=true;sd.textContent=t.sending;
+    const pick=f=>box.querySelector(`.chips[data-field="${f}"] .chip.on`)?.dataset.v||null;
+    const row={form_lang:IN.lang,name:v("#iName"),birth:$("#iBirth").value||null,gender:$("#iGender").value||null,nationality:pick("inat"),phone:v("#iPhone")||null,
+      messenger:$("#iMsgr").value||null,messenger_id:v("#iMsgrId")||null,email:v("#iEmail")||null,department:pick("idept"),procedure:v("#iProc")||null,visit_month:$("#iVisit").value||null,message:v("#iMsg")||null,
+      coord_slug:IN.slug||null,coordinator:IN.coord?.name||null,consent_privacy:true,consent_sensitive:true,consent_third:true,consent_overseas:c("overseas"),consent_marketing:c("marketing"),consent_version:"2026-10-v1",status:"new"};
+    const {error}=await sb.from("labelle_leads").insert(row);
+    sd.disabled=false;sd.textContent=t.submit;
+    if(error){err.textContent="Error: "+error.message;return}
+    IN.done=true;renderIntake();scrollTo(0,0);
+  };
+}
+async function bootIntake(){
+  const q=new URLSearchParams(location.search);IN.slug=(q.get("c")||"").toLowerCase()||null;IN.lang=pickFormLang();
+  $("#auth").hidden=true;$("#app").hidden=true;
+  if(IN.slug){try{const {data}=await sb.rpc("labelle_coord",{p_slug:IN.slug});if(data&&data[0])IN.coord=data[0]}catch(e){}}
+  renderIntake();
+}
+const isIntake=()=>{const q=new URLSearchParams(location.search);return q.has("c")||q.has("form")};
+
+
+/* ================= i18n (EN / 中文) ================= */
+const I18N={"en": {"고객이 링크를 열어 개인정보와 동의서를 직접 입력합니다. 내 링크로 들어온 문의는 나에게, 공용 링크는 대기 목록으로 들어옵니다.": "Customers open the link and enter their personal info and consents themselves. Inquiries from my link come to me; the shared link goes to the waiting list.", "샘플 환자는 모두 가상의 인물입니다. 실제 환자 개인정보·의료자료는 보안 설정을 갖춘 정식 버전에서만 입력하세요.": "All sample patients are fictional. Enter real patient personal and medical data only in the official version with security settings.", "파일은 비공개 저장소에 보관되며, 열람할 때마다 1시간짜리 보안 링크가 만들어지고 기록이 남습니다. 파일당 최대": "Files are kept in private storage; each view creates a 1-hour secure link and is logged. Max per file:", "수술일을 입력하면 D-14 ~ D+14 안내와 1·3·6·12개월 사후관리 일정이 자동으로 만들어집니다.": "Enter the surgery date to auto-create D-14 ~ D+14 guidance and 1·3·6·12-month aftercare schedules.", "아직 첨부된 파일이 없습니다. 사진, 검사 결과, 여권, 개인정보·수술 동의서 등을 올려 보관하세요.": "No files attached yet. Upload photos, test results, passports, privacy/surgery consents, etc.", "처음 로그인할 때 이 아이디와 비밀번호(6자 이상)로 ‘계정 만들기’를 누르면 됩니다.": "On first login, use this ID and a password (6+ characters) and tap ‘Create account’.", "아이디 또는 비밀번호가 맞지 않습니다. 처음이라면 ‘계정 만들기’를 누르세요.": "Incorrect ID or password. If this is your first time, tap ‘Create account’.", "내 상담 링크 ID가 없습니다. 직원 탭에서 ADM이 설정할 수 있습니다.": "You have no consultation link ID. An ADM can set it in the Staff tab.", "주식회사 라벨르엘비 (LABELLE LB) · labellelb.com": "LABELLE LB Co., Ltd. (LABELLE LB) · labellelb.com", "숫자 = 상담 건수 · 아래 = 근무 시간 · 날짜를 누르면 상세": "Number = consultations · Below = work hours · Tap a date for details", "아직 일정이 없습니다. 항공·픽업·병원·숙박 일정을 추가하세요.": "No schedules yet. Add flight, pickup, hospital and lodging schedules.", "직원 실적·출퇴근·신규 상담 기능을 쓰려면 Supabase에": "To use staff performance, clock-in/out and new consultations: in Supabase,", "여러 개 선택 가능 · 사진, PDF, 스캔본, ZIP 등": "Multiple selection allowed · photos, PDF, scans, ZIP, etc.", "새 계정 만들기가 꺼져 있습니다. 관리자에게 요청하세요.": "New account creation is turned off. Please ask an administrator.", "취소되었습니다. 기록 탭에서 다시 활성화할 수 있습니다.": "Cancelled. You can reactivate it in the Records tab.", "국가-에이전시-연월-순번으로 저장 시 자동 발급됩니다.": "Auto-issued on save as Country-Agency-YearMonth-Sequence.", "에 labelle_v16.sql을 먼저 실행해 주세요.": ": please run labelle_v16.sql first.", "에 labelle_v17.sql을 먼저 실행해 주세요.": ": please run labelle_v17.sql first.", "이메일 인증이 필요합니다. 관리자에게 요청하세요.": "Email verification is required. Please ask an administrator.", "데모: 담당자와 병원에 긴급 알림이 전송됩니다.": "Demo: an urgent alert is sent to the staff in charge and the hospital.", "오늘은 예정된 일정이 없습니다. 편안히 쉬세요.": "No schedules for today. Take it easy.", "그래도 등록하려면 저장을 한 번 더 누르세요.": "To register anyway, tap Save once more.", "이미 있는 계정입니다. 로그인을 눌러 주세요.": "This account already exists. Please tap Log in.", "예: 코 성형 견적 문의, 11월 방문 희망": "e.g. Nose surgery quote inquiry, wants to visit in November", "신규 상담 기능을 쓰려면 Supabase에": "To use new consultations: in Supabase,", "의료적 판단은 담당 의료기관이 수행합니다.": "Medical decisions are made by the responsible medical institution.", "이름과 코드(영문 2~4자)를 입력하세요.": "Enter a name and code (2–4 letters).", "변경되었습니다. 환자 화면에 반영됩니다.": "Updated. It will be reflected on the patient screen.", "사진·PDF·동의서 등 · 파일당 최대": "Photos·PDF·consents etc. · Max per file:", "수술 전후 비교 · 좌우로 밀어 보세요": "Before & after · slide left and right", "새로운 나, 더 자신감 있는 미래…”": "A new me, a more confident future…”", "비밀번호는 6자 이상이어야 합니다.": "Password must be at least 6 characters.", "결제 방식 (여러 개 선택 가능)": "Payment method (multiple allowed)", "대기 중인 신규 문의가 없습니다.": "No new inquiries waiting.", "샘플 환자 4명이 추가되었습니다.": "4 sample patients added.", "예시 화면입니다 (가상 이미지).": "Example screen (fictional images).", "이미 사용 중인 링크 ID입니다.": "This link ID is already in use.", "개인정보 ✓ 민감정보 ✓ 제3자": "Personal info ✓ Sensitive info ✓ Third party", "날짜별 상담 건수 · 근무 시간": "Consultations by date · work hours", "등록된 코드는 바뀌지 않습니다.": "Registered codes cannot be changed.", "예: 한복 체험 + 성수동 투어": "e.g. Hanbok experience + Seongsu-dong tour", "울란바토르 Gerege 에이전시": "Ulaanbaatar Gerege Agency", "이메일과 비밀번호를 입력하세요.": "Enter your email and password.", "로그인 아이디 또는 이메일 *": "Login ID or email *", "아직 등록된 환자가 없습니다.": "No patients registered yet.", "예: 정면 사진, 수술 동의서": "e.g. Front photo, surgery consent", "이미 등록된 환자와 비슷합니다": "Similar to an existing patient", "프로필 사진이 저장되었습니다.": "Profile photo saved.", "회복 상태·경과사진·불편 증상": "Recovery status·progress photos·discomfort", "관리자에게 권한을 요청하세요": "Ask an administrator for permission", "새로운 나, 새로운 시작.”": "A new me, a new beginning.”", "수술 전후 안내 · 사후관리": "Pre/post-op guidance · aftercare", "예: 울란바토르 Gerege": "e.g. Ulaanbaatar Gerege", "이 단계의 환자가 없습니다.": "No patients at this stage.", "이 분류의 자료가 없습니다.": "No files in this category.", "이름과 아이디를 입력하세요.": "Enter a name and ID.", "이미 사용 중인 코드입니다.": "This code is already in use.", "인천공항 T1 (OM301)": "Incheon Airport T1 (OM301)", "인천공항 T1 → 강남 숙소": "Incheon Airport T1 → Gangnam lodging", "제출 요청이 기록되었습니다.": "Submission request recorded.", "회복 경과·만족도·추가 상담": "Recovery·satisfaction·follow-up consultation", "긴급 도움 요청 (SOS)": "Emergency help (SOS)", "내 상담으로 가져왔습니다.": "Moved to my consultations.", "발송 · 병원 승인 안내문": "Send · hospital-approved guide", "수술 전후 안내 자동 발송": "Auto-send pre/post-op guidance", "수술 후 12개월 사후관리": "12-month post-op aftercare", "에이전시가 추가되었습니다.": "Agency added.", "열람 기록이 저장되었습니다": "Access log saved", "의료자료 · 서류 · 파일": "Medical files · documents · files", "의료자료에 함께 보관됩니다": "Stored together in medical files", "이 날은 일정이 없습니다.": "No schedules on this day.", "제목 (비우면 파일 이름)": "Title (blank = file name)", "최종 경과 확인·재진 안내": "Final progress check·revisit guide", "한복 체험 + 성수동 투어": "Hanbok experience + Seongsu-dong tour", "가상 환자 · 견적 대기": "Fictional patient · awaiting quote", "강남 레지던스 1203호": "Gangnam Residence #1203", "계정을 만들 수 없습니다": "Cannot create account", "금식·복약 등 병원 지침": "Fasting·medication and other hospital instructions", "등록된 직원이 없습니다.": "No staff registered.", "사전 준비사항·검사 안내": "Preparation·test guidance", "상담 링크 ID (영문)": "Consultation link ID (English letters)", "신규 문의에서 환자 등록": "Register patient from new inquiry", "예정된 일정이 없습니다.": "No upcoming schedules.", "장기 경과사진·상태 확인": "Long-term progress photos·status check", "전날 밤 12시부터 금식": "Fasting from midnight the night before", "다시 활성화되었습니다.": "Reactivated.", "담당 환자 (진행 중)": "My patients (in progress)", "링크가 복사되었습니다.": "Link copied.", "모든 여정을 마쳤습니다": "All journeys completed", "백업이 복사되었습니다.": "Backup copied.", "병원 위치·담당자 안내": "Hospital location·contact guide", "상담 기록이 없습니다.": "No consultation records.", "상담이 기록되었습니다.": "Consultation recorded.", "새로운 시작이 됩니다.": "becomes a new beginning.", "여권 영문명 또는 이름": "Passport English name or name", "코드 (영문 2~4자)": "Code (2–4 letters)", "파일이 저장되었습니다.": "File saved.", "한 번 더 누르면 삭제": "Tap again to delete", "한 번 더 누르면 종료": "Tap again to end", "한 번 더 누르면 취소": "Tap again to cancel", "해당 문의가 없습니다.": "No such inquiry.", "강남 A성형외과 3층": "Gangnam A Plastic Surgery, 3F", "경과·불편 증상 확인": "Progress·discomfort check", "를 넘어 건너뜁니다.": " will be skipped.", "병원별 수술 준비사항": "Surgery preparation by hospital", "복사할 수 없습니다.": "Cannot copy.", "예: 병원 요청 자료": "e.g. Documents requested by hospital", "일정이 변경되었습니다": "Schedule changed", "한복 체험 · 경복궁": "Hanbok experience · Gyeongbokgung", "환자로 등록되었습니다": "Registered as patient", "가상 환자 · 데모": "Fictional patient · demo", "날짜를 선택하세요.": "Select a date.", "당사 수납액 (원)": "Amount received by us (KRW)", "도움이 필요하세요?": "Need help?", "아이디 또는 이메일": "ID or email", "예: 인천공항 T1": "e.g. Incheon Airport T1", "예시 이미지입니다.": "This is an example image.", "을 실행해 주세요.": " needs to be run.", "이름을 입력하세요.": "Enter a name.", "파일을 선택하세요.": "Select a file.", "한 사람의 이야기가": "One person's story", "환자 여정 통합관리": "Patient journey management", "환자 코드 (자동)": "Patient code (auto)", "견적 금액 (원)": "Quoted amount (KRW)", "기록이 없습니다.": "No records.", "방문 일정·준비물": "Visit schedule·items to bring", "사진 올리는 중…": "Uploading photo…", "소요 시간 (분)": "Duration (min)", "예: 통역 김OO": "e.g. Interpreter Kim OO", "예시 화면입니다.": "This is an example screen.", "예정된 일정 없음": "No upcoming schedules", "입국장 A 게이트": "Arrivals Gate A", "촬영일·발급일 *": "Date taken·issued *", "프로필 사진 변경": "Change profile photo", "환자 정보 기록지": "Patient information sheet", "강남 A성형외과": "Gangnam A Plastic Surgery", "개인정보 동의서": "Privacy consent form", "고객 상담 링크": "Customer consultation link", "근무 기록 없음": "No work records", "글로벌 의료관광": "Global medical tourism", "나의 전체 일정": "My full schedule", "담당 코디네이터": "Coordinator in charge", "병원 공유 해제": "Stop sharing with hospital", "병원 직접 결제": "Paid directly to hospital", "비자·입국 준비": "Visa·entry preparation", "삭제되었습니다.": "Deleted.", "샘플 추가 실패": "Failed to add samples", "샘플 환자 등록": "Register sample patients", "샘플 환자 보기": "View sample patients", "샘플 환자 추가": "Add sample patients", "수술 예약 확정": "Surgery booking confirmed", "신규 문의 배정": "Assign new inquiry", "신규 환자 등록": "Register new patient", "압구정 B피부과": "Apgujeong B Dermatology", "예: Oyuna": "e.g. Oyuna", "예: jieun": "e.g. jieun", "재진·경과 확인": "Revisit·progress check", "저장되었습니다.": "Saved.", "종료되었습니다.": "Ended.", "직원 정보 수정": "Edit staff info", "초기 회복 확인": "Early recovery check", "통역 Oyuna": "Interpreter Oyuna", "통역 Saraa": "Interpreter Saraa", "퇴원·회복 안내": "Discharge·recovery guide", "해외송금, 카드": "International transfer, card", "혈액검사 결과지": "Blood test results", "확인되었습니다.": "Confirmed.", "환자 정보 수정": "Edit patient info", "환자 화면 보기": "View patient screen", "개인정보 동의": "Privacy consent", "견적서·영수증": "Quotes·receipts", "관광 프로그램": "Tour programs", "내가 상담하기": "Take this consultation", "동의서·견적서": "Consents·quotes", "등록되었습니다": "Registered", "레이저 리프팅": "Laser lifting", "병원 공유 중": "Shared with hospital", "불러오기 실패": "Failed to load", "사후관리 일정": "Aftercare schedule", "수술 전 사진": "Before photos", "수술 후 7일": "Post-op day 7", "수술 후 사진": "After photos", "숙박팀 이OO": "Lodging team Lee OO", "안검하수 교정": "Ptosis correction", "에이전시 이름": "Agency name", "에이전시 저장": "Save agency", "연락처·메신저": "Contact·messenger", "예: 코 성형": "e.g. Nose surgery", "유치 에이전시": "Referring agency", "의전팀 정OO": "Protocol team Jung OO", "이번 달 상담": "Consultations this month", "인천공항 T1": "Incheon Airport T1", "장기 사후관리": "Long-term aftercare", "직접 유치 =": "Direct acquisition =", "진단서·소견서": "Medical certificate·opinion", "처음 화면으로": "Back to start", "첫 환자 등록": "Register first patient", "총 근무 시간": "Total work hours", "출국·사후관리": "Departure·aftercare", "출근했습니다.": "Clocked in.", "퇴근 · 오늘": "Clock-out · Today", "파일 선택 *": "Select file *", "가상 이미지": "Fictional image", "계정 만들기": "Create account", "고객용 링크": "Customer link", "공복 불필요": "No fasting needed", "기사 박OO": "Driver Park OO", "기사 최OO": "Driver Choi OO", "다시 활성화": "Reactivate", "담당 통역사": "Interpreter in charge", "로그인 실패": "Login failed", "메모·준비물": "Notes·items to bring", "병원 비공개": "Hidden from hospital", "상담한 직원": "Consulting staff", "새 에이전시": "New agency", "서초 C치과": "Seocho C Dental", "수술 동의서": "Surgery consent form", "숙박 체크인": "Hotel check-in", "시간당 상담": "Consultations per hour", "시술·수술명": "Procedure·surgery name", "업로드 실패": "Upload failed", "업로드 중…": "Uploading…", "여권·신분증": "Passport·ID", "예: GRG": "e.g. GRG", "예약금 입금": "Deposit paid", "오늘의 일정": "Today's schedule", "온라인 결제": "Online payment", "제3자 제공": "Third-party provision", "프로필 사진": "Profile photo", "한국 입국일": "Arrival date in Korea", "해외 파트너": "Overseas partner", "환영합니다.": "Welcome.", "환자로 등록": "Register as patient", "가상 환자": "Fictional patient", "개월 경과": " months post-op", "견적 확인": "Review quote", "결제 방식": "Payment method", "결제·정산": "Payment·settlement", "공용 링크": "Shared link", "공항 샌딩": "Airport drop-off", "공항 픽업": "Airport pickup", "관광·체험": "Tours·experiences", "국외 이전": "Overseas transfer", "권한 없음": "No permission", "근무 시간": "Work hours", "기본 정보": "Basic info", "다음 단계": "Next stage", "다음 일정": "Next schedule", "담당 환자": "My patients", "당사 수납": "Received by us", "라미네이트": "Laminates", "백업 복사": "Copy backup", "변경 이력": "Change history", "병원 공유": "Share with hospital", "병원 상담": "Hospital consultation", "병원 안내": "Hospital guide", "병원 진료": "Hospital visit", "사용 언어": "Language", "상담 건수": "Consultations", "상담 기록": "Consultation records", "상담 내용": "Consultation details", "상담 링크": "Consultation link", "상담·견적": "Consultation·quote", "상담일 *": "Consultation date *", "서류 요청": "Request documents", "수술 당일": "Surgery day", "수술 완료": "Surgery completed", "수술·시술": "Surgery·procedure", "시간 미정": "Time TBD", "시간 없음": "No time", "신규 상담": "New consultation", "신규 환자": "New patient", "안면 CT": "Facial CT", "업로드 중": "Uploading", "에게 알림": " notified", "여권 사본": "Passport copy", "여권·비자": "Passport·visa", "여정 취소": "Cancel journey", "연결 계정": "Linked account", "예시 닫기": "Close example", "예시 보기": "View example", "완료 취소": "Undo completion", "원본 열기": "Open original", "유치 경로": "Acquisition channel", "이후 일정": "Upcoming schedules", "일정 변경": "Change schedule", "일정 삭제": "Delete schedule", "일정 추가": "Add schedule", "입국 예정": "Arriving", "자료 삭제": "Delete file", "자료 열람": "View file", "자료 종류": "File type", "저장 실패": "Save failed", "전체 보기": "View all", "전체 진행": "Overall progress", "전후 비교": "Before & after", "정면 사진": "Front photo", "정보 수정": "Edit info", "정보 없음": "No info", "지인 소개": "Referral", "직원 목록": "Staff list", "직원 추가": "Add staff", "직접 유치": "Direct acquisition", "진행 단계": "Progress stage", "진행 전체": "All progress", "측면 사진": "Side photo", "코드 발급": "Issue code", "코디네이터": "Coordinator", "파일 열기": "Open file", "파일 첨부": "Attach file", "표시 색상": "Display color", "필수 서류": "Required documents", "한국 입국": "Arrival in Korea", "한국 체류": "Stay in Korea", "항공 입국": "Flight arrival", "항공 출국": "Flight departure", "현재 단계": "Current stage", "확인 중…": "Checking…", "환자 등록": "Register patient", "환자 보기": "View patient", "환자 언어": "Patient language", "환자 여정": "Patient journey", "환자 코드": "Patient code", "환자 확인": "Verify patient", "희망 방문": "Preferred visit", "개인정보": "Personal info", "건강검진": "Health checkup", "경과사진": "Progress photos", "계좌이체": "Bank transfer", "국외이전": "Overseas transfer", "근무 중": "On duty", "날짜 *": "Date *", "내 링크": "My link", "내 상담": "My consultations", "러시아어": "Russian", "로그아웃": "Log out", "민감정보": "Sensitive info", "비밀번호": "Password", "사후관리": "Aftercare", "상담 중": "In consultation", "생년월일": "Date of birth", "성형외과": "Plastic surgery", "수술 후": "Post-op", "앱 버전": "App version", "영상통화": "Video call", "이름 *": "Name *", "이번 달": "This month", "진료과목": "Specialty", "진행 중": "In progress", "코 성형": "Nose surgery", "프로그램": "Program", "해외송금": "International transfer", "혈액검사": "Blood test", "홈페이지": "Website", "회복관리": "Recovery care", "가상)": "fictional)", "김지은": "Kim Ji-eun", "담당자": "Person in charge", "로그인": "Log in", "마케팅": "Marketing", "메신저": "Messenger", "몽골어": "Mongolian", "미배정": "Unassigned", "미수금": "Outstanding balance", "미제출": "Not submitted", "박서연": "Park Seo-yeon", "변경됨": "Changed", "비활성": "Inactive", "수술일": "Surgery date", "시간당": "Per hour", "업로드": "Upload", "연락처": "Contact", "오늘은": "Today", "이메일": "Email", "일 전": " days ago", "입국일": "Arrival date", "중국어": "Chinese", "출국일": "Departure date", "취소됨": "Cancelled", "캐나다": "Canada", "통역사": "Interpreter", "피부과": "Dermatology", "한국어": "Korean", "항공권": "Flight ticket", "개월": " months", "검사": "Test", "견적": "Quote", "공유": "Share", "국적": "Nationality", "근무": "Work", "기록": "Records", "기타": "Other", "다음": "Next", "단계": "Stage", "닫기": "Close", "담당": "In charge", "대기": "Waiting", "동의": "Consent", "등록": "Register", "만원": "×10k KRW", "메모": "Memo", "목록": "List", "몽골": "Mongolia", "미국": "USA", "방문": "Visit", "병원": "Hospital", "복사": "Copy", "비자": "Visa", "사진": "Photos", "삭제": "Delete", "상담": "Consultation", "상태": "Status", "서류": "Documents", "수술": "Surgery", "시간": "Time", "안과": "Ophthalmology", "없음": "None", "여정": "Journey", "역할": "Role", "열람": "View", "영어": "English", "오늘": "Today", "오전": "AM", "오후": "PM", "완료": "Done", "요일": "Weekday", "요청": "Request", "이름": "Name", "이전": "Previous", "일정": "Schedule", "입국": "Arrival", "장소": "Location", "재진": "Revisit", "저장": "Save", "전체": "All", "전화": "Phone", "접수": "Received", "종료": "End", "종류": "Type", "종일": "All day", "중국": "China", "중동": "Middle East", "직원": "Staff", "채널": "Channel", "체크": "Check", "출국": "Departure", "출근": "Clock in", "취소": "Cancel", "치과": "Dental", "카드": "Card", "코디": "Coord.", "통역": "Interpretation", "퇴근": "Clock out", "편집": "Edit", "합계": "Total", "해제": "Release", "현금": "Cash", "호주": "Australia", "확인": "Confirm", "활성": "Active"}, "zh": {"고객이 링크를 열어 개인정보와 동의서를 직접 입력합니다. 내 링크로 들어온 문의는 나에게, 공용 링크는 대기 목록으로 들어옵니다.": "客户打开链接后自行填写个人信息和同意书。通过我的链接提交的咨询归我，公用链接的咨询进入待处理列表。", "샘플 환자는 모두 가상의 인물입니다. 실제 환자 개인정보·의료자료는 보안 설정을 갖춘 정식 버전에서만 입력하세요.": "样本患者均为虚构人物。真实患者的个人信息·医疗资料请仅在具备安全设置的正式版本中录入。", "파일은 비공개 저장소에 보관되며, 열람할 때마다 1시간짜리 보안 링크가 만들어지고 기록이 남습니다. 파일당 최대": "文件保存在私密存储中，每次查看都会生成1小时有效的安全链接并留下记录。每个文件最大", "수술일을 입력하면 D-14 ~ D+14 안내와 1·3·6·12개월 사후관리 일정이 자동으로 만들어집니다.": "输入手术日期后，将自动生成D-14 ~ D+14指引及1·3·6·12个月术后护理日程。", "아직 첨부된 파일이 없습니다. 사진, 검사 결과, 여권, 개인정보·수술 동의서 등을 올려 보관하세요.": "尚无附件。请上传照片、检查结果、护照、个人信息·手术同意书等进行保存。", "처음 로그인할 때 이 아이디와 비밀번호(6자 이상)로 ‘계정 만들기’를 누르면 됩니다.": "首次登录时，使用此账号和密码（6位以上）点击‘创建账号’即可。", "아이디 또는 비밀번호가 맞지 않습니다. 처음이라면 ‘계정 만들기’를 누르세요.": "账号或密码不正确。如果是首次使用，请点击‘创建账号’。", "내 상담 링크 ID가 없습니다. 직원 탭에서 ADM이 설정할 수 있습니다.": "您还没有咨询链接ID。ADM可在员工标签中设置。", "주식회사 라벨르엘비 (LABELLE LB) · labellelb.com": "株式会社LABELLE LB (LABELLE LB) · labellelb.com", "숫자 = 상담 건수 · 아래 = 근무 시간 · 날짜를 누르면 상세": "数字 = 咨询数 · 下方 = 工作时长 · 点击日期查看详情", "아직 일정이 없습니다. 항공·픽업·병원·숙박 일정을 추가하세요.": "尚无日程。请添加航班·接机·医院·住宿日程。", "직원 실적·출퇴근·신규 상담 기능을 쓰려면 Supabase에": "要使用员工业绩·考勤·新咨询功能，请在Supabase中", "여러 개 선택 가능 · 사진, PDF, 스캔본, ZIP 등": "可多选 · 照片、PDF、扫描件、ZIP等", "새 계정 만들기가 꺼져 있습니다. 관리자에게 요청하세요.": "新账号创建已关闭。请联系管理员。", "취소되었습니다. 기록 탭에서 다시 활성화할 수 있습니다.": "已取消。可在记录标签中重新启用。", "국가-에이전시-연월-순번으로 저장 시 자동 발급됩니다.": "保存时按 国家-代理-年月-序号 自动生成。", "에 labelle_v16.sql을 먼저 실행해 주세요.": "中请先执行labelle_v16.sql。", "에 labelle_v17.sql을 먼저 실행해 주세요.": "中请先执行labelle_v17.sql。", "이메일 인증이 필요합니다. 관리자에게 요청하세요.": "需要邮箱验证。请联系管理员。", "데모: 담당자와 병원에 긴급 알림이 전송됩니다.": "演示：将向负责人和医院发送紧急通知。", "오늘은 예정된 일정이 없습니다. 편안히 쉬세요.": "今天没有安排的日程。请好好休息。", "그래도 등록하려면 저장을 한 번 더 누르세요.": "如仍要登记，请再点击一次保存。", "이미 있는 계정입니다. 로그인을 눌러 주세요.": "该账号已存在。请点击登录。", "예: 코 성형 견적 문의, 11월 방문 희망": "例：鼻整形报价咨询，希望11月到访", "신규 상담 기능을 쓰려면 Supabase에": "要使用新咨询功能，请在Supabase中", "의료적 판단은 담당 의료기관이 수행합니다.": "医疗判断由负责的医疗机构作出。", "이름과 코드(영문 2~4자)를 입력하세요.": "请输入名称和代码（2~4位英文字母）。", "변경되었습니다. 환자 화면에 반영됩니다.": "已变更。将同步显示在患者页面。", "사진·PDF·동의서 등 · 파일당 최대": "照片·PDF·同意书等 · 每个文件最大", "수술 전후 비교 · 좌우로 밀어 보세요": "术前术后对比 · 左右滑动查看", "새로운 나, 더 자신감 있는 미래…”": "全新的我，更自信的未来…”", "비밀번호는 6자 이상이어야 합니다.": "密码须为6位以上。", "결제 방식 (여러 개 선택 가능)": "付款方式（可多选）", "대기 중인 신규 문의가 없습니다.": "没有待处理的新咨询。", "샘플 환자 4명이 추가되었습니다.": "已添加4名样本患者。", "예시 화면입니다 (가상 이미지).": "示例画面（虚拟图片）。", "이미 사용 중인 링크 ID입니다.": "该链接ID已被使用。", "개인정보 ✓ 민감정보 ✓ 제3자": "个人信息 ✓ 敏感信息 ✓ 第三方", "날짜별 상담 건수 · 근무 시간": "按日期咨询数 · 工作时长", "등록된 코드는 바뀌지 않습니다.": "已登记的代码不可更改。", "예: 한복 체험 + 성수동 투어": "例：韩服体验 + 圣水洞观光", "울란바토르 Gerege 에이전시": "乌兰巴托Gerege代理", "이메일과 비밀번호를 입력하세요.": "请输入邮箱和密码。", "로그인 아이디 또는 이메일 *": "登录账号或邮箱 *", "아직 등록된 환자가 없습니다.": "尚无登记的患者。", "예: 정면 사진, 수술 동의서": "例：正面照片、手术同意书", "이미 등록된 환자와 비슷합니다": "与已登记的患者相似", "프로필 사진이 저장되었습니다.": "头像已保存。", "회복 상태·경과사진·불편 증상": "恢复状态·恢复照片·不适症状", "관리자에게 권한을 요청하세요": "请向管理员申请权限", "새로운 나, 새로운 시작.”": "全新的我，全新的开始。”", "수술 전후 안내 · 사후관리": "术前术后指引 · 术后护理", "예: 울란바토르 Gerege": "例：乌兰巴托Gerege", "이 단계의 환자가 없습니다.": "此阶段没有患者。", "이 분류의 자료가 없습니다.": "此分类下没有资料。", "이름과 아이디를 입력하세요.": "请输入姓名和账号。", "이미 사용 중인 코드입니다.": "该代码已被使用。", "인천공항 T1 (OM301)": "仁川机场T1 (OM301)", "인천공항 T1 → 강남 숙소": "仁川机场T1 → 江南住处", "제출 요청이 기록되었습니다.": "提交请求已记录。", "회복 경과·만족도·추가 상담": "恢复情况·满意度·追加咨询", "긴급 도움 요청 (SOS)": "紧急求助 (SOS)", "내 상담으로 가져왔습니다.": "已转入我的咨询。", "발송 · 병원 승인 안내문": "发送 · 医院审核通过的指引", "수술 전후 안내 자동 발송": "自动发送术前术后指引", "수술 후 12개월 사후관리": "术后12个月护理", "에이전시가 추가되었습니다.": "代理已添加。", "열람 기록이 저장되었습니다": "查看记录已保存", "의료자료 · 서류 · 파일": "医疗资料 · 文件 · 附件", "의료자료에 함께 보관됩니다": "将一并保存在医疗资料中", "이 날은 일정이 없습니다.": "这一天没有日程。", "제목 (비우면 파일 이름)": "标题（留空则用文件名）", "최종 경과 확인·재진 안내": "最终恢复确认·复诊指引", "한복 체험 + 성수동 투어": "韩服体验 + 圣水洞观光", "가상 환자 · 견적 대기": "虚构患者 · 等待报价", "강남 레지던스 1203호": "江南公寓1203号", "계정을 만들 수 없습니다": "无法创建账号", "금식·복약 등 병원 지침": "禁食·服药等医院指示", "등록된 직원이 없습니다.": "尚无登记的员工。", "사전 준비사항·검사 안내": "事前准备·检查指引", "상담 링크 ID (영문)": "咨询链接ID（英文）", "신규 문의에서 환자 등록": "从新咨询登记患者", "예정된 일정이 없습니다.": "没有安排的日程。", "장기 경과사진·상태 확인": "长期恢复照片·状态确认", "전날 밤 12시부터 금식": "前一晚12点起禁食", "다시 활성화되었습니다.": "已重新启用。", "담당 환자 (진행 중)": "负责患者（进行中）", "링크가 복사되었습니다.": "链接已复制。", "모든 여정을 마쳤습니다": "全部旅程已完成", "백업이 복사되었습니다.": "备份已复制。", "병원 위치·담당자 안내": "医院位置·联系人指引", "상담 기록이 없습니다.": "没有咨询记录。", "상담이 기록되었습니다.": "咨询已记录。", "새로운 시작이 됩니다.": "成为新的开始。", "여권 영문명 또는 이름": "护照英文名或姓名", "코드 (영문 2~4자)": "代码（2~4位英文字母）", "파일이 저장되었습니다.": "文件已保存。", "한 번 더 누르면 삭제": "再点一次删除", "한 번 더 누르면 종료": "再点一次结束", "한 번 더 누르면 취소": "再点一次取消", "해당 문의가 없습니다.": "没有相应的咨询。", "강남 A성형외과 3층": "江南A整形外科3楼", "경과·불편 증상 확인": "恢复·不适症状确认", "를 넘어 건너뜁니다.": "将被跳过。", "병원별 수술 준비사항": "各医院手术准备事项", "복사할 수 없습니다.": "无法复制。", "예: 병원 요청 자료": "例：医院要求的资料", "일정이 변경되었습니다": "日程已变更", "한복 체험 · 경복궁": "韩服体验 · 景福宫", "환자로 등록되었습니다": "已登记为患者", "가상 환자 · 데모": "虚构患者 · 演示", "날짜를 선택하세요.": "请选择日期。", "당사 수납액 (원)": "本公司收款金额（韩元）", "도움이 필요하세요?": "需要帮助吗？", "아이디 또는 이메일": "账号或邮箱", "예: 인천공항 T1": "例：仁川机场T1", "예시 이미지입니다.": "这是示例图片。", "을 실행해 주세요.": "执行。", "이름을 입력하세요.": "请输入姓名。", "파일을 선택하세요.": "请选择文件。", "한 사람의 이야기가": "一个人的故事，", "환자 여정 통합관리": "患者旅程综合管理", "환자 코드 (자동)": "患者代码（自动）", "견적 금액 (원)": "报价金额（韩元）", "기록이 없습니다.": "没有记录。", "방문 일정·준비물": "到访日程·携带物品", "사진 올리는 중…": "正在上传照片…", "소요 시간 (분)": "所需时间（分钟）", "예: 통역 김OO": "例：翻译 Kim OO", "예시 화면입니다.": "这是示例画面。", "예정된 일정 없음": "没有安排的日程", "입국장 A 게이트": "入境大厅A口", "촬영일·발급일 *": "拍摄日期·签发日期 *", "프로필 사진 변경": "更换头像", "환자 정보 기록지": "患者信息记录表", "강남 A성형외과": "江南A整形外科", "개인정보 동의서": "个人信息同意书", "고객 상담 링크": "客户咨询链接", "근무 기록 없음": "无工作记录", "글로벌 의료관광": "全球医疗旅游", "나의 전체 일정": "我的全部日程", "담당 코디네이터": "负责顾问", "병원 공유 해제": "取消与医院共享", "병원 직접 결제": "直接向医院付款", "비자·입국 준비": "签证·入境准备", "삭제되었습니다.": "已删除。", "샘플 추가 실패": "添加样本失败", "샘플 환자 등록": "登记样本患者", "샘플 환자 보기": "查看样本患者", "샘플 환자 추가": "添加样本患者", "수술 예약 확정": "手术预约确认", "신규 문의 배정": "分配新咨询", "신규 환자 등록": "登记新患者", "압구정 B피부과": "狎鸥亭B皮肤科", "예: Oyuna": "例：Oyuna", "예: jieun": "例：jieun", "재진·경과 확인": "复诊·恢复确认", "저장되었습니다.": "已保存。", "종료되었습니다.": "已结束。", "직원 정보 수정": "修改员工信息", "초기 회복 확인": "初期恢复确认", "통역 Oyuna": "翻译 Oyuna", "통역 Saraa": "翻译 Saraa", "퇴원·회복 안내": "出院·恢复指引", "해외송금, 카드": "境外汇款、刷卡", "혈액검사 결과지": "血液检查结果单", "확인되었습니다.": "已确认。", "환자 정보 수정": "修改患者信息", "환자 화면 보기": "查看患者页面", "개인정보 동의": "个人信息同意", "견적서·영수증": "报价单·收据", "관광 프로그램": "观光项目", "내가 상담하기": "由我咨询", "동의서·견적서": "同意书·报价单", "등록되었습니다": "已登记", "레이저 리프팅": "激光提升", "병원 공유 중": "已与医院共享", "불러오기 실패": "加载失败", "사후관리 일정": "术后护理日程", "수술 전 사진": "术前照片", "수술 후 7일": "术后7天", "수술 후 사진": "术后照片", "숙박팀 이OO": "住宿组 Lee OO", "안검하수 교정": "上睑下垂矫正", "에이전시 이름": "代理名称", "에이전시 저장": "保存代理", "연락처·메신저": "联系方式·通讯软件", "예: 코 성형": "例：鼻整形", "유치 에이전시": "招揽代理", "의전팀 정OO": "接待组 Jung OO", "이번 달 상담": "本月咨询", "인천공항 T1": "仁川机场T1", "장기 사후관리": "长期术后护理", "직접 유치 =": "直接招揽 =", "진단서·소견서": "诊断书·医生意见书", "처음 화면으로": "返回首页", "첫 환자 등록": "登记第一位患者", "총 근무 시간": "总工作时长", "출국·사후관리": "出境·术后护理", "출근했습니다.": "已上班打卡。", "퇴근 · 오늘": "下班 · 今天", "파일 선택 *": "选择文件 *", "가상 이미지": "虚拟图片", "계정 만들기": "创建账号", "고객용 링크": "客户链接", "공복 불필요": "无需空腹", "기사 박OO": "司机 Park OO", "기사 최OO": "司机 Choi OO", "다시 활성화": "重新启用", "담당 통역사": "负责翻译", "로그인 실패": "登录失败", "메모·준비물": "备注·携带物品", "병원 비공개": "对医院不公开", "상담한 직원": "咨询员工", "새 에이전시": "新代理", "서초 C치과": "瑞草C牙科", "수술 동의서": "手术同意书", "숙박 체크인": "住宿入住", "시간당 상담": "每小时咨询数", "시술·수술명": "项目·手术名称", "업로드 실패": "上传失败", "업로드 중…": "上传中…", "여권·신분증": "护照·身份证", "예: GRG": "例：GRG", "예약금 입금": "定金到账", "오늘의 일정": "今日日程", "온라인 결제": "在线支付", "제3자 제공": "向第三方提供", "프로필 사진": "头像", "한국 입국일": "入境韩国日期", "해외 파트너": "海外合作伙伴", "환영합니다.": "欢迎。", "환자로 등록": "登记为患者", "가상 환자": "虚构患者", "개월 경과": "个月后", "견적 확인": "确认报价", "결제 방식": "付款方式", "결제·정산": "付款·结算", "공용 링크": "公用链接", "공항 샌딩": "机场送机", "공항 픽업": "机场接机", "관광·체험": "观光·体验", "국외 이전": "境外转移", "권한 없음": "无权限", "근무 시간": "工作时长", "기본 정보": "基本信息", "다음 단계": "下一阶段", "다음 일정": "下一日程", "담당 환자": "负责患者", "당사 수납": "本公司收款", "라미네이트": "贴面", "백업 복사": "复制备份", "변경 이력": "变更记录", "병원 공유": "与医院共享", "병원 상담": "医院咨询", "병원 안내": "医院指引", "병원 진료": "医院就诊", "사용 언어": "使用语言", "상담 건수": "咨询数", "상담 기록": "咨询记录", "상담 내용": "咨询内容", "상담 링크": "咨询链接", "상담·견적": "咨询·报价", "상담일 *": "咨询日期 *", "서류 요청": "索取资料", "수술 당일": "手术当天", "수술 완료": "手术完成", "수술·시술": "手术·项目", "시간 미정": "时间待定", "시간 없음": "无时间", "신규 상담": "新咨询", "신규 환자": "新患者", "안면 CT": "面部CT", "업로드 중": "上传中", "에게 알림": "已收到通知", "여권 사본": "护照复印件", "여권·비자": "护照·签证", "여정 취소": "取消旅程", "연결 계정": "关联账号", "예시 닫기": "关闭示例", "예시 보기": "查看示例", "완료 취소": "取消完成", "원본 열기": "打开原件", "유치 경로": "招揽渠道", "이후 일정": "后续日程", "일정 변경": "变更日程", "일정 삭제": "删除日程", "일정 추가": "添加日程", "입국 예정": "预计入境", "자료 삭제": "删除资料", "자료 열람": "查看资料", "자료 종류": "资料类型", "저장 실패": "保存失败", "전체 보기": "查看全部", "전체 진행": "整体进度", "전후 비교": "术前术后对比", "정면 사진": "正面照片", "정보 수정": "修改信息", "정보 없음": "无信息", "지인 소개": "熟人介绍", "직원 목록": "员工列表", "직원 추가": "添加员工", "직접 유치": "直接招揽", "진행 단계": "进行阶段", "진행 전체": "全部进度", "측면 사진": "侧面照片", "코드 발급": "生成代码", "코디네이터": "顾问", "파일 열기": "打开文件", "파일 첨부": "附加文件", "표시 색상": "显示颜色", "필수 서류": "必需资料", "한국 입국": "入境韩国", "한국 체류": "在韩停留", "항공 입국": "航班入境", "항공 출국": "航班出境", "현재 단계": "当前阶段", "확인 중…": "确认中…", "환자 등록": "登记患者", "환자 보기": "查看患者", "환자 언어": "患者语言", "환자 여정": "患者旅程", "환자 코드": "患者代码", "환자 확인": "确认患者", "희망 방문": "希望到访", "개인정보": "个人信息", "건강검진": "健康体检", "경과사진": "恢复照片", "계좌이체": "银行转账", "국외이전": "境外转移", "근무 중": "工作中", "날짜 *": "日期 *", "내 링크": "我的链接", "내 상담": "我的咨询", "러시아어": "俄语", "로그아웃": "退出登录", "민감정보": "敏感信息", "비밀번호": "密码", "사후관리": "术后护理", "상담 중": "咨询中", "생년월일": "出生日期", "성형외과": "整形外科", "수술 후": "术后", "앱 버전": "应用版本", "영상통화": "视频通话", "이름 *": "姓名 *", "이번 달": "本月", "진료과목": "诊疗科目", "진행 중": "进行中", "코 성형": "鼻整形", "프로그램": "项目", "해외송금": "境外汇款", "혈액검사": "血液检查", "홈페이지": "官网", "회복관리": "恢复管理", "가상)": "虚构)", "김지은": "Kim Ji-eun", "담당자": "负责人", "로그인": "登录", "마케팅": "营销", "메신저": "通讯软件", "몽골어": "蒙古语", "미배정": "未分配", "미수금": "未收款", "미제출": "未提交", "박서연": "Park Seo-yeon", "변경됨": "已变更", "비활성": "停用", "수술일": "手术日期", "시간당": "每小时", "업로드": "上传", "연락처": "联系方式", "오늘은": "今天", "이메일": "邮箱", "일 전": "天前", "입국일": "入境日期", "중국어": "中文", "출국일": "出境日期", "취소됨": "已取消", "캐나다": "加拿大", "통역사": "翻译", "피부과": "皮肤科", "한국어": "韩语", "항공권": "机票", "개월": "个月", "검사": "检查", "견적": "报价", "공유": "共享", "국적": "国籍", "근무": "工作", "기록": "记录", "기타": "其他", "다음": "下一步", "단계": "阶段", "닫기": "关闭", "담당": "负责", "대기": "待处理", "동의": "同意", "등록": "登记", "만원": "万韩元", "메모": "备注", "목록": "列表", "몽골": "蒙古", "미국": "美国", "방문": "到访", "병원": "医院", "복사": "复制", "비자": "签证", "사진": "照片", "삭제": "删除", "상담": "咨询", "상태": "状态", "서류": "资料", "수술": "手术", "시간": "时间", "안과": "眼科", "없음": "无", "여정": "旅程", "역할": "角色", "열람": "查看", "영어": "英语", "오늘": "今天", "오전": "上午", "오후": "下午", "완료": "完成", "요일": "星期", "요청": "请求", "이름": "姓名", "이전": "上一步", "일정": "日程", "입국": "入境", "장소": "地点", "재진": "复诊", "저장": "保存", "전체": "全部", "전화": "电话", "접수": "已接收", "종료": "结束", "종류": "类型", "종일": "全天", "중국": "中国", "중동": "中东", "직원": "员工", "채널": "渠道", "체크": "勾选", "출국": "出境", "출근": "上班", "취소": "取消", "치과": "牙科", "카드": "刷卡", "코디": "顾问", "통역": "翻译", "퇴근": "下班", "편집": "编辑", "합계": "合计", "해제": "解除", "현금": "现金", "호주": "澳大利亚", "확인": "确认", "활성": "启用"}};
+const I18N_PAT=[
+ [/수술 (\d+)일 전/g,"$1 days before surgery","术前$1天"],
+ [/수술 후 (\d+)일/g,"$1 days after surgery","术后$1天"],
+ [/(\d+)시간 (\d+)분/g,"$1h $2m","$1小时$2分"],
+ [/(오전|오후) (\d+)시/g,(m,a,h)=>h+(a==="오전"?" AM":" PM"),(m,a,h)=>(a==="오전"?"上午":"下午")+h+"点"],
+ [/(\d+)개월/g,"$1 mo","$1个月"],
+ [/(\d+)분/g,"$1 min","$1分钟"],
+ [/(\d+)건/g,"$1","$1件"],
+ [/(\d+)명/g,"$1","$1名"],
+ [/(\d+)개/g,"$1","$1个"],
+ [/(\d{4})년 (\d+)월/g,(m,y,mo)=>MONF_EN[mo-1]+" "+y,"$1年$2月"],
+ [/\s?님,/g,",","，"],[/\s?님/g,"",""]
+];
+const I18N_EXACT={en:{"일":"Sun","월":"Mon","화":"Tue","수":"Wed","목":"Thu","금":"Fri","토":"Sat","오전":"AM","오후":"PM"},zh:{"일":"日","월":"一","화":"二","수":"三","목":"四","금":"五","토":"六","오전":"上午","오후":"下午"}};
+I18N.en["샘플 환자가 추가되었습니다."]="Sample patients added.";I18N.zh["샘플 환자가 추가되었습니다."]="已添加示例患者。";
+let I18N_RE=null;
+function trText(t){
+  if(UIL==="ko"||!t||!/[가-힣]/.test(t))return t;
+  const ex=I18N_EXACT[UIL][t.trim()];if(ex)return t.replace(t.trim(),ex);
+  const li=UIL==="en"?1:2;for(const p of I18N_PAT)t=t.replace(p[0],p[li]);
+  if(!I18N_RE){const keys=Object.keys(I18N.en).sort((a,b)=>b.length-a.length).map(k=>k.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"));I18N_RE=new RegExp(keys.join("|"),"g")}
+  return t.replace(I18N_RE,m=>I18N[UIL][m]??m);
+}
+function trNode(root){
+  if(UIL==="ko"||!root)return;
+  const skip=n=>{const e=n.nodeType===1?n:n.parentElement;return !e||e.closest("#intake,textarea,[data-notr],script,style")};
+  if(root.nodeType===3){if(!skip(root)){const v=trText(root.nodeValue);if(v!==root.nodeValue)root.nodeValue=v}return}
+  if(root.nodeType!==1||skip(root))return;
+  const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;const list=[];while((n=w.nextNode()))list.push(n);
+  list.forEach(n=>{if(skip(n))return;const v=trText(n.nodeValue);if(v!==n.nodeValue)n.nodeValue=v});
+  [root,...root.querySelectorAll("[placeholder],[title],[aria-label]")].forEach(e=>{if(!e.getAttribute||skip(e))return;["placeholder","title","aria-label"].forEach(a=>{const v=e.getAttribute(a);if(v&&/[가-힣]/.test(v))e.setAttribute(a,trText(v))})});
+}
+const I18N_OBS=new MutationObserver(ms=>{I18N_OBS.disconnect();ms.forEach(m=>{if(m.type==="characterData")trNode(m.target);else m.addedNodes.forEach(trNode)});obsOn()});
+function obsOn(){if(UIL!=="ko")I18N_OBS.observe(document.body,{childList:true,subtree:true,characterData:true})}
+document.querySelectorAll("[data-uil]").forEach(b=>{b.classList.toggle("on",b.dataset.uil===UIL);b.onclick=()=>{try{localStorage.setItem("lb-lang",b.dataset.uil)}catch(e){}location.reload()}});
+if(UIL!=="ko"){document.documentElement.lang=UIL==="zh"?"zh-CN":"en";trNode(document.body);obsOn()}
 
 $("#aVer").textContent=VERSION;
 boot();
