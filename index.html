@@ -131,7 +131,7 @@ select.in{appearance:none;-webkit-appearance:none}
 .step{min-height:36px;padding:0 11px;border-radius:999px;font-size:12.5px;background:var(--s1);border:1px solid var(--line);color:var(--dim)}
 .step.done{color:var(--muted);border-color:#5a3049}
 .step.cur{background:var(--grad);color:#fff;border-color:transparent;font-weight:700}
-.kv{display:grid;grid-template-columns:96px minmax(0,1fr);gap:6px 10px;font-size:14px}
+.kv{display:grid;grid-template-columns:110px minmax(0,1fr);gap:6px 10px;font-size:14px}
 .kv dt{color:var(--dim)} .kv dd{margin:0;word-break:break-word}
 .ev{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line)}
 .ev:first-child{border-top:0}
@@ -223,6 +223,22 @@ select.in{appearance:none;-webkit-appearance:none}
 .lbx .box{width:100%;max-width:520px}
 .lbx img{width:100%;border-radius:18px;border:1px solid var(--line);display:block}
 .demo-note{font-size:12px;color:var(--warn);background:rgba(255,194,102,.08);border:1px dashed rgba(255,194,102,.4);border-radius:12px;padding:8px 10px;margin-top:8px}
+/* v1.6 */
+.av{width:44px;height:44px;border-radius:50%;object-fit:cover;flex:0 0 auto;background:var(--s3);border:2px solid rgba(255,46,139,.55);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px;color:var(--pink2);overflow:hidden}
+.av.lg{width:72px;height:72px;font-size:24px}
+.avwrap{position:relative;display:inline-block;cursor:pointer;flex:0 0 auto}
+.avwrap .cam{position:absolute;right:-4px;bottom:-4px;background:var(--grad);color:#fff;font-size:10.5px;font-weight:700;border-radius:999px;padding:2px 7px;white-space:nowrap}
+.pchead{display:flex;gap:12px;align-items:center;min-width:0}
+.stp{display:grid;grid-template-columns:repeat(13,minmax(0,1fr));gap:3px;margin-top:14px}
+.sn{aspect-ratio:1/1;min-width:0;padding:0;border-radius:50%;font-size:11px;font-weight:700;background:var(--s1);border:1px solid var(--line);color:var(--dim);line-height:1}
+.sn.done{background:rgba(255,46,139,.22);border-color:transparent;color:#FFD0E6}
+.sn.cur{background:var(--grad);border-color:transparent;color:#fff;box-shadow:0 0 12px rgba(255,46,139,.55)}
+.stpl{margin-top:8px;font-size:14px}
+.stpl b{font-size:20px;font-weight:900;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.codebox{display:inline-block;font-family:ui-monospace,Menlo,monospace;font-weight:700;letter-spacing:.04em;color:#fff;background:var(--s3);border:1px solid var(--line);border-radius:10px;padding:4px 10px;font-size:14px}
+.agnew{background:var(--s1);border:1px dashed var(--line);border-radius:14px;padding:10px;margin-top:8px}
+.fileline{font-size:12.5px;color:var(--muted);margin-top:6px}
+.fc .th.doc{object-fit:cover}
 .toast{position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:40;
   background:#fff;color:#1a0f17;font-weight:700;font-size:14px;padding:11px 18px;border-radius:999px;max-width:calc(100% - 32px);text-align:center;
   box-shadow:0 10px 30px rgba(0,0,0,.4)}
@@ -279,7 +295,7 @@ const SB_URL="https://agdqlnaedojcgivwluty.supabase.co";
 const SB_KEY="sb_publishable_PKGxxrfpduzI7xY1_DWQyQ_cnJA9isP";
 const T="labelle_patients";
 const LOGIN_DOMAIN="@labelle.app";
-const VERSION="v1.5";
+const VERSION="v1.6";
 const sb=window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:true,autoRefreshToken:true,storageKey:"labelle-auth"}});
 
 /* ---------- constants ---------- */
@@ -300,9 +316,14 @@ const EVCOL={"항공 입국":"#FFB37A","항공 출국":"#FFB37A","공항 픽업"
 const PRE=[[-14,"사전 준비사항·검사 안내"],[-7,"병원별 수술 준비사항"],[-3,"방문 일정·준비물"],[-1,"금식·복약 등 병원 지침"],[0,"병원 위치·담당자 안내"],[1,"퇴원·회복 안내"],[3,"초기 회복 확인"],[7,"경과·불편 증상 확인"],[14,"재진·경과 확인"]];
 const FU=[[1,"회복 상태·경과사진·불편 증상"],[3,"회복 경과·만족도·추가 상담"],[6,"장기 경과사진·상태 확인"],[12,"최종 경과 확인·재진 안내"]];
 const WD=["일","월","화","수","목","금","토"];
-const FKIND=["수술 전 사진","수술 후 사진","경과사진","CT·MRI·X-ray","혈액검사","진단서·소견서","여권·비자","항공권","동의서·견적서","기타"];
-const FGRP={"사진":["수술 전 사진","수술 후 사진","경과사진"],"검사":["CT·MRI·X-ray","혈액검사","진단서·소견서"],"서류":["여권·비자","항공권","동의서·견적서","기타"]};
-const FREQ=["여권·비자","항공권","수술 전 사진","혈액검사","동의서·견적서"];
+const BUCKET="labelle-files";
+const CC={"몽골":"MN","미국":"US","캐나다":"CA","호주":"AU","중동":"ME","기타":"ET"};
+const PAY=["카드","현금","계좌이체","해외송금","온라인 결제","병원 직접 결제","기타"];
+const MAXMB=50;
+const FKIND=["수술 전 사진","수술 후 사진","경과사진","CT·MRI·X-ray","혈액검사","진단서·소견서","여권·신분증","비자","항공권","환자 정보 기록지","개인정보 동의서","수술 동의서","견적서·영수증","기타"];
+const FKIND_OLD=["수술 전 사진","수술 후 사진","경과사진","CT·MRI·X-ray","혈액검사","진단서·소견서","여권·비자","항공권","동의서·견적서","기타"];
+const FGRP={"사진":["수술 전 사진","수술 후 사진","경과사진"],"검사":["CT·MRI·X-ray","혈액검사","진단서·소견서"],"서류":["여권·신분증","비자","항공권","환자 정보 기록지","개인정보 동의서","수술 동의서","견적서·영수증","기타","여권·비자","동의서·견적서"]};
+const FREQ=["여권·신분증","항공권","수술 전 사진","혈액검사","개인정보 동의서","수술 동의서"];
 const isPhoto=k=>FGRP["사진"].includes(k);
 function illus(kind,title,date){
   const e=x=>String(x||"").replace(/[<>&"']/g,"");
@@ -355,7 +376,8 @@ const man=n=>n||n===0?(n>=10000?(Math.round(n/1000)/10).toLocaleString("ko-KR")+
 const won=n=>n||n===0?"₩"+Number(n).toLocaleString("ko-KR"):"—";
 const dDiff=s=>Math.round((pd(s)-pd(today()))/864e5);
 const ddLabel=n=>n===0?"오늘":n>0?`D-${n}`:`D+${-n}`;
-const code=r=>{const c=(r.created_at||"").slice(2,10).replace(/-/g,"");return`LB-${c||"000000"}-${String(r.id||"").slice(0,4).toUpperCase()}`};
+const code=r=>r.patient_code||oldCode(r);
+const oldCode=r=>{const c=(r.created_at||"").slice(2,10).replace(/-/g,"");return`LB-${c||"000000"}-${String(r.id||"").slice(0,4).toUpperCase()}`};
 const nowStamp=()=>{const d=new Date();return`${d.getMonth()+1}/${d.getDate()} ${fT(pad(d.getHours())+":"+pad(d.getMinutes()))}`};
 const uid=()=>Math.random().toString(36).slice(2,10);
 function toast(m){const t=$("#toast");t.textContent=m;t.hidden=false;clearTimeout(toast._);toast._=setTimeout(()=>t.hidden=true,2400)}
@@ -363,6 +385,49 @@ const active=()=>S.rows.filter(r=>r.status!=="canceled");
 const byId=id=>S.rows.find(r=>r.id===id);
 const evSort=(a,b)=>(a.date+(a.time||"99")).localeCompare(b.date+(b.time||"99"));
 function nextEvent(r){const t=today();return (r.events||[]).filter(e=>!e.done&&e.date>=t).sort(evSort)[0]}
+
+/* ---------- patient code / agencies ---------- */
+const yymm=()=>{const d=new Date();return String(d.getFullYear()).slice(2)+pad(d.getMonth()+1)};
+const codePrefix=(nat,ag)=>`${CC[nat]||"ET"}-${ag||"LB"}-${yymm()}`;
+function nextCode(prefix,extra=0){let n=0;S.rows.forEach(r=>{const c=r.patient_code||"";if(c.startsWith(prefix+"-")){const k=parseInt(c.slice(prefix.length+1),10);if(k>n)n=k}});return `${prefix}-${String(n+1+extra).padStart(3,"0")}`}
+function agencyList(){const m=new Map();(S.agencies||[]).forEach(a=>m.set(a.name,a));S.rows.forEach(r=>{if(r.agency&&!m.has(r.agency))m.set(r.agency,{name:r.agency,code:r.agency_code||"LB",country:r.nationality})});return [...m.values()].sort((a,b)=>a.name.localeCompare(b.name))}
+const agCode=name=>name&&name!=="직접 유치"?(agencyList().find(a=>a.name===name)?.code||"LB"):"LB";
+
+/* ---------- storage ---------- */
+S.urls={};S.urlPending=new Set();
+const urlOf=p=>(S.urls[p]&&S.urls[p].exp>Date.now())?S.urls[p].url:"";
+async function fetchUrls(paths){
+  paths=[...new Set(paths)].filter(p=>p&&!urlOf(p)&&!S.urlPending.has(p));if(!paths.length)return false;
+  paths.forEach(p=>S.urlPending.add(p));
+  let res;try{res=await sb.storage.from(BUCKET).createSignedUrls(paths,3600)}catch(e){res={error:e}}
+  paths.forEach(p=>S.urlPending.delete(p));
+  if(res.error||!res.data)return false;
+  res.data.forEach(d=>{if(d.signedUrl)S.urls[d.path]={url:d.signedUrl,exp:Date.now()+3300e3}});return true;
+}
+function paintUrls(){document.querySelectorAll("img[data-path]").forEach(i=>{const u=urlOf(i.dataset.path);if(u&&i.getAttribute("src")!==u)i.src=u})}
+function wantUrls(){const ps=[...document.querySelectorAll("img[data-path]")].map(i=>i.dataset.path);paintUrls();fetchUrls(ps).then(ok=>{if(ok)paintUrls()})}
+const isImg=f=>/^image\//.test(f.mime||"")||/\.(jpe?g|png|gif|webp|heic|heif)$/i.test(f.name||"");
+const fmtSize=b=>!b?"":b>1048576?(b/1048576).toFixed(1)+"MB":Math.max(1,Math.round(b/1024))+"KB";
+function storageErr(e){const m=(e&&e.message||"")+"";return /bucket|not found|policy|row-level|security/i.test(m)?"Supabase에 labelle_v16.sql을 먼저 실행해 주세요.":"업로드 실패: "+m}
+async function upFile(r,file,prefix=""){
+  const safe=(file.name||"file").replace(/[^\w.\-]+/g,"_").slice(-60);
+  const path=`${r.id}/${prefix}${Date.now()}-${uid()}-${safe}`;
+  const {error}=await sb.storage.from(BUCKET).upload(path,file,{contentType:file.type||"application/octet-stream",upsert:false});
+  if(error)throw error;return path;
+}
+async function shrink(file,max=640){
+  if(!/^image\//.test(file.type||""))return file;
+  try{const img=await createImageBitmap(file);const k=Math.min(1,max/Math.max(img.width,img.height));const c=document.createElement("canvas");c.width=Math.round(img.width*k);c.height=Math.round(img.height*k);
+    c.getContext("2d").drawImage(img,0,0,c.width,c.height);const b=await new Promise(res=>c.toBlob(res,"image/jpeg",.86));return b?new File([b],"profile.jpg",{type:"image/jpeg"}):file}catch(e){return file}
+}
+function avatar(r,lg){const ini=esc((r.name||"?").trim().slice(0,1).toUpperCase());
+  return r.profile_path?`<img class="av ${lg?"lg":""}" data-path="${esc(r.profile_path)}" alt="">`:`<span class="av ${lg?"lg":""}">${ini}</span>`}
+async function setProfile(r,file){
+  if(!file)return;toast("사진 올리는 중…");
+  try{const small=await shrink(file);const path=await upFile(r,small,"profile-");const old=r.profile_path;
+    if(await patch(r,{profile_path:path},"프로필 사진 변경")){if(old)sb.storage.from(BUCKET).remove([old]);toast("프로필 사진이 저장되었습니다.");render()}
+  }catch(e){toast(storageErr(e))}
+}
 
 /* ---------- auth ---------- */
 async function boot(){
@@ -399,11 +464,13 @@ async function load(){
   const {data,error}=await sb.from(T).select("*").order("created_at",{ascending:false});
   if(error){toast("불러오기 실패: "+error.message);return}
   S.rows=(data||[]).map(r=>({...r,events:r.events||[],log:r.log||[],files:r.files||[]}));
+  const ag=await sb.from("labelle_agencies").select("*").order("name",{ascending:true});
+  S.agencies=ag.error?[]:(ag.data||[]);
 }
 async function patch(r,p,logText){
   if(logText){p.log=[{at:nowStamp(),text:logText+(S.user?" · "+who():"")},...(r.log||[])].slice(0,200)}
   const {error}=await sb.from(T).update(p).eq("id",r.id);
-  if(error){toast(/files/.test(error.message||"")?"Supabase에 labelle_files.sql을 먼저 실행해 주세요.":"저장 실패: "+error.message);return false}
+  if(error){toast(/column|files|schema/i.test(error.message||"")?"Supabase에 labelle_v16.sql을 먼저 실행해 주세요.":"저장 실패: "+error.message);return false}
   Object.assign(r,p);return true;
 }
 document.addEventListener("visibilitychange",async()=>{if(!document.hidden&&S.user&&!busy()){await load();render()}});
@@ -415,13 +482,13 @@ function render(){
   document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("on",b.dataset.t===S.tab&&!S.openId));
   renderNext();
   const m=$("#main");
-  if(S.openId&&byId(S.openId)){m.innerHTML=detailHTML(byId(S.openId));bindDetail();return}
+  if(S.openId&&byId(S.openId)){m.innerHTML=detailHTML(byId(S.openId));bindDetail();wantUrls();return}
   S.openId=null;
   if(S.tab==="home")m.innerHTML=homeHTML();
   else if(S.tab==="new")m.innerHTML=formHTML(null);
   else if(S.tab==="cal")m.innerHTML=calHTML();
   else m.innerHTML=histHTML();
-  bindMain();
+  bindMain();wantUrls();
 }
 function renderMe(){$("#me").innerHTML=S.me?`<span class="pill" style="margin-right:6px">${esc(S.me.role||"ADM")}</span>${esc(who())}`:`<span class="pill gray" style="margin-right:6px">권한 없음</span>${esc(who())} · 관리자에게 권한을 요청하세요`}
 function renderNext(){renderMe();
@@ -432,7 +499,7 @@ function renderNext(){renderMe();
 function goHome(e){if(e)e.preventDefault();const pv=$("#pv");pv.hidden=true;document.body.style.overflow="";
   $("#lbx").hidden=true;S.fAdd=false;S.fGroup="전체";S.cmpAfter=null;S.tab="home";S.group="all";S.openId=null;S.editing=false;S.evAdd=false;S.evEdit=null;S.arm=null;S.dupArm=false;render();scrollTo(0,0)}
 $("#logo").onclick=goHome;
-document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{S.tab=b.dataset.t;S.openId=null;S.editing=false;S.evAdd=false;S.evEdit=null;S.dupArm=false;render();scrollTo(0,0)});
+document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{S.agNew=false;S.tab=b.dataset.t;S.openId=null;S.editing=false;S.evAdd=false;S.evEdit=null;S.dupArm=false;render();scrollTo(0,0)});
 
 /* ---------- home ---------- */
 function homeHTML(){
@@ -454,7 +521,7 @@ function homeHTML(){
 function cardHTML(r){
   const s=r.stage||0,ne=nextEvent(r);
   return `<button class="card pc" data-open="${r.id}">
-    <div class="top"><div><div class="nm">${esc(r.name)}</div><div class="code">${code(r)}</div></div><span class="pill ${s===12?"ok":""}">${STAGES[s]}</span></div>
+    <div class="top"><div class="pchead">${avatar(r)}<div style="min-width:0"><div class="nm">${esc(r.name)}</div><div class="code">${esc(code(r))}</div></div></div><span class="pill ${s===12?"ok":""}">${s+1} · ${STAGES[s]}</span></div>
     <div class="meta">${[r.nationality,r.language,r.department,r.procedure].filter(Boolean).map(esc).join(" · ")||"정보 없음"}</div>
     <div class="bar"><i style="width:${Math.round((s+1)/STAGES.length*100)}%"></i></div>
     <div class="nx">${ne?`다음 · <b>${fD(ne.date)} ${fT(ne.time)}</b> ${esc(ne.type)}`:r.surgery_date?`수술일 · <b>${fD(r.surgery_date)}</b>`:`<span class="dim">예정된 일정 없음</span>`}</div>
@@ -462,7 +529,15 @@ function cardHTML(r){
 }
 
 /* ---------- form (new / edit) ---------- */
-function chips(field,opts,val,cls=""){return `<div class="chips ${cls}" data-field="${field}">${opts.map((o,i)=>`<button type="button" class="chip ${val===o||(field==="stage"&&val===i)?"on":""}" data-v="${field==="stage"?i:esc(o)}">${esc(o)}</button>`).join("")}</div>`}
+function chips(field,opts,val,cls=""){const multi=cls.includes("multi"),set=multi?String(val||"").split(", ").filter(Boolean):[];
+  return `<div class="chips ${cls}" data-field="${field}">${opts.map((o,i)=>`<button type="button" class="chip ${(multi?set.includes(o):val===o)||(field==="stage"&&val===i)?"on":""}" data-v="${field==="stage"?i:esc(o)}">${field==="stage"?(i+1)+" ":""}${esc(o)}</button>`).join("")}</div>`}
+function agencyBox(v){const list=agencyList(),cur=v.agency||"직접 유치";
+  return `${chips("agency",["직접 유치",...list.map(a=>a.name)],cur,"small")}
+  <div class="small dim" style="margin-top:6px">${list.length?list.map(a=>`${esc(a.name)} = <b>${esc(a.code)}</b>`).join(" · ")+" · ":""}직접 유치 = <b>LB</b></div>
+  ${S.agNew?`<div class="agnew"><div class="g2"><div class="f" style="margin:0"><label class="lb">에이전시 이름</label><input id="agName" class="in" placeholder="예: 울란바토르 Gerege"></div>
+  <div class="f" style="margin:0"><label class="lb">코드 (영문 2~4자)</label><input id="agCode" class="in" maxlength="4" placeholder="예: GRG" style="text-transform:uppercase"></div></div>
+  <div class="brow end" style="margin-top:8px"><button type="button" class="btn ghost sm" id="agCancel">닫기</button><button type="button" class="btn pri sm" id="agSave">에이전시 저장</button></div></div>`
+  :`<button type="button" class="btn sm" id="agOpen" style="margin-top:8px">+ 새 에이전시</button>`}`}
 function dateField(id,label,val){return `<div class="f"><label class="lb">${label}</label><input class="in dt" type="date" id="${id}" value="${val||""}"><div class="confirm" data-for="${id}">${val?"→ "+fFull(val):""}</div></div>`}
 function formHTML(r){
   const v=r||{stage:0};
@@ -472,18 +547,27 @@ function formHTML(r){
    <div class="f"><label class="lb">이름 <em>*</em></label><input id="fName" class="in" value="${esc(v.name)}" placeholder="여권 영문명 또는 이름"></div>
    <div class="f"><label class="lb">국적</label>${chips("nationality",NAT,v.nationality)}</div>
    <div class="f"><label class="lb">사용 언어</label>${chips("language",LANG,v.language)}</div>
+   <div class="f"><label class="lb">유치 에이전시</label><div id="agBox">${agencyBox(v)}</div></div>
+   <div class="f"><label class="lb">환자 코드 (자동)</label><span class="codebox" id="codePrev">${r&&r.patient_code?esc(r.patient_code):""}</span>
+     <div class="small dim" style="margin-top:5px">${r&&r.patient_code?"등록된 코드는 바뀌지 않습니다.":"국가-에이전시-연월-순번으로 저장 시 자동 발급됩니다."}</div></div>
+   ${r?"":`<div class="f"><label class="lb">프로필 사진</label><input id="fPhoto" class="in" type="file" accept="image/*"></div>`}
    <div class="g2"><div class="f"><label class="lb">연락처·메신저</label><input id="fContact" class="in" value="${esc(v.contact)}" placeholder="+976 …"></div>
-   <div class="f"><label class="lb">담당 상담사</label><input id="fCounselor" class="in" value="${esc(v.counselor)}"></div></div>
+   <div class="f"><label class="lb">담당 코디네이터</label><input id="fCounselor" class="in" value="${esc(v.counselor)}"></div></div>
+   <div class="g2"><div class="f"><label class="lb">담당 통역사</label><input id="fInterp" class="in" value="${esc(v.interpreter)}" placeholder="예: Oyuna"></div>
+   <div class="f"><label class="lb">관광 프로그램</label><input id="fProgram" class="in" value="${esc(v.program)}" placeholder="예: 한복 체험 + 성수동 투어"></div></div>
    <div class="f"><label class="lb">진료과목</label>${chips("department",DEPT,v.department)}</div>
    <div class="g2"><div class="f"><label class="lb">시술·수술명</label><input id="fProc" class="in" value="${esc(v.procedure)}" placeholder="예: 코 성형"></div>
    <div class="f"><label class="lb">병원</label><input id="fHosp" class="in" value="${esc(v.hospital)}"></div></div>
    <div class="f"><label class="lb">유치 경로</label>${chips("source",SRC,v.source)}</div>
-   <div class="f"><label class="lb">해외 파트너명</label><input id="fPartner" class="in" value="${esc(v.partner)}" placeholder="예: 울란바토르 OO에이전시"></div>
    <div class="f"><label class="lb">진행 단계</label>${chips("stage",STAGES,v.stage||0,"small")}</div>
    <div class="g3">${dateField("fArr","한국 입국일",v.arrival_date)}${dateField("fSurg","수술일",v.surgery_date)}${dateField("fDep","출국일",v.departure_date)}</div>
    <div class="g2"><div class="f"><label class="lb">견적 금액 (원)</label><input id="fQuote" class="in" inputmode="numeric" value="${v.quote_krw??""}"></div>
    <div class="f"><label class="lb">당사 수납액 (원)</label><input id="fPaid" class="in" inputmode="numeric" value="${v.paid_krw??""}"></div></div>
+   <div class="f"><label class="lb">결제 방식 (여러 개 선택 가능)</label>${chips("payment_method",PAY,v.payment_method,"multi")}</div>
    <div class="f"><label class="lb">메모</label><textarea id="fNotes" class="in">${esc(v.notes)}</textarea></div>
+   <div class="f"><label class="lb">파일 첨부</label><div class="g2"><input id="fAttach" class="in" type="file" multiple>
+     <select id="fAttKind" class="in">${FKIND.map(k=>`<option ${k==="기타"?"selected":""}>${k}</option>`).join("")}</select></div>
+     <div class="small dim" style="margin-top:5px">사진·PDF·동의서 등 · 파일당 최대 ${MAXMB}MB · 의료자료에 함께 보관됩니다</div></div>
    <div class="brow end">${r?`<button class="btn ghost" id="fClose">닫기</button>`:""}<button class="btn pri" id="fSave">저장</button></div>
   </div>`;
 }
@@ -492,14 +576,38 @@ function readForm(){
   const num=id=>{const x=$(id).value.replace(/[^\d]/g,"");return x?Number(x):null};
   return {name:$("#fName").value.trim(),nationality:pick("nationality"),language:pick("language"),contact:$("#fContact").value.trim()||null,
     counselor:$("#fCounselor").value.trim()||null,department:pick("department"),procedure:$("#fProc").value.trim()||null,hospital:$("#fHosp").value.trim()||null,
-    source:pick("source"),partner:$("#fPartner").value.trim()||null,stage:Number(pick("stage")||0),
+    interpreter:$("#fInterp").value.trim()||null,program:$("#fProgram").value.trim()||null,
+    payment_method:[...document.querySelectorAll('.chips[data-field="payment_method"] .chip.on')].map(b=>b.dataset.v).join(", ")||null,
+    agency:(pick("agency")&&pick("agency")!=="직접 유치")?pick("agency"):null,
+    source:pick("source"),stage:Number(pick("stage")||0),
     arrival_date:$("#fArr").value||null,surgery_date:$("#fSurg").value||null,departure_date:$("#fDep").value||null,
     quote_krw:num("#fQuote"),paid_krw:num("#fPaid"),notes:$("#fNotes").value.trim()||null};
 }
 function bindForm(r){
-  document.querySelectorAll(".chips").forEach(g=>g.onclick=e=>{const b=e.target.closest(".chip");if(!b)return;
+  const always=["stage","evtype","fkind","agency"];
+  const prev=()=>{const cp=$("#codePrev");if(!cp||(r&&r.patient_code))return;
+    const nat=document.querySelector('.chips[data-field="nationality"] .chip.on')?.dataset.v;const ag=document.querySelector('.chips[data-field="agency"] .chip.on')?.dataset.v;
+    cp.textContent=nextCode(codePrefix(nat,agCode(ag)))};
+  const bindChips=()=>document.querySelectorAll(".chips").forEach(g=>g.onclick=e=>{const b=e.target.closest(".chip");if(!b)return;
+    if(g.classList.contains("multi")){b.classList.toggle("on");return}
     const was=b.classList.contains("on");g.querySelectorAll(".chip").forEach(x=>x.classList.remove("on"));
-    if(!was||g.dataset.field==="stage"||g.dataset.field==="evtype"||g.dataset.field==="fkind")b.classList.add("on")});
+    if(!was||always.includes(g.dataset.field))b.classList.add("on");prev()});
+  bindChips();prev();
+  const bindAg=()=>{
+    const o=$("#agOpen");if(o)o.onclick=()=>{S.agNew=true;redrawAg()};
+    const c=$("#agCancel");if(c)c.onclick=()=>{S.agNew=false;redrawAg()};
+    const sv2=$("#agSave");if(sv2)sv2.onclick=async()=>{
+      const name=$("#agName").value.trim(),cd=$("#agCode").value.trim().toUpperCase().replace(/[^A-Z0-9]/g,"");
+      if(!name||cd.length<2){toast("이름과 코드(영문 2~4자)를 입력하세요.");return}
+      if(agencyList().some(a=>a.code===cd)||cd==="LB"){toast("이미 사용 중인 코드입니다.");return}
+      const nat=document.querySelector('.chips[data-field="nationality"] .chip.on')?.dataset.v||null;
+      const {data,error}=await sb.from("labelle_agencies").insert({name,code:cd,country:nat}).select().single();
+      if(error){toast(/relation|exist|schema/i.test(error.message)?"Supabase에 labelle_v16.sql을 먼저 실행해 주세요.":"저장 실패: "+error.message);return}
+      S.agencies=[...(S.agencies||[]),data];S.agNew=false;redrawAg(name);toast("에이전시가 추가되었습니다.");
+    }};
+  const redrawAg=(sel)=>{const box=$("#agBox");if(!box)return;const cur=sel||document.querySelector('.chips[data-field="agency"] .chip.on')?.dataset.v;
+    box.innerHTML=agencyBox({agency:cur==="직접 유치"?null:cur});bindChips();bindAg();prev()};
+  bindAg();
   document.querySelectorAll("input.dt").forEach(i=>i.oninput=()=>{const c=document.querySelector(`.confirm[data-for="${i.id}"]`);if(c)c.textContent=i.value?"→ "+fFull(i.value):""});
   const sv=$("#fSave");if(!sv)return;
   sv.onclick=async()=>{
@@ -509,15 +617,25 @@ function bindForm(r){
       const dup=active().find(x=>x.name.trim().toLowerCase()===v.name.toLowerCase()||(v.contact&&x.contact===v.contact));
       if(dup&&!S.dupArm){S.dupArm=true;$("#dupWarn").innerHTML=`<div class="warnbox">이미 등록된 환자와 비슷합니다: <b>${esc(dup.name)}</b> (${code(dup)}). 그래도 등록하려면 저장을 한 번 더 누르세요.</div>`;scrollTo(0,0);return}
       sv.disabled=true;
-      const {data,error}=await sb.from(T).insert({...v,events:[],log:[{at:nowStamp(),text:"환자 등록 · "+STAGES[v.stage]}],status:"active"}).select().single();
+      const prefix=codePrefix(v.nationality,agCode(v.agency));v.agency_code=v.agency?agCode(v.agency):null;
+      let data,error;
+      for(let k=0;k<4;k++){v.patient_code=nextCode(prefix,k);
+        ({data,error}=await sb.from(T).insert({...v,events:[],log:[{at:nowStamp(),text:`환자 등록 · ${v.patient_code} · ${who()}`}],status:"active"}).select().single());
+        if(!error||!/duplicate|unique/i.test(error.message||""))break}
+      if(error){sv.disabled=false;toast(/column|schema/i.test(error.message||"")?"Supabase에 labelle_v16.sql을 먼저 실행해 주세요.":"저장 실패: "+error.message);return}
+      const row={...data,events:data.events||[],log:data.log||[],files:data.files||[]};S.rows.unshift(row);S.dupArm=false;
+      const ph=$("#fPhoto")?.files?.[0],att=[...($("#fAttach")?.files||[])],ak=$("#fAttKind")?.value||"기타";
+      if(ph)await setProfile(row,ph);
+      if(att.length)await addFiles(row,att,{kind:ak,date:today(),title:"",note:""});
       sv.disabled=false;
-      if(error){toast("저장 실패: "+error.message);return}
-      S.rows.unshift({...data,events:data.events||[],log:data.log||[],files:data.files||[]});S.dupArm=false;
-      toast("등록되었습니다.");S.tab="home";S.openId=data.id;render();scrollTo(0,0);
+      toast(`등록되었습니다 · ${row.patient_code}`);S.tab="home";S.openId=data.id;render();scrollTo(0,0);
     }else{
       const ch=[];if(v.stage!==(r.stage||0))ch.push(`단계: ${STAGES[r.stage||0]} → ${STAGES[v.stage]}`);
       [["surgery_date","수술일"],["arrival_date","입국일"],["departure_date","출국일"]].forEach(([k,l])=>{if((v[k]||null)!==(r[k]||null))ch.push(`${l}: ${r[k]?fD(r[k]):"없음"} → ${v[k]?fD(v[k]):"없음"}`)});
-      if(await patch(r,v,"정보 수정"+(ch.length?" · "+ch.join(", "):""))){S.editing=false;toast("저장되었습니다.");render()}
+      if(!r.patient_code){v.patient_code=nextCode(codePrefix(v.nationality,agCode(v.agency)));ch.push("코드 발급 "+v.patient_code)}
+      v.agency_code=v.agency?agCode(v.agency):null;
+      const att=[...($("#fAttach")?.files||[])],ak=$("#fAttKind")?.value||"기타";
+      if(await patch(r,v,"정보 수정"+(ch.length?" · "+ch.join(", "):""))){if(att.length)await addFiles(r,att,{kind:ak,date:today(),title:"",note:""});S.editing=false;toast("저장되었습니다.");render()}
     }
   };
   const c=$("#fClose");if(c)c.onclick=()=>{S.editing=false;render()};
@@ -536,21 +654,19 @@ function detailHTML(r){
    <div class="stack">
     <div class="card dhead">
       <div class="top" style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start">
-        <div><div class="code">${code(r)}</div><div class="nm">${esc(r.name)}</div>
-        <div class="meta">${[r.nationality,r.language,r.department,r.procedure].filter(Boolean).map(esc).join(" · ")}</div></div>
-        ${r.status==="canceled"?`<span class="pill gray">취소됨</span>`:`<span class="pill ${s===12?"ok":""}">${STAGES[s]}</span>`}
+        <div class="pchead"><label class="avwrap" title="프로필 사진">${avatar(r,1)}<span class="cam">사진</span><input type="file" accept="image/*" id="pfFile" hidden></label>
+        <div style="min-width:0"><div class="codebox" style="font-size:12px;padding:2px 8px">${esc(code(r))}</div><div class="nm" style="margin-top:4px">${esc(r.name)}</div>
+        <div class="meta">${[r.nationality,r.language,r.department,r.procedure].filter(Boolean).map(esc).join(" · ")}</div></div></div>
+        ${r.status==="canceled"?`<span class="pill gray">취소됨</span>`:""}
       </div>
-      <div class="bar"><i style="width:${Math.round((s+1)/STAGES.length*100)}%"></i></div>
+      <div class="stp">${STAGES.map((x,i)=>`<button class="sn ${i<s?"done":""} ${i===s?"cur":""}" data-st="${i}" title="${i+1}. ${x}" aria-label="${i+1}. ${x}">${i+1}</button>`).join("")}</div>
+      <div class="stpl"><b>${s+1}</b><span class="dim"> / 13</span> · ${STAGES[s]}${s<12?` <span class="dim small">→ ${s+2} ${STAGES[s+1]}</span>`:""}</div>
       <div class="brow" style="margin-top:14px">
         <button class="btn pri sm" id="pvOpen">환자 화면 보기</button>
-        ${s<12&&r.status!=="canceled"?`<button class="btn sm" id="stNext">다음 단계 → ${STAGES[s+1]}</button>`:""}
+        ${s<12&&r.status!=="canceled"?`<button class="btn sm" id="stNext">다음 단계 →</button>`:""}
       </div>
     </div>
 
-    <div class="card">
-      <div class="h3">환자 여정 단계 · 눌러서 변경</div>
-      <div class="steps">${STAGES.map((x,i)=>`<button class="step ${i<s?"done":""} ${i===s?"cur":""}" data-st="${i}">${i+1}. ${x}</button>`).join("")}</div>
-    </div>
 
     <div class="card">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><div class="h3" style="margin:0">일정</div>${S.evAdd?"":`<button class="btn sm" id="evNew">+ 일정 추가</button>`}</div>
@@ -570,8 +686,11 @@ function detailHTML(r){
       <dl class="kv">
         <dt>연락처</dt><dd>${esc(r.contact)||"—"}</dd>
         <dt>병원</dt><dd>${esc(r.hospital)||"—"}</dd>
-        <dt>담당 상담사</dt><dd>${esc(r.counselor)||"—"}</dd>
-        <dt>유치 경로</dt><dd>${esc([r.source,r.partner].filter(Boolean).join(" · "))||"—"}</dd>
+        <dt>환자 코드</dt><dd>${esc(code(r))}</dd>
+        <dt>담당 코디네이터</dt><dd>${esc(r.counselor)||"—"}</dd>
+        <dt>관광 프로그램</dt><dd>${esc(r.program)||"—"}</dd>
+        <dt>담당 통역사</dt><dd>${esc(r.interpreter)||"—"}</dd>
+        <dt>유치 경로</dt><dd>${esc([r.source,r.agency?r.agency+" ("+(r.agency_code||agCode(r.agency))+")":r.partner].filter(Boolean).join(" · "))||"—"}</dd>
         <dt>입국</dt><dd>${r.arrival_date?fD(r.arrival_date):"—"}</dd>
         <dt>수술</dt><dd>${r.surgery_date?fD(r.surgery_date)+` <span class="pill" style="margin-left:4px">${ddLabel(dDiff(r.surgery_date))}</span>`:"—"}</dd>
         <dt>출국</dt><dd>${r.departure_date?fD(r.departure_date):"—"}</dd>
@@ -580,6 +699,7 @@ function detailHTML(r){
     </div>
     <div class="card"><div class="h3">결제·정산</div>
       <div class="money"><div class="m"><span>견적</span><b>${man(r.quote_krw)}</b></div><div class="m"><span>당사 수납</span><b>${man(r.paid_krw)}</b></div><div class="m"><span>미수금</span><b style="color:${due>0?"var(--warn)":"var(--ok)"}">${r.quote_krw?man(due):"—"}</b></div></div>
+      <div class="small" style="margin-top:10px"><span class="dim">결제 방식 · </span>${esc(r.payment_method)||"—"}</div>
     </div>
     <div class="card"><div class="h3">변경 이력</div><div class="log">${(r.log||[]).map(l=>`<div><span class="dim">${esc(l.at)}</span> · ${esc(l.text)}</div>`).join("")||"—"}</div></div>
     <div class="brow end">
@@ -610,100 +730,133 @@ function evFormHTML(e){
    <div class="brow end">${e?`<button class="btn danger sm ${S.arm==="ev"+e.id?"arm":""}" id="evDel">${S.arm==="ev"+e.id?"한 번 더 누르면 삭제":"삭제"}</button>`:""}<button class="btn ghost sm" id="evClose">닫기</button><button class="btn pri sm" id="evSave">저장</button></div>
   </div>`;
 }
+function fileThumb(f){
+  if(f.path&&isImg(f))return `<img class="th" data-path="${esc(f.path)}" alt="">`;
+  const ext=(f.name||"").split(".").pop().toUpperCase();
+  return `<img class="th ${isPhoto(f.kind)||f.kind==="CT·MRI·X-ray"?"":"doc"}" src="${illus(f.kind,f.title,f.path?(ext||"FILE")+" "+fmtSize(f.size):f.date)}" alt="">`;
+}
+function photoSrc(f){return f.path&&isImg(f)?`data-path="${esc(f.path)}"`:`src="${illus(f.kind,f.title,f.date)}"`}
 function filesHTML(r){
-  const real=(r.files||[]).length>0;
-  if(!real){S.preview=S.preview||{};S.preview[r.id]=S.preview[r.id]||sampleFiles(r,true)}
-  const fs=(real?r.files:S.preview[r.id]).slice().sort((a,b)=>(b.date||"").localeCompare(a.date||""));
+  const real=(r.files||[]).length>0,ex=!real&&S.showEx===r.id;
+  if(ex){S.preview=S.preview||{};S.preview[r.id]=S.preview[r.id]||sampleFiles(r,true)}
+  const fs=(real?r.files:ex?S.preview[r.id]:[]).slice().sort((a,b)=>(b.date||"").localeCompare(a.date||""));
   const grp=S.fGroup||"전체";
   const list=grp==="전체"?fs:fs.filter(f=>FGRP[grp].includes(f.kind));
-  const have=new Set(fs.map(f=>f.kind));
+  const have=new Set(fs.map(f=>f.kind==="여권·비자"?"여권·신분증":f.kind));
   const befores=fs.filter(f=>f.kind==="수술 전 사진").sort((a,b)=>a.date.localeCompare(b.date));
   const afters=fs.filter(f=>f.kind==="수술 후 사진"||f.kind==="경과사진").sort((a,b)=>a.date.localeCompare(b.date));
   let cmp="";
   if(befores.length&&afters.length){
-    const b0=befores[0],a0=afters.find(a=>a.id===S.cmpAfter)||afters[afters.length-1];
+    const b0=befores.find(x=>x.id===S.cmpBefore)||befores[0],a0=afters.find(a=>a.id===S.cmpAfter)||afters[afters.length-1];
     cmp=`<div class="h3" style="margin-top:14px">수술 전후 비교 · 좌우로 밀어 보세요</div>
-    ${afters.length>1?`<div class="chips small" style="margin-bottom:6px">${afters.map(a=>`<button class="chip ${a.id===a0.id?"on":""}" data-cmpa="${a.id}">${esc(a.kind)} ${fD(a.date)}</button>`).join("")}</div>`:""}
-    <div class="cmp" id="cmp" style="--x:${S.cmpX??50}%"><img src="${illus(a0.kind,a0.title,a0.date)}" alt=""><img class="top" src="${illus(b0.kind,b0.title,b0.date)}" alt="">
+    ${afters.length>1?`<div class="chips small" style="margin-bottom:6px">${afters.map(a=>`<button class="chip ${a.id===a0.id?"on":""}" data-cmpa="${a.id}">${esc(a.title||a.kind)} ${fD(a.date)}</button>`).join("")}</div>`:""}
+    <div class="cmp" id="cmp" style="--x:${S.cmpX??50}%"><img ${photoSrc(a0)} alt=""><img class="top" ${photoSrc(b0)} alt="">
     <span class="tg" style="left:12px">Before</span><span class="tg" style="right:12px">After</span><span class="ln"></span>
     <input type="range" min="0" max="100" value="${S.cmpX??50}" id="cmpR" aria-label="전후 비교"></div>
     <div class="small dim" style="text-align:center;margin-top:6px">${fD(b0.date)} → ${fD(a0.date)}</div>`;
   }
   return `<div class="card">
-    <div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><div class="h3" style="margin:0">의료자료 · 사진·검사·서류</div>${S.fAdd?"":`<button class="btn sm" id="fNew">+ 자료 추가</button>`}</div>
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><div class="h3" style="margin:0">의료자료 · 서류 · 파일</div>${S.fAdd?"":`<button class="btn sm pri" id="fNew">+ 파일 첨부</button>`}</div>
     ${S.fAdd?fFormHTML():""}
-    ${real?"":`<div class="warnbox" style="margin-top:10px">아직 등록된 자료가 없어 <b>예시 화면</b>을 보여드립니다. <button class="btn sm" id="fSeed" style="margin-left:6px">이 예시를 저장</button></div>`}
     <div class="h3" style="margin-top:12px">필수 서류</div>
     <div class="req">${FREQ.map(k=>have.has(k)?`<span class="rq ok">✓ ${k}</span>`:`<span class="rq miss">${k} 미제출 <button data-req="${k}">요청</button></span>`).join("")}</div>
+    ${ex?`<div class="warnbox" style="margin-top:12px">예시 화면입니다 (가상 이미지). <button class="btn sm" id="fExOff" style="margin-left:6px">예시 닫기</button></div>`:""}
     ${cmp}
-    <div class="ftabs">${["전체","사진","검사","서류"].map(g=>`<button class="chip ${grp===g?"on":""}" style="min-height:36px" data-fg="${g}">${g} ${g==="전체"?fs.length:fs.filter(f=>FGRP[g].includes(f.kind)).length}</button>`).join("")}</div>
+    ${fs.length?`<div class="ftabs">${["전체","사진","검사","서류"].map(g=>`<button class="chip ${grp===g?"on":""}" style="min-height:36px" data-fg="${g}">${g} ${g==="전체"?fs.length:fs.filter(f=>FGRP[g].includes(f.kind)).length}</button>`).join("")}</div>`:""}
     ${list.length?`<div class="fgrid">${list.map(f=>`<div class="fc">
-      <img class="th ${isPhoto(f.kind)||f.kind==="CT·MRI·X-ray"?"":"doc"}" src="${illus(f.kind,f.title,f.date)}" alt="">
-      <div class="fb"><div class="ft">${esc(f.title||f.kind)}</div><div class="dim">${esc(f.kind)} · ${fD(f.date)}</div>
+      ${fileThumb(f)}
+      <div class="fb"><div class="ft">${esc(f.title||f.name||f.kind)}</div><div class="dim">${esc(f.kind)} · ${fD(f.date)}${f.size?" · "+fmtSize(f.size):""}</div>
       <span class="share ${f.shared?"on":""}">${f.shared?"병원 공유 중":"병원 비공개"}</span>
-      <div class="fr"><button class="btn" data-fview="${f.id}">열람</button><button class="btn" data-fshare="${f.id}">${f.shared?"해제":"공유"}</button></div></div></div>`).join("")}</div>`
-      :`<div class="dim small" style="padding:6px 0">이 분류의 자료가 없습니다.</div>`}
-    <div class="demo-note">데모 버전: 화면 구성 확인용 가상 이미지입니다. 실제 사진·의료영상 업로드는 암호화·접근기록을 갖춘 정식 버전에서 제공됩니다.</div>
+      <div class="fr"><button class="btn" data-fview="${f.id}">열람</button><button class="btn" data-fshare="${f.id}">${f.shared?"해제":"공유"}</button></div>
+      <div class="fr" style="margin-top:6px"><button class="btn ${S.arm==="f"+f.id?"danger arm":"ghost"}" data-fdel="${f.id}">${S.arm==="f"+f.id?"한 번 더 누르면 삭제":"삭제"}</button></div></div></div>`).join("")}</div>`
+      :fs.length?`<div class="dim small" style="padding:6px 0">이 분류의 자료가 없습니다.</div>`
+      :`<div class="dim small" style="padding:10px 0">아직 첨부된 파일이 없습니다. 사진, 검사 결과, 여권, 개인정보·수술 동의서 등을 올려 보관하세요. <button class="btn sm" id="fExOn" style="margin-left:6px">예시 보기</button></div>`}
+    <div class="fileline">파일은 비공개 저장소에 보관되며, 열람할 때마다 1시간짜리 보안 링크가 만들어지고 기록이 남습니다. 파일당 최대 ${MAXMB}MB.</div>
   </div>`;
 }
 function fFormHTML(){
   return `<div class="card" style="background:var(--s1);margin:10px 0">
+   <div class="f"><label class="lb">파일 선택 *</label><input id="fiFile" class="in" type="file" multiple><div class="small dim" style="margin-top:5px">여러 개 선택 가능 · 사진, PDF, 스캔본, ZIP 등</div></div>
    <div class="f"><label class="lb">자료 종류</label>${chips("fkind",FKIND,"수술 전 사진","small")}</div>
    ${dateField("fiDate","촬영일·발급일 *",today())}
-   <div class="f"><label class="lb">제목</label><input id="fiTitle" class="in" placeholder="예: 정면 사진, 흉부 CT, 혈액검사 결과지"></div>
+   <div class="f"><label class="lb">제목 (비우면 파일 이름)</label><input id="fiTitle" class="in" placeholder="예: 정면 사진, 수술 동의서"></div>
    <div class="f"><label class="lb">메모</label><input id="fiNote" class="in" placeholder="예: 병원 요청 자료"></div>
-   <div class="f"><label class="lb">파일</label><div class="dim small">데모에서는 실제 파일 대신 가상 이미지가 저장됩니다.</div></div>
-   <div class="brow end"><button class="btn ghost sm" id="fiClose">닫기</button><button class="btn pri sm" id="fiSave">저장</button></div></div>`;
+   <div class="brow end"><button class="btn ghost sm" id="fiClose">닫기</button><button class="btn pri sm" id="fiSave">업로드</button></div></div>`;
+}
+async function addFiles(r,list,meta){
+  const ok=[];let i=0;
+  for(const file of list){i++;
+    if(file.size>MAXMB*1048576){toast(`${file.name}: ${MAXMB}MB를 넘어 건너뜁니다.`);continue}
+    toast(`업로드 중 ${i}/${list.length} · ${file.name}`);
+    try{const path=await upFile(r,file);ok.push({id:uid(),kind:meta.kind,date:meta.date,title:meta.title&&list.length===1?meta.title:(meta.title?meta.title+" "+i:file.name),note:meta.note,shared:false,path,name:file.name,size:file.size,mime:file.type||""})}
+    catch(e){toast(storageErr(e));return false}
+  }
+  if(!ok.length)return false;
+  return await patch(r,{files:[...(r.files||[]),...ok]},`파일 첨부 ${ok.length}개: ${ok.map(f=>f.title).join(", ").slice(0,80)} (${meta.kind})`);
 }
 function sampleFiles(r,preview){
   const base=r.surgery_date||today(),F=(kind,title,date,shared)=>({id:uid(),kind,title,date,shared:!!shared,note:""});
-  const out=[F("수술 전 사진","정면 사진",addDays(base,-20),true),F("수술 전 사진","측면 사진",addDays(base,-20),true),F("CT·MRI·X-ray","안면 CT",addDays(base,-15),true),F("혈액검사","혈액검사 결과지",addDays(base,-10),true),F("여권·비자","여권 사본",addDays(base,-30))];
+  const out=[F("수술 전 사진","정면 사진",addDays(base,-20),true),F("수술 전 사진","측면 사진",addDays(base,-20),true),F("CT·MRI·X-ray","안면 CT",addDays(base,-15),true),F("혈액검사","혈액검사 결과지",addDays(base,-10),true),F("여권·신분증","여권 사본",addDays(base,-30)),F("수술 동의서","수술 동의서",addDays(base,-1),true)];
   if((r.surgery_date&&addDays(base,7)<=today())||preview){out.push(F("수술 후 사진","수술 후 7일",addDays(base,7),true));if(addMonths(base,1)<=today())out.push(F("경과사진","1개월 경과",addMonths(base,1),true))}
   return out;
 }
-function openLB(r,f){
+async function openLB(r,f){
   const lb=$("#lbx");
-  lb.innerHTML=`<div class="box"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px"><div><div style="font-weight:900;font-size:18px">${esc(f.title||f.kind)}</div><div class="small muted">${esc(r.name)} · ${esc(f.kind)} · ${fFull(f.date)}</div></div><button class="btn sm" id="lbClose">닫기</button></div>
-  <img src="${illus(f.kind,f.title,f.date)}" alt="">
+  if(f.path)await fetchUrls([f.path]);
+  const u=f.path?urlOf(f.path):"";
+  const body=f.path?(isImg(f)?`<img src="${u}" alt="">`:`<div class="card" style="text-align:center"><div style="font-weight:900;font-size:16px;word-break:break-all">${esc(f.name)}</div><div class="small dim" style="margin:4px 0 12px">${fmtSize(f.size)}</div>
+      <a class="btn pri" style="display:inline-flex;align-items:center;text-decoration:none" href="${u}" target="_blank" rel="noopener">파일 열기</a></div>`)
+    :`<img src="${illus(f.kind,f.title,f.date)}" alt="">`;
+  lb.innerHTML=`<div class="box"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px"><div style="min-width:0"><div style="font-weight:900;font-size:18px;word-break:break-all">${esc(f.title||f.name||f.kind)}</div><div class="small muted">${esc(r.name)} · ${esc(f.kind)} · ${fFull(f.date)}</div></div><button class="btn sm" id="lbClose">닫기</button></div>
+  ${body}
+  ${f.path&&isImg(f)&&u?`<div class="brow" style="margin-top:10px"><a class="btn sm" style="display:inline-flex;align-items:center;text-decoration:none" href="${u}" target="_blank" rel="noopener">원본 열기</a></div>`:""}
   ${f.note?`<p class="small muted">${esc(f.note)}</p>`:""}
-  <p class="small dim">열람 기록이 환자 변경 이력에 저장되었습니다 (${esc(who())}, ${nowStamp()}).</p></div>`;
+  <p class="small dim">${f.path?`열람 기록이 저장되었습니다 (${esc(who())}, ${nowStamp()}).`:"예시 이미지입니다."}</p></div>`;
   lb.hidden=false;document.body.style.overflow="hidden";
   $("#lbClose").onclick=()=>{lb.hidden=true;document.body.style.overflow="";render()};
 }
 function bindFiles(r){
   const fn=$("#fNew");if(fn)fn.onclick=()=>{S.fAdd=true;render()};
+  const eo=$("#fExOn");if(eo)eo.onclick=()=>{S.showEx=r.id;render()};
+  const ef=$("#fExOff");if(ef)ef.onclick=()=>{S.showEx=null;render()};
+  const pf=$("#pfFile");if(pf)pf.onchange=()=>setProfile(r,pf.files[0]);
   document.querySelectorAll("[data-fg]").forEach(b=>b.onclick=()=>{S.fGroup=b.dataset.fg;render()});
   document.querySelectorAll("[data-cmpa]").forEach(b=>b.onclick=()=>{S.cmpAfter=b.dataset.cmpa;render()});
   const cr=$("#cmpR");if(cr)cr.oninput=()=>{S.cmpX=Number(cr.value);$("#cmp").style.setProperty("--x",cr.value+"%")};
   document.querySelectorAll("[data-req]").forEach(b=>b.onclick=async()=>{const k=b.dataset.req;
-    if(await patch(r,{},`서류 요청 발송: ${k} (${r.language||"환자 언어"})`)){toast(`${k} 제출 요청을 보냈습니다 (데모).`);render()}});
+    if(await patch(r,{},`서류 요청: ${k} (${r.language||"환자 언어"})`)){toast(`${k} 제출 요청이 기록되었습니다.`);render()}});
   const real=(r.files||[]).length>0,pool=real?r.files:(S.preview?.[r.id]||[]);
   document.querySelectorAll("[data-fview]").forEach(b=>b.onclick=async()=>{const f=pool.find(x=>x.id===b.dataset.fview);
-    if(real)await patch(r,{},`자료 열람: ${f.title||f.kind}`);openLB(r,f)});
-  document.querySelectorAll("[data-fshare]").forEach(b=>b.onclick=async()=>{if(!real){toast("먼저 ‘이 예시를 저장’을 누르세요.");return}const id=b.dataset.fshare;const f=r.files.find(x=>x.id===id);
+    if(real)await patch(r,{},`자료 열람: ${f.title||f.name||f.kind}`);openLB(r,f)});
+  document.querySelectorAll("[data-fshare]").forEach(b=>b.onclick=async()=>{if(!real){toast("예시 화면입니다.");return}const id=b.dataset.fshare;const f=r.files.find(x=>x.id===id);
     const files=r.files.map(x=>x.id===id?{...x,shared:!x.shared}:x);
     if(await patch(r,{files},`${f.shared?"병원 공유 해제":"병원 공유"}: ${f.title||f.kind} → ${r.hospital||"병원"}`))render()});
-  const sd=$("#fSeed");if(sd)sd.onclick=async()=>{const files=(S.preview?.[r.id]||sampleFiles(r,true));if(await patch(r,{files},"샘플 의료자료 등록")){toast("예시 자료가 저장되었습니다.");render()}};
+  document.querySelectorAll("[data-fdel]").forEach(b=>b.onclick=async()=>{if(!real){toast("예시 화면입니다.");return}const id=b.dataset.fdel;
+    if(S.arm!=="f"+id){S.arm="f"+id;render();return}S.arm=null;const f=r.files.find(x=>x.id===id);
+    if(await patch(r,{files:r.files.filter(x=>x.id!==id)},`자료 삭제: ${f.title||f.name||f.kind}`)){if(f.path)sb.storage.from(BUCKET).remove([f.path]);toast("삭제되었습니다.");render()}});
   if(S.fAdd){
     bindForm(r);
     $("#fiClose").onclick=()=>{S.fAdd=false;render()};
     $("#fiSave").onclick=async()=>{
       const kind=document.querySelector('.chips[data-field="fkind"] .chip.on')?.dataset.v||"기타";
       const date=$("#fiDate").value;if(!date){toast("날짜를 선택하세요.");return}
-      const f={id:uid(),kind,date,title:$("#fiTitle").value.trim()||kind,note:$("#fiNote").value.trim(),shared:false};
-      if(await patch(r,{files:[...(r.files||[]),f]},`자료 등록: ${f.title} (${kind})`)){S.fAdd=false;toast("자료가 등록되었습니다.");render()}
+      const list=[...($("#fiFile").files||[])];if(!list.length){toast("파일을 선택하세요.");return}
+      const btn=$("#fiSave");btn.disabled=true;btn.textContent="업로드 중…";
+      const ok=await addFiles(r,list,{kind,date,title:$("#fiTitle").value.trim(),note:$("#fiNote").value.trim()});
+      btn.disabled=false;btn.textContent="업로드";
+      if(ok){S.fAdd=false;S.showEx=null;toast("파일이 저장되었습니다.");render()}
     };
   }
 }
 function bindDetail(){
   const r=byId(S.openId);
-  $("#dBack").onclick=()=>{S.openId=null;S.editing=false;S.evAdd=false;S.evEdit=null;S.fAdd=false;S.fGroup="전체";S.cmpAfter=null;S.arm=null;render();scrollTo(0,0)};
+  $("#dBack").onclick=()=>{S.openId=null;S.editing=false;S.evAdd=false;S.evEdit=null;S.fAdd=false;S.fGroup="전체";S.cmpAfter=null;S.showEx=null;S.arm=null;render();scrollTo(0,0)};
   if(S.editing){bindForm(r);return}
   $("#pvOpen").onclick=()=>openPV(r);
   bindFiles(r);
   const nx=$("#stNext");if(nx)nx.onclick=async()=>{const s=(r.stage||0)+1;if(await patch(r,{stage:s},`단계: ${STAGES[s-1]} → ${STAGES[s]}`)){toast(STAGES[s]);render()}};
-  document.querySelectorAll("[data-st]").forEach(b=>b.onclick=async()=>{const s=Number(b.dataset.st);if(s===(r.stage||0))return;if(await patch(r,{stage:s},`단계: ${STAGES[r.stage||0]} → ${STAGES[s]}`))render()});
-  $("#dEdit").onclick=()=>{S.editing=true;render();scrollTo(0,0)};
+  document.querySelectorAll("[data-st]").forEach(b=>b.onclick=async()=>{const s=Number(b.dataset.st);if(s===(r.stage||0)){toast(`${s+1}. ${STAGES[s]}`);return}if(await patch(r,{stage:s},`단계: ${(r.stage||0)+1} ${STAGES[r.stage||0]} → ${s+1} ${STAGES[s]}`)){toast(`${s+1}. ${STAGES[s]}`);render()}});
+  $("#dEdit").onclick=()=>{S.agNew=false;S.editing=true;render();scrollTo(0,0)};
   const c=$("#dCancel");if(c)c.onclick=async()=>{if(S.arm!==r.id){S.arm=r.id;render();return}S.arm=null;
     if(await patch(r,{status:"canceled",canceled_at:new Date().toISOString()},"여정 취소")){toast("취소되었습니다. 기록 탭에서 다시 활성화할 수 있습니다.");render()}};
   const ra=$("#dReact");if(ra)ra.onclick=async()=>{if(await patch(r,{status:"active",canceled_at:null},"다시 활성화")){toast("다시 활성화되었습니다.");render()}};
@@ -758,7 +911,8 @@ function openPV(r){
      ${up.length?`<div class="tl">${up.map(e=>`<div class="tli ${e.done?"done":""}"><div class="d">${fD(e.date)} ${fT(e.time)}</div><div class="w">${esc(e.type)}${e.changed&&!e.ack?`<span class="chg">변경됨</span>`:""}</div><div class="p">${[e.place,e.staff&&"담당 "+e.staff].filter(Boolean).map(esc).join(" · ")}</div></div>`).join("")}</div>`:`<div class="dim small">예정된 일정이 없습니다.</div>`}
    </div>
    ${r.surgery_date?`<div class="card" style="margin-top:12px"><div class="h3">사후관리 일정</div><div class="sched">${FU.map(([m,l])=>`<div class="sc"><b>${m}개월</b>${fD(addMonths(r.surgery_date,m))}</div>`).join("")}</div></div>`:""}
-   <div class="card" style="margin-top:12px;text-align:center"><div class="small muted">도움이 필요하세요?</div><div style="font-weight:900;font-size:17px;margin:2px 0 10px">담당 코디네이터 ${esc(r.counselor)||"LA BELLE"}</div>
+   <div class="card" style="margin-top:12px;text-align:center"><div class="small muted">도움이 필요하세요?</div><div style="font-weight:900;font-size:17px;margin:2px 0 4px">담당 코디네이터 ${esc(r.counselor)||"LA BELLE"}</div>
+     <div class="small muted" style="margin-bottom:10px">${r.interpreter?"통역 "+esc(r.interpreter):""}${r.interpreter&&r.program?" · ":""}${r.program?"프로그램 "+esc(r.program):""}</div>
      <button class="btn pri" style="width:100%" id="pvSos">긴급 도움 요청 (SOS)</button></div>
    <p class="small dim" style="text-align:center;margin-top:14px">의료적 판단은 담당 의료기관이 수행합니다.</p>
   </div>`;
@@ -854,7 +1008,9 @@ async function seed(){
     arrival_date:D(-40),surgery_date:D(-30),departure_date:D(-23),quote_krw:5400000,paid_krw:5400000,notes:"가상 환자",
     events:[E("수술·시술",D(-30),"09:00","강남 A성형외과","통역 Oyuna"),E("항공 출국",D(-23),"12:00","인천공항 T1","")],log:L("장기 사후관리")}
   ].map(r=>({...r,status:"active"}));
-  rows.forEach(r=>{if(r.surgery_date)r.files=sampleFiles(r)});
+  rows.forEach(r=>{if(r.partner){r.agency=r.partner+" (가상)";r.agency_code="GRG"}delete r.partner;
+    const pre=codePrefix(r.nationality,r.agency_code);let n=0;const taken=[...S.rows,...rows].map(x=>x.patient_code||"");taken.forEach(c=>{if(c.startsWith(pre+"-")){const k=parseInt(c.slice(pre.length+1),10);if(k>n)n=k}});r.patient_code=`${pre}-${String(n+1).padStart(3,"0")}`;
+    r.interpreter=r.language==="몽골어"?"Oyuna (가상)":"Jenny (가상)";r.program=r.stage>=4?"한복 체험 + 성수동 투어":null;r.payment_method=r.paid_krw?"해외송금, 카드":null});
   const {error}=await sb.from(T).insert(rows);
   if(error){toast("샘플 추가 실패: "+error.message);return}
   await load();S.tab="home";S.group="all";toast("샘플 환자 4명이 추가되었습니다.");render();
