@@ -899,6 +899,10 @@ a.btn{text-decoration:none;display:inline-flex;align-items:center}
   .hv2 .pic{position:relative;order:2;height:190px;margin:16px 0 0;background-image:url(img/hero2-m.jpg);background-position:62% 50%}
   .hv2 .pic::after{background:linear-gradient(180deg,rgba(246,240,230,.9) 0%,rgba(246,240,230,0) 30%)}
 }
+
+/* sidebar: no logo mark above the name */
+#logo svg{display:none}
+#logo b{margin-top:10px}
 </style>
 </head>
 <body>
@@ -955,7 +959,7 @@ const SB_URL="https://agdqlnaedojcgivwluty.supabase.co";
 const SB_KEY="sb_publishable_PKGxxrfpduzI7xY1_DWQyQ_cnJA9isP";
 const T="labelle_patients";
 const LOGIN_DOMAIN="@labelle.app";
-const VERSION="v3.2.2";
+const VERSION="v3.2.4";
 const sb=window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:true,autoRefreshToken:true,storageKey:"labelle-auth"}});
 
 /* ---------- constants ---------- */
