@@ -97,7 +97,7 @@ input,select,textarea{font:inherit;color:var(--text)}
 .empty .pen{font-family:'Nanum Pen Script',cursive;font-size:30px;color:var(--pink2);line-height:1.15}
 
 /* buttons */
-.btn{min-height:46px;padding:0 20px;border-radius:999px;font-weight:700;background:var(--s3);border:1px solid var(--line)}
+.btn{white-space:nowrap;min-height:46px;padding:0 20px;border-radius:999px;font-weight:700;background:var(--s3);border:1px solid var(--line)}
 .btn.pri{background:var(--grad);border-color:transparent;color:#fff;box-shadow:0 6px 22px rgba(255,46,139,.32)}
 .btn.ghost{background:transparent}
 .btn.danger{background:rgba(255,80,110,.12);border-color:rgba(255,80,110,.45);color:#FF8FA6}
@@ -195,6 +195,34 @@ select.in{appearance:none;-webkit-appearance:none}
 .auth{max-width:400px;margin:8vh auto 0}
 .auth .pen{font-family:'Nanum Pen Script',cursive;font-size:28px;color:var(--pink2);line-height:1.15;margin:16px 0 18px}
 
+/* medical files */
+.ftabs{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 10px}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.fc{background:var(--s1);border:1px solid var(--line);border-radius:16px;overflow:hidden;text-align:left;display:flex;flex-direction:column}
+.fc .th{display:block;width:100%;aspect-ratio:5/6;object-fit:cover;background:#1a1218}
+.fc .th.doc{aspect-ratio:5/4}
+.fc .fb{padding:9px 10px 10px;font-size:12.5px}
+.fc .ft{font-weight:700;font-size:13.5px;line-height:1.3}
+.fc .fr{display:flex;gap:6px;margin-top:8px}
+.fc .fr .btn{flex:1;min-height:36px;padding:0 8px;font-size:12px}
+.share{font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--s3);color:var(--dim);display:inline-block;margin-top:5px}
+.share.on{background:rgba(91,227,168,.12);color:var(--ok)}
+.req{display:flex;flex-wrap:wrap;gap:6px}
+.rq{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 6px 0 12px;border-radius:999px;font-size:12.5px;border:1px solid var(--line);background:var(--s1)}
+.rq.ok{color:var(--ok);border-color:rgba(91,227,168,.4);padding-right:12px}
+.rq.miss{color:var(--warn);border-color:rgba(255,194,102,.45)}
+.rq button{min-height:28px;padding:0 10px;border-radius:999px;background:rgba(255,194,102,.16);color:var(--warn);font-size:11.5px;font-weight:700}
+.cmp{position:relative;width:100%;max-width:420px;aspect-ratio:5/6;border-radius:18px;overflow:hidden;margin:6px auto 0;border:1px solid var(--line);touch-action:pan-y}
+.cmp img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;user-select:none;-webkit-user-drag:none}
+.cmp .top{clip-path:inset(0 calc(100% - var(--x,50%)) 0 0)}
+.cmp .ln{position:absolute;top:0;bottom:0;left:var(--x,50%);width:2px;margin-left:-1px;background:#fff;box-shadow:0 0 12px rgba(255,46,139,.8);pointer-events:none}
+.cmp .ln::after{content:"‹ ›";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--grad);color:#fff;font-weight:900;font-size:14px;border-radius:999px;padding:6px 10px;white-space:nowrap}
+.cmp .tg{position:absolute;top:10px;font-family:'Dancing Script',cursive;font-size:22px;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.6);pointer-events:none}
+.cmp input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+.lbx{position:fixed;inset:0;z-index:30;background:#09060A;overflow-y:auto;display:flex;align-items:flex-start;justify-content:center;padding:calc(20px + env(safe-area-inset-top)) 16px 30px}
+.lbx .box{width:100%;max-width:520px}
+.lbx img{width:100%;border-radius:18px;border:1px solid var(--line);display:block}
+.demo-note{font-size:12px;color:var(--warn);background:rgba(255,194,102,.08);border:1px dashed rgba(255,194,102,.4);border-radius:12px;padding:8px 10px;margin-top:8px}
 .toast{position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:40;
   background:#fff;color:#1a0f17;font-weight:700;font-size:14px;padding:11px 18px;border-radius:999px;max-width:calc(100% - 32px);text-align:center;
   box-shadow:0 10px 30px rgba(0,0,0,.4)}
@@ -243,6 +271,7 @@ select.in{appearance:none;-webkit-appearance:none}
 </div>
 
 <div id="pv" class="pv" hidden></div>
+<div id="lbx" class="lbx" hidden></div>
 <div id="toast" class="toast" hidden></div>
 
 <script>
@@ -250,7 +279,7 @@ const SB_URL="https://agdqlnaedojcgivwluty.supabase.co";
 const SB_KEY="sb_publishable_PKGxxrfpduzI7xY1_DWQyQ_cnJA9isP";
 const T="labelle_patients";
 const LOGIN_DOMAIN="@labelle.app";
-const VERSION="v1.2";
+const VERSION="v1.4";
 const sb=window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:true,autoRefreshToken:true,storageKey:"labelle-auth"}});
 
 /* ---------- constants ---------- */
@@ -271,6 +300,41 @@ const EVCOL={"항공 입국":"#FFB37A","항공 출국":"#FFB37A","공항 픽업"
 const PRE=[[-14,"사전 준비사항·검사 안내"],[-7,"병원별 수술 준비사항"],[-3,"방문 일정·준비물"],[-1,"금식·복약 등 병원 지침"],[0,"병원 위치·담당자 안내"],[1,"퇴원·회복 안내"],[3,"초기 회복 확인"],[7,"경과·불편 증상 확인"],[14,"재진·경과 확인"]];
 const FU=[[1,"회복 상태·경과사진·불편 증상"],[3,"회복 경과·만족도·추가 상담"],[6,"장기 경과사진·상태 확인"],[12,"최종 경과 확인·재진 안내"]];
 const WD=["일","월","화","수","목","금","토"];
+const FKIND=["수술 전 사진","수술 후 사진","경과사진","CT·MRI·X-ray","혈액검사","진단서·소견서","여권·비자","항공권","동의서·견적서","기타"];
+const FGRP={"사진":["수술 전 사진","수술 후 사진","경과사진"],"검사":["CT·MRI·X-ray","혈액검사","진단서·소견서"],"서류":["여권·비자","항공권","동의서·견적서","기타"]};
+const FREQ=["여권·비자","항공권","수술 전 사진","혈액검사","동의서·견적서"];
+const isPhoto=k=>FGRP["사진"].includes(k);
+function illus(kind,title,date){
+  const e=x=>String(x||"").replace(/[<>&"']/g,"");
+  let body;
+  if(isPhoto(kind)){
+    const st=kind==="수술 전 사진"?0:kind==="경과사진"?1:2;
+    const bg=[["#3a3036","#1c161b"],["#5a3346","#24131d"],["#ff8cc6","#7a2150"]][st];
+    const skin=["#d9b8a6","#e6c2ae","#f0cdb8"][st];
+    const glow=st===2?"<circle cx='150' cy='150' r='150' fill='#ffb37a' opacity='.25'/>":"";
+    const nose=st===0?"M150 165 q-10 28 -14 40 q14 8 28 0 q-4 -12 -14 -40":"M150 162 q-5 30 -9 42 q9 6 18 0 q-4 -12 -9 -42";
+    const lid=st===0?"<path d='M108 150 q16 8 32 0 M160 150 q16 8 32 0' stroke='#8a6a5c' stroke-width='3' fill='none'/>":"";
+    body=`<defs><linearGradient id='g' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='${bg[0]}'/><stop offset='1' stop-color='${bg[1]}'/></linearGradient></defs>
+<rect width='300' height='360' fill='url(#g)'/>${glow}
+<path d='M70 330 q80 -70 160 0 v40 h-160z' fill='#2a1a22'/>
+<rect x='128' y='240' width='44' height='50' fill='${skin}'/>
+<ellipse cx='150' cy='170' rx='74' ry='96' fill='${skin}'/>
+<path d='M76 160 q0 -110 74 -110 q74 0 74 110 q-10 -60 -74 -64 q-64 4 -74 64z' fill='#1b1015'/>
+<ellipse cx='124' cy='158' rx='10' ry='6' fill='#2b1a14'/><ellipse cx='176' cy='158' rx='10' ry='6' fill='#2b1a14'/>${lid}
+<path d='${nose}' stroke='#a07a68' stroke-width='3' fill='none'/>
+<path d='M130 228 q20 ${st?14:8} 40 0' stroke='#b0566e' stroke-width='5' fill='none' stroke-linecap='round'/>`;
+  }else if(kind==="CT·MRI·X-ray"){
+    body=`<rect width='300' height='360' fill='#060607'/><ellipse cx='150' cy='170' rx='105' ry='125' fill='none' stroke='#cfcfcf' stroke-width='10' opacity='.85'/>
+<ellipse cx='150' cy='170' rx='88' ry='108' fill='#3b3b3e'/><ellipse cx='150' cy='150' rx='60' ry='55' fill='#6d6d72'/><ellipse cx='122' cy='190' rx='18' ry='22' fill='#141416'/><ellipse cx='178' cy='190' rx='18' ry='22' fill='#141416'/>
+<path d='M150 120 v120' stroke='#9a9aa0' stroke-width='3'/><text x='14' y='24' fill='#9a9aa0' font-size='13' font-family='monospace'>CT · AXIAL · DEMO</text>`;
+  }else{
+    let lines="";for(let i=0;i<9;i++)lines+=`<rect x='34' y='${118+i*22}' width='${232-(i%3)*40}' height='7' rx='3' fill='#e3d6dd'/>`;
+    body=`<rect width='300' height='360' fill='#2a1d26'/><rect x='18' y='18' width='264' height='324' rx='10' fill='#fdf8fb'/>
+<rect x='34' y='40' width='120' height='12' rx='4' fill='#ff2e8b'/><text x='34' y='88' fill='#2a1d26' font-size='20' font-weight='700'>${e(kind)}</text>${lines}`;
+  }
+  const lab=`<rect x='0' y='322' width='300' height='38' fill='rgba(0,0,0,.55)'/><text x='12' y='346' fill='#fff' font-size='14' font-family='sans-serif'>${e(date)} · 가상 이미지</text>`;
+  return "data:image/svg+xml;charset=utf-8,"+encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 360'>${body}${lab}</svg>`);
+}
 
 /* ---------- state ---------- */
 const S={user:null,rows:[],tab:"home",group:"all",openId:null,editing:false,evEdit:null,evAdd:false,calSel:null,calBase:null,hist:"all",arm:null,dupArm:false};
@@ -313,7 +377,10 @@ async function signIn(up){
   if(!email||!password){$("#aMsg").textContent="이메일과 비밀번호를 입력하세요.";return}
   $("#aMsg").textContent="확인 중…";
   const r=up?await sb.auth.signUp({email,password}):await sb.auth.signInWithPassword({email,password});
-  if(r.error){$("#aMsg").textContent=up?"계정을 만들 수 없습니다: "+r.error.message:"이메일 또는 비밀번호가 맞지 않습니다.";return}
+  if(r.error){const m=(r.error.message||"").toLowerCase();
+    $("#aMsg").textContent=up?(m.includes("registered")||m.includes("exists")?"이미 있는 계정입니다. 로그인을 눌러 주세요.":m.includes("signup")||m.includes("not allowed")?"새 계정 만들기가 꺼져 있습니다. 관리자에게 요청하세요.":"계정을 만들 수 없습니다: "+r.error.message)
+      :(m.includes("invalid")?"아이디 또는 비밀번호가 맞지 않습니다. 처음이라면 ‘계정 만들기’를 누르세요.":m.includes("confirm")?"이메일 인증이 필요합니다. 관리자에게 요청하세요.":"로그인 실패: "+r.error.message);
+    console.log("auth error",email,r.error);return}
   S.user=r.data.user||r.data.session?.user;showApp();
 }
 $("#aIn").onclick=()=>signIn(false);
@@ -331,17 +398,17 @@ const who=()=>{const em=S.user?.email||"";return S.me?.name||(em.endsWith(LOGIN_
 async function load(){
   const {data,error}=await sb.from(T).select("*").order("created_at",{ascending:false});
   if(error){toast("불러오기 실패: "+error.message);return}
-  S.rows=(data||[]).map(r=>({...r,events:r.events||[],log:r.log||[]}));
+  S.rows=(data||[]).map(r=>({...r,events:r.events||[],log:r.log||[],files:r.files||[]}));
 }
 async function patch(r,p,logText){
-  if(logText){p.log=[{at:nowStamp(),text:logText},...(r.log||[])].slice(0,200)}
+  if(logText){p.log=[{at:nowStamp(),text:logText+(S.user?" · "+who():"")},...(r.log||[])].slice(0,200)}
   const {error}=await sb.from(T).update(p).eq("id",r.id);
   if(error){toast("저장 실패: "+error.message);return false}
   Object.assign(r,p);return true;
 }
 document.addEventListener("visibilitychange",async()=>{if(!document.hidden&&S.user&&!busy()){await load();render()}});
 setInterval(async()=>{if(S.user&&!document.hidden&&!busy()){await load();render()}},60000);
-function busy(){return S.tab==="new"||S.editing||S.evAdd||S.evEdit}
+function busy(){return S.tab==="new"||S.editing||S.evAdd||S.evEdit||S.fAdd||!$("#lbx").hidden}
 
 /* ---------- render root ---------- */
 function render(){
@@ -363,7 +430,7 @@ function renderNext(){renderMe();
   $("#next").innerHTML=best?`다음 일정 · <b>${fD(best.e.date)} ${fT(best.e.time)}</b> ${esc(best.e.type)} · ${esc(best.r.name)}`:`오늘은 ${fFull(t)}`;
 }
 function goHome(e){if(e)e.preventDefault();const pv=$("#pv");pv.hidden=true;document.body.style.overflow="";
-  S.tab="home";S.group="all";S.openId=null;S.editing=false;S.evAdd=false;S.evEdit=null;S.arm=null;S.dupArm=false;render();scrollTo(0,0)}
+  $("#lbx").hidden=true;S.fAdd=false;S.fGroup="전체";S.cmpAfter=null;S.tab="home";S.group="all";S.openId=null;S.editing=false;S.evAdd=false;S.evEdit=null;S.arm=null;S.dupArm=false;render();scrollTo(0,0)}
 $("#logo").onclick=goHome;
 document.querySelectorAll(".tab").forEach(b=>b.onclick=()=>{S.tab=b.dataset.t;S.openId=null;S.editing=false;S.evAdd=false;S.evEdit=null;S.dupArm=false;render();scrollTo(0,0)});
 
@@ -432,7 +499,7 @@ function readForm(){
 function bindForm(r){
   document.querySelectorAll(".chips").forEach(g=>g.onclick=e=>{const b=e.target.closest(".chip");if(!b)return;
     const was=b.classList.contains("on");g.querySelectorAll(".chip").forEach(x=>x.classList.remove("on"));
-    if(!was||g.dataset.field==="stage"||g.dataset.field==="evtype")b.classList.add("on")});
+    if(!was||g.dataset.field==="stage"||g.dataset.field==="evtype"||g.dataset.field==="fkind")b.classList.add("on")});
   document.querySelectorAll("input.dt").forEach(i=>i.oninput=()=>{const c=document.querySelector(`.confirm[data-for="${i.id}"]`);if(c)c.textContent=i.value?"→ "+fFull(i.value):""});
   const sv=$("#fSave");if(!sv)return;
   sv.onclick=async()=>{
@@ -445,7 +512,7 @@ function bindForm(r){
       const {data,error}=await sb.from(T).insert({...v,events:[],log:[{at:nowStamp(),text:"환자 등록 · "+STAGES[v.stage]}],status:"active"}).select().single();
       sv.disabled=false;
       if(error){toast("저장 실패: "+error.message);return}
-      S.rows.unshift({...data,events:data.events||[],log:data.log||[]});S.dupArm=false;
+      S.rows.unshift({...data,events:data.events||[],log:data.log||[],files:data.files||[]});S.dupArm=false;
       toast("등록되었습니다.");S.tab="home";S.openId=data.id;render();scrollTo(0,0);
     }else{
       const ch=[];if(v.stage!==(r.stage||0))ch.push(`단계: ${STAGES[r.stage||0]} → ${STAGES[v.stage]}`);
@@ -490,6 +557,8 @@ function detailHTML(r){
       ${S.evAdd?evFormHTML(null):""}
       <div style="margin-top:8px">${evs.length?evs.map(e=>S.evEdit===e.id?evFormHTML(e):evRow(e)).join(""):`<div class="dim small" style="padding:8px 0">아직 일정이 없습니다. 항공·픽업·병원·숙박 일정을 추가하세요.</div>`}</div>
     </div>
+
+    ${filesHTML(r)}
 
     ${r.surgery_date?`<div class="card"><div class="h3">수술 전후 안내 자동 발송 일정 · ${r.language||"환자 언어"}</div><div class="sched">${pre}</div>
     <div class="h3" style="margin-top:14px">수술 후 12개월 사후관리</div><div class="sched">${fu}</div></div>`:
@@ -541,11 +610,93 @@ function evFormHTML(e){
    <div class="brow end">${e?`<button class="btn danger sm ${S.arm==="ev"+e.id?"arm":""}" id="evDel">${S.arm==="ev"+e.id?"한 번 더 누르면 삭제":"삭제"}</button>`:""}<button class="btn ghost sm" id="evClose">닫기</button><button class="btn pri sm" id="evSave">저장</button></div>
   </div>`;
 }
+function filesHTML(r){
+  const fs=(r.files||[]).slice().sort((a,b)=>(b.date||"").localeCompare(a.date||""));
+  const grp=S.fGroup||"전체";
+  const list=grp==="전체"?fs:fs.filter(f=>FGRP[grp].includes(f.kind));
+  const have=new Set(fs.map(f=>f.kind));
+  const befores=fs.filter(f=>f.kind==="수술 전 사진").sort((a,b)=>a.date.localeCompare(b.date));
+  const afters=fs.filter(f=>f.kind==="수술 후 사진"||f.kind==="경과사진").sort((a,b)=>a.date.localeCompare(b.date));
+  let cmp="";
+  if(befores.length&&afters.length){
+    const b0=befores[0],a0=afters.find(a=>a.id===S.cmpAfter)||afters[afters.length-1];
+    cmp=`<div class="h3" style="margin-top:14px">수술 전후 비교 · 좌우로 밀어 보세요</div>
+    ${afters.length>1?`<div class="chips small" style="margin-bottom:6px">${afters.map(a=>`<button class="chip ${a.id===a0.id?"on":""}" data-cmpa="${a.id}">${esc(a.kind)} ${fD(a.date)}</button>`).join("")}</div>`:""}
+    <div class="cmp" id="cmp" style="--x:${S.cmpX??50}%"><img src="${illus(a0.kind,a0.title,a0.date)}" alt=""><img class="top" src="${illus(b0.kind,b0.title,b0.date)}" alt="">
+    <span class="tg" style="left:12px">Before</span><span class="tg" style="right:12px">After</span><span class="ln"></span>
+    <input type="range" min="0" max="100" value="${S.cmpX??50}" id="cmpR" aria-label="전후 비교"></div>
+    <div class="small dim" style="text-align:center;margin-top:6px">${fD(b0.date)} → ${fD(a0.date)}</div>`;
+  }
+  return `<div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><div class="h3" style="margin:0">의료자료 · 사진·검사·서류</div>${S.fAdd?"":`<button class="btn sm" id="fNew">+ 자료 추가</button>`}</div>
+    ${S.fAdd?fFormHTML():""}
+    <div class="h3" style="margin-top:12px">필수 서류</div>
+    <div class="req">${FREQ.map(k=>have.has(k)?`<span class="rq ok">✓ ${k}</span>`:`<span class="rq miss">${k} 미제출 <button data-req="${k}">요청</button></span>`).join("")}</div>
+    ${cmp}
+    <div class="ftabs">${["전체","사진","검사","서류"].map(g=>`<button class="chip ${grp===g?"on":""}" style="min-height:36px" data-fg="${g}">${g} ${g==="전체"?fs.length:fs.filter(f=>FGRP[g].includes(f.kind)).length}</button>`).join("")}</div>
+    ${list.length?`<div class="fgrid">${list.map(f=>`<div class="fc">
+      <img class="th ${isPhoto(f.kind)||f.kind==="CT·MRI·X-ray"?"":"doc"}" src="${illus(f.kind,f.title,f.date)}" alt="">
+      <div class="fb"><div class="ft">${esc(f.title||f.kind)}</div><div class="dim">${esc(f.kind)} · ${fD(f.date)}</div>
+      <span class="share ${f.shared?"on":""}">${f.shared?"병원 공유 중":"병원 비공개"}</span>
+      <div class="fr"><button class="btn" data-fview="${f.id}">열람</button><button class="btn" data-fshare="${f.id}">${f.shared?"해제":"공유"}</button></div></div></div>`).join("")}</div>`
+      :`<div class="dim small" style="padding:6px 0">등록된 자료가 없습니다.${fs.length?"":` <button class="btn sm" id="fSeed" style="margin-left:6px">샘플 자료 넣기</button>`}</div>`}
+    <div class="demo-note">데모 버전: 화면 구성 확인용 가상 이미지입니다. 실제 사진·의료영상 업로드는 암호화·접근기록을 갖춘 정식 버전에서 제공됩니다.</div>
+  </div>`;
+}
+function fFormHTML(){
+  return `<div class="card" style="background:var(--s1);margin:10px 0">
+   <div class="f"><label class="lb">자료 종류</label>${chips("fkind",FKIND,"수술 전 사진","small")}</div>
+   ${dateField("fiDate","촬영일·발급일 *",today())}
+   <div class="f"><label class="lb">제목</label><input id="fiTitle" class="in" placeholder="예: 정면 사진, 흉부 CT, 혈액검사 결과지"></div>
+   <div class="f"><label class="lb">메모</label><input id="fiNote" class="in" placeholder="예: 병원 요청 자료"></div>
+   <div class="f"><label class="lb">파일</label><div class="dim small">데모에서는 실제 파일 대신 가상 이미지가 저장됩니다.</div></div>
+   <div class="brow end"><button class="btn ghost sm" id="fiClose">닫기</button><button class="btn pri sm" id="fiSave">저장</button></div></div>`;
+}
+function sampleFiles(r){
+  const base=r.surgery_date||today(),F=(kind,title,date,shared)=>({id:uid(),kind,title,date,shared:!!shared,note:""});
+  const out=[F("수술 전 사진","정면 사진",addDays(base,-20),true),F("수술 전 사진","측면 사진",addDays(base,-20),true),F("CT·MRI·X-ray","안면 CT",addDays(base,-15),true),F("혈액검사","혈액검사 결과지",addDays(base,-10),true),F("여권·비자","여권 사본",addDays(base,-30))];
+  if(r.surgery_date&&addDays(base,7)<=today()){out.push(F("수술 후 사진","수술 후 7일",addDays(base,7),true));if(addMonths(base,1)<=today())out.push(F("경과사진","1개월 경과",addMonths(base,1),true))}
+  return out;
+}
+function openLB(r,f){
+  const lb=$("#lbx");
+  lb.innerHTML=`<div class="box"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px"><div><div style="font-weight:900;font-size:18px">${esc(f.title||f.kind)}</div><div class="small muted">${esc(r.name)} · ${esc(f.kind)} · ${fFull(f.date)}</div></div><button class="btn sm" id="lbClose">닫기</button></div>
+  <img src="${illus(f.kind,f.title,f.date)}" alt="">
+  ${f.note?`<p class="small muted">${esc(f.note)}</p>`:""}
+  <p class="small dim">열람 기록이 환자 변경 이력에 저장되었습니다 (${esc(who())}, ${nowStamp()}).</p></div>`;
+  lb.hidden=false;document.body.style.overflow="hidden";
+  $("#lbClose").onclick=()=>{lb.hidden=true;document.body.style.overflow="";render()};
+}
+function bindFiles(r){
+  const fn=$("#fNew");if(fn)fn.onclick=()=>{S.fAdd=true;render()};
+  document.querySelectorAll("[data-fg]").forEach(b=>b.onclick=()=>{S.fGroup=b.dataset.fg;render()});
+  document.querySelectorAll("[data-cmpa]").forEach(b=>b.onclick=()=>{S.cmpAfter=b.dataset.cmpa;render()});
+  const cr=$("#cmpR");if(cr)cr.oninput=()=>{S.cmpX=Number(cr.value);$("#cmp").style.setProperty("--x",cr.value+"%")};
+  document.querySelectorAll("[data-req]").forEach(b=>b.onclick=async()=>{const k=b.dataset.req;
+    if(await patch(r,{},`서류 요청 발송: ${k} (${r.language||"환자 언어"})`)){toast(`${k} 제출 요청을 보냈습니다 (데모).`);render()}});
+  document.querySelectorAll("[data-fview]").forEach(b=>b.onclick=async()=>{const f=r.files.find(x=>x.id===b.dataset.fview);
+    await patch(r,{},`자료 열람: ${f.title||f.kind}`);openLB(r,f)});
+  document.querySelectorAll("[data-fshare]").forEach(b=>b.onclick=async()=>{const id=b.dataset.fshare;const f=r.files.find(x=>x.id===id);
+    const files=r.files.map(x=>x.id===id?{...x,shared:!x.shared}:x);
+    if(await patch(r,{files},`${f.shared?"병원 공유 해제":"병원 공유"}: ${f.title||f.kind} → ${r.hospital||"병원"}`))render()});
+  const sd=$("#fSeed");if(sd)sd.onclick=async()=>{if(await patch(r,{files:sampleFiles(r)},"샘플 의료자료 등록")){toast("샘플 자료가 추가되었습니다.");render()}};
+  if(S.fAdd){
+    bindForm(r);
+    $("#fiClose").onclick=()=>{S.fAdd=false;render()};
+    $("#fiSave").onclick=async()=>{
+      const kind=document.querySelector('.chips[data-field="fkind"] .chip.on')?.dataset.v||"기타";
+      const date=$("#fiDate").value;if(!date){toast("날짜를 선택하세요.");return}
+      const f={id:uid(),kind,date,title:$("#fiTitle").value.trim()||kind,note:$("#fiNote").value.trim(),shared:false};
+      if(await patch(r,{files:[...(r.files||[]),f]},`자료 등록: ${f.title} (${kind})`)){S.fAdd=false;toast("자료가 등록되었습니다.");render()}
+    };
+  }
+}
 function bindDetail(){
   const r=byId(S.openId);
-  $("#dBack").onclick=()=>{S.openId=null;S.editing=false;S.evAdd=false;S.evEdit=null;S.arm=null;render();scrollTo(0,0)};
+  $("#dBack").onclick=()=>{S.openId=null;S.editing=false;S.evAdd=false;S.evEdit=null;S.fAdd=false;S.fGroup="전체";S.cmpAfter=null;S.arm=null;render();scrollTo(0,0)};
   if(S.editing){bindForm(r);return}
   $("#pvOpen").onclick=()=>openPV(r);
+  bindFiles(r);
   const nx=$("#stNext");if(nx)nx.onclick=async()=>{const s=(r.stage||0)+1;if(await patch(r,{stage:s},`단계: ${STAGES[s-1]} → ${STAGES[s]}`)){toast(STAGES[s]);render()}};
   document.querySelectorAll("[data-st]").forEach(b=>b.onclick=async()=>{const s=Number(b.dataset.st);if(s===(r.stage||0))return;if(await patch(r,{stage:s},`단계: ${STAGES[r.stage||0]} → ${STAGES[s]}`))render()});
   $("#dEdit").onclick=()=>{S.editing=true;render();scrollTo(0,0)};
@@ -664,7 +815,7 @@ function histHTML(){
 /* ---------- main binds ---------- */
 function bindMain(){
   document.querySelectorAll("[data-g]").forEach(b=>b.onclick=()=>{S.group=S.group===b.dataset.g?"all":b.dataset.g;render()});
-  document.querySelectorAll("[data-open]").forEach(b=>b.onclick=()=>{S.openId=b.dataset.open;S.editing=false;S.arm=null;render();scrollTo(0,0)});
+  document.querySelectorAll("[data-open]").forEach(b=>b.onclick=()=>{S.fAdd=false;S.fGroup="전체";S.cmpAfter=null;S.openId=b.dataset.open;S.editing=false;S.arm=null;render();scrollTo(0,0)});
   document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{S.tab=b.dataset.go;render()});
   if(S.tab==="new")bindForm(null);
   if(S.tab==="cal"){
@@ -699,6 +850,7 @@ async function seed(){
     arrival_date:D(-40),surgery_date:D(-30),departure_date:D(-23),quote_krw:5400000,paid_krw:5400000,notes:"가상 환자",
     events:[E("수술·시술",D(-30),"09:00","강남 A성형외과","통역 Oyuna"),E("항공 출국",D(-23),"12:00","인천공항 T1","")],log:L("장기 사후관리")}
   ].map(r=>({...r,status:"active"}));
+  rows.forEach(r=>{if(r.surgery_date)r.files=sampleFiles(r)});
   const {error}=await sb.from(T).insert(rows);
   if(error){toast("샘플 추가 실패: "+error.message);return}
   await load();S.tab="home";S.group="all";toast("샘플 환자 4명이 추가되었습니다.");render();
