@@ -943,7 +943,7 @@ const SB_URL="https://agdqlnaedojcgivwluty.supabase.co";
 const SB_KEY="sb_publishable_PKGxxrfpduzI7xY1_DWQyQ_cnJA9isP";
 const T="labelle_patients";
 const LOGIN_DOMAIN="@labelle.app";
-const VERSION="v3.2";
+const VERSION="v3.2.1";
 const sb=window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:true,autoRefreshToken:true,storageKey:"labelle-auth"}});
 
 /* ---------- constants ---------- */
@@ -2837,7 +2837,7 @@ function threadHTML(){
    <div class="tinfo">${t.nationality?`<span>국적 <b>${esc(t.nationality)}</b></span>`:""}${t.messenger||t.messenger_id?`<span>메신저 <b data-notr>${esc([t.messenger,t.messenger_id].filter(Boolean).join(" "))}</b></span>`:""}${t.phone?`<span>전화 <b data-notr>${esc(t.phone)}</b></span>`:""}${t.assigned?`<span>담당 <b data-notr>${esc(t.assigned)}</b></span>`:""}${lead?`<span><a href="#" data-go="leads">상담 관리에서 보기 ›</a></span>`:t.lead_id?`<span>상담 신청 접수됨</span>`:`<span class="dim">아직 연락처를 남기지 않았습니다</span>`}</div>
    <div class="chmsgs" id="thMsgs">${arr?tmsgsHTML(arr,t):`<div class="chempty"><span class="small">불러오는 중…</span></div>`}</div>
    ${t.status==="closed"?`<div class="chcomp" style="justify-content:center"><span class="small dim">종료된 대화입니다.</span></div>`:
-   `<div class="chcomp"><select class="faqsel" id="thFaq" title="FAQ 답변 넣기"><option value="">FAQ 답변 넣기</option>${fq.map(f=>`<option value="${esc(f.id)}">${esc(f.id.replace("FAQ-",""))} ${esc((f.q.ko||"").slice(0,26))}</option>`).join("")}</select><textarea id="thIn" rows="1" placeholder="${esc(trText("고객에게 답장 · Enter 전송"))}">${esc(CH.tdraft[t.id]||"")}</textarea><button class="ib send" id="thSend" aria-label="전송">${svgI("send")}</button></div>`}`;
+   `<div class="chcomp"><select class="faqsel" id="thFaq" title="FAQ 답변 넣기"><option value="">FAQ 답변 넣기</option>${fq.map(f=>`<option value="${esc(f.id)}" data-notr>${esc(f.id.replace("FAQ-",""))} ${esc(fL(f.q).slice(0,30))}</option>`).join("")}</select><textarea id="thIn" rows="1" placeholder="${esc(trText("고객에게 답장 · Enter 전송"))}">${esc(CH.tdraft[t.id]||"")}</textarea><button class="ib send" id="thSend" aria-label="전송">${svgI("send")}</button></div>`}`;
 }
 function msgPageHTML(){
   if(CH.ok===false)return pageHead("고객 메시지","")+`<div class="notice">고객 메시지와 챗봇을 켜려면 Supabase SQL Editor에서 labelle_v22.sql을 한 번 실행해 주세요.</div>`;
@@ -2896,6 +2896,7 @@ function bindMsg(){
 
 /* ---------- chatbot admin (FAQ) ---------- */
 const BLANGS=["ko","mn","en","zh","pt"];
+const fL=o=>(o&&(o[UIL]||o.ko||o.en))||"";
 const botLink=(slug,l)=>baseURL()+"?bot=1"+(slug?"&c="+encodeURIComponent(slug):"")+(l?"&l="+l:"");
 function faqCats(){const m=new Map();CH.faq.forEach(f=>{const k=f.cat?.ko||"기타";if(!m.has(k))m.set(k,f.cat||{ko:k})});return [...m.values()]}
 async function loadUnq(){
@@ -2914,14 +2915,14 @@ function faqEditHTML(f){
    <div class="f"><label class="lb">질문 (${LANGNM[L]})</label><input class="in" id="fqQ" value="${esc(f.q?.[L]||"")}" ${dis} data-notr></div>
    <div class="f"><label class="lb">답변 (${LANGNM[L]})</label><textarea class="in" id="fqA" ${dis} data-notr>${esc(f.a?.[L]||"")}</textarea></div>
    <div class="f"><label class="lb">검색 키워드 (${LANGNM[L]})</label><div class="small dim" style="margin:-4px 0 6px">띄어쓰기로 구분, 고객이 쓸 만한 단어</div><input class="in" id="fqK" value="${esc(f.kw?.[L]||"")}" ${dis} data-notr></div>
-   <div class="g3"><div class="f"><label class="lb">분류</label><select class="in" id="fqCat" ${dis}>${cats.map(c=>`<option ${c.ko===(f.cat?.ko)?"selected":""}>${esc(c.ko)}</option>`).join("")}</select></div>
+   <div class="g3"><div class="f"><label class="lb">분류</label><select class="in" id="fqCat" ${dis}>${cats.map(c=>`<option value="${esc(c.ko)}" ${c.ko===(f.cat?.ko)?"selected":""} data-notr>${esc(fL(c))}</option>`).join("")}</select></div>
     <div class="f"><label class="lb">상태</label><select class="in" id="fqSt" ${dis}>${[["draft","초안"],["approved","승인 (고객에게 표시)"],["hidden","숨김"]].map(([k,l])=>`<option value="${k}" ${f.status===k?"selected":""}>${l}</option>`).join("")}</select></div>
     <div class="f"><label class="lb">옵션</label><label class="small"><input type="checkbox" id="fqLink" ${f.link?"checked":""} ${dis}> 상담 신청 버튼 표시</label><br><label class="small"><input type="checkbox" id="fqEm" ${f.emergency?"checked":""} ${dis}> 응급 안내</label></div></div>
    ${adm?`<div class="brow end" style="margin-top:6px">${f.__new?"":`<button class="btn sm danger ${CH.armFaq===f.id?"arm":""}" data-fqa="del">${CH.armFaq===f.id?"삭제 확인":"삭제"}</button>`}<button class="btn sm ghost" data-fqa="cancel">닫기</button><button class="btn sm pri" data-fqa="save">저장</button></div>`:`<div class="small dim" style="margin-top:6px">FAQ 수정·승인은 ADM만 할 수 있습니다.</div>`}</div>`;
 }
 function faqRow(f){
   const full=BLANGS.every(l=>f.q?.[l]&&f.a?.[l]);
-  return `<button class="fqrow" data-fq="${esc(f.id)}"><span class="id">${esc(f.id)}</span><span class="q"><span data-notr>${esc(f.q?.ko||"")}</span><small data-notr>${esc(f.a?.ko||"")}</small></span><span class="tg">${f.emergency?`<span class="spl waiting">응급</span>`:""}${f.link?`<span class="spl open">상담 연결</span>`:""}${full?"":`<span class="spl">번역 부족</span>`}<span class="spl ${f.status}">${{draft:"초안",approved:"승인",hidden:"숨김"}[f.status]||f.status}</span></span></button>`
+  return `<button class="fqrow" data-fq="${esc(f.id)}"><span class="id">${esc(f.id)}</span><span class="q"><span data-notr>${esc(fL(f.q))}</span><small data-notr>${esc(fL(f.a))}</small></span><span class="tg">${f.emergency?`<span class="spl waiting">응급</span>`:""}${f.link?`<span class="spl open">상담 연결</span>`:""}${full?"":`<span class="spl">번역 부족</span>`}<span class="spl ${f.status}">${{draft:"초안",approved:"승인",hidden:"숨김"}[f.status]||f.status}</span></span></button>`
    +(CH.faqOpen===f.id?faqEditHTML(CH.faqEdit||f):"");
 }
 function botAdminHTML(){
@@ -2947,11 +2948,11 @@ function botAdminHTML(){
      <div class="brow" style="margin-top:12px"><button class="btn sm pri" data-go="msg">고객 메시지 보기</button>${notifBtn()}</div></div></div>
   <div class="wcard" style="margin-bottom:16px"><div class="whead"><h3>답을 찾지 못한 질문</h3><span class="sub">FAQ에 추가하면 챗봇이 더 똑똑해집니다</span></div><div id="unqBox">${unqHTML()}</div></div>
   <div class="wcard"><div class="whead"><h3>FAQ · 지식 베이스</h3><span class="sub">${CH.faq.length} · KO MN EN ZH PT</span></div>
-   <div class="fqbar"><input id="fqSearch" placeholder="질문 · 답변 검색" value="${esc(CH.faqQ)}"><select id="fqCatF"><option value="">전체 분류</option>${faqCats().map(c=>`<option ${CH.faqCat===c.ko?"selected":""}>${esc(c.ko)}</option>`).join("")}</select>
+   <div class="fqbar"><input id="fqSearch" placeholder="질문 · 답변 검색" value="${esc(CH.faqQ)}"><select id="fqCatF"><option value="">전체 분류</option>${faqCats().map(c=>`<option value="${esc(c.ko)}" ${CH.faqCat===c.ko?"selected":""} data-notr>${esc(fL(c))}</option>`).join("")}</select>
     <select id="fqStF"><option value="">전체 상태</option><option value="draft" ${CH.faqSt==="draft"?"selected":""}>초안</option><option value="approved" ${CH.faqSt==="approved"?"selected":""}>승인</option><option value="hidden" ${CH.faqSt==="hidden"?"selected":""}>숨김</option></select>
     ${isAdmin()?`<button class="btn sm ${CH.armAll?"danger arm":""}" data-fqa="approveall">${CH.armAll?"승인 확인 ("+CH.faq.filter(f=>f.status==="draft").length+")":"초안 전체 승인"}</button><button class="btn sm pri" data-fqa="new">+ 새 FAQ</button>`:""}</div>
    ${CH.faqOpen==="__new"?faqEditHTML(CH.faqEdit):""}
-   ${[...groups.entries()].filter(([k])=>k!=="__new").map(([k,arr])=>`<div class="fqcat">${esc(k)}</div>${arr.map(faqRow).join("")}`).join("")||`<div class="small dim">결과가 없습니다.</div>`}</div>`;
+   ${[...groups.entries()].filter(([k])=>k!=="__new").map(([k,arr])=>`<div class="fqcat" data-notr>${esc(fL(arr[0]?.cat)||k)}</div>${arr.map(faqRow).join("")}`).join("")||`<div class="small dim">결과가 없습니다.</div>`}</div>`;
 }
 function readFaqForm(){
   const f=CH.faqEdit;if(!f||!$("#fqQ"))return;const L=CH.faqLang;
@@ -2964,7 +2965,7 @@ function bindBotAdmin(){
   m.querySelectorAll("[data-go]").forEach(b=>b.onclick=e=>{e.preventDefault();goTab(b.dataset.go)});
   m.querySelectorAll("[data-s2='notify']").forEach(b=>b.onclick=askNotify);
   m.querySelectorAll("[data-th2]").forEach(b=>b.onclick=()=>openThread(b.dataset.th2));
-  m.querySelectorAll("[data-fq]").forEach(b=>b.onclick=()=>{const id=b.dataset.fq;if(CH.faqOpen===id){CH.faqOpen=null}else{CH.faqOpen=id;CH.faqEdit=JSON.parse(JSON.stringify(CH.faq.find(x=>x.id===id)))}CH.armFaq=null;render()});
+  m.querySelectorAll("[data-fq]").forEach(b=>b.onclick=()=>{const id=b.dataset.fq;if(CH.faqOpen===id){CH.faqOpen=null}else{CH.faqOpen=id;if(BLANGS.includes(UIL))CH.faqLang=UIL;CH.faqEdit=JSON.parse(JSON.stringify(CH.faq.find(x=>x.id===id)))}CH.armFaq=null;render()});
   m.querySelectorAll("[data-faqnew]").forEach(b=>b.onclick=()=>{const l=b.dataset.faql||"ko";CH.faqLang=l;CH.faqOpen="__new";CH.faqEdit={__new:1,id:nextFaqId(),q:{[l]:b.dataset.faqnew},a:{},kw:{},cat:faqCats()[0]||{ko:"기타"},status:"draft",link:true,emergency:false,sort:CH.faq.length+1};render();setTimeout(()=>$("#fqEd")?.scrollIntoView({behavior:"smooth",block:"center"}),60)});
   m.querySelectorAll("[data-fl]").forEach(b=>b.onclick=()=>{readFaqForm();CH.faqLang=b.dataset.fl;const ed=$("#fqEd");if(ed){ed.outerHTML=faqEditHTML(CH.faqEdit);bindBotAdmin()}});
   const sq=$("#fqSearch");if(sq)sq.oninput=()=>{CH.faqQ=sq.value;const pos=sq.selectionStart;render();const n=$("#fqSearch");n.focus();n.setSelectionRange(pos,pos)};
