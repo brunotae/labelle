@@ -213,9 +213,9 @@ select.in{appearance:none;-webkit-appearance:none}
     <div class="script">My Medical Journey</div>
     <div class="pen">“새로운 나, 새로운 시작.”<br>환자 여정 통합관리</div>
     <div class="card">
-      <div class="f"><label class="lb">이메일</label><input id="aEmail" class="in" type="email" autocomplete="username"></div>
+      <div class="f"><label class="lb">아이디 또는 이메일</label><input id="aEmail" class="in" type="text" autocapitalize="none" autocorrect="off" autocomplete="username"></div>
       <div class="f"><label class="lb">비밀번호</label><input id="aPass" class="in" type="password" autocomplete="current-password"></div>
-      <div id="aMsg" class="small" style="color:var(--pink2);min-height:20px;margin-bottom:8px"></div>
+      <div class="dim small" style="margin:-4px 0 8px">앱 버전 <span id="aVer"></span></div><div id="aMsg" class="small" style="color:var(--pink2);min-height:20px;margin-bottom:8px"></div>
       <div class="brow"><button id="aIn" class="btn pri" style="flex:1">로그인</button><button id="aUp" class="btn">계정 만들기</button></div>
     </div>
   </section>
@@ -230,7 +230,7 @@ select.in{appearance:none;-webkit-appearance:none}
         </a>
         <div class="script">Real Story · Real Change</div>
       </div>
-      <div id="next" class="next"></div>
+      <div id="me" class="next" style="margin-top:4px"></div><div id="next" class="next"></div>
     </header>
     <nav class="tabs" id="tabs">
       <button class="tab" data-t="home">환자 여정</button>
@@ -249,6 +249,8 @@ select.in{appearance:none;-webkit-appearance:none}
 const SB_URL="https://agdqlnaedojcgivwluty.supabase.co";
 const SB_KEY="sb_publishable_PKGxxrfpduzI7xY1_DWQyQ_cnJA9isP";
 const T="labelle_patients";
+const LOGIN_DOMAIN="@labelle.app";
+const VERSION="v1.2";
 const sb=window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:true,autoRefreshToken:true,storageKey:"labelle-auth"}});
 
 /* ---------- constants ---------- */
@@ -305,7 +307,9 @@ async function boot(){
   if(S.user){showApp()}else{$("#auth").hidden=false;$("#app").hidden=true}
 }
 async function signIn(up){
-  const email=$("#aEmail").value.trim(),password=$("#aPass").value;
+  let email=$("#aEmail").value.trim().toLowerCase();const password=$("#aPass").value;
+  if(email&&!email.includes("@"))email+=LOGIN_DOMAIN;
+  if(up&&password.length<6){$("#aMsg").textContent="비밀번호는 6자 이상이어야 합니다.";return}
   if(!email||!password){$("#aMsg").textContent="이메일과 비밀번호를 입력하세요.";return}
   $("#aMsg").textContent="확인 중…";
   const r=up?await sb.auth.signUp({email,password}):await sb.auth.signInWithPassword({email,password});
@@ -315,7 +319,13 @@ async function signIn(up){
 $("#aIn").onclick=()=>signIn(false);
 $("#aUp").onclick=()=>signIn(true);
 $("#aPass").addEventListener("keydown",e=>{if(e.key==="Enter")signIn(false)});
-async function showApp(){$("#auth").hidden=true;$("#app").hidden=false;await load();render()}
+async function showApp(){$("#auth").hidden=true;$("#app").hidden=false;await loadMe();await load();render()}
+async function loadMe(){
+  const em=(S.user?.email||"").toLowerCase();
+  const {data}=await sb.from("labelle_staff").select("*").eq("email",em);
+  S.me=(data&&data[0])||null;
+}
+const who=()=>{const em=S.user?.email||"";return S.me?.name||(em.endsWith(LOGIN_DOMAIN)?em.slice(0,-LOGIN_DOMAIN.length):em)};
 
 /* ---------- data ---------- */
 async function load(){
@@ -346,7 +356,8 @@ function render(){
   else m.innerHTML=histHTML();
   bindMain();
 }
-function renderNext(){
+function renderMe(){$("#me").innerHTML=S.me?`<span class="pill" style="margin-right:6px">${esc(S.me.role||"ADM")}</span>${esc(who())}`:`<span class="pill gray" style="margin-right:6px">권한 없음</span>${esc(who())} · 관리자에게 권한을 요청하세요`}
+function renderNext(){renderMe();
   const t=today();let best=null;
   active().forEach(r=>(r.events||[]).forEach(e=>{if(!e.done&&e.date>=t&&(!best||evSort(e,best.e)<0))best={e,r}}));
   $("#next").innerHTML=best?`다음 일정 · <b>${fD(best.e.date)} ${fT(best.e.time)}</b> ${esc(best.e.type)} · ${esc(best.r.name)}`:`오늘은 ${fFull(t)}`;
@@ -644,7 +655,7 @@ function histHTML(){
     <div class="t2">${r.status==="canceled"?"취소됨 · "+(r.canceled_at?fD(r.canceled_at.slice(0,10)):""):STAGES[r.stage||0]} · 등록 ${r.created_at?fD(r.created_at.slice(0,10)):""}</div></div>
     ${r.status==="canceled"?`<button class="btn sm" data-react="${r.id}">다시 활성화</button>`:""}</div>`).join(""):`<div class="dim small">기록이 없습니다.</div>`}</div>
   <div class="foot">
-    <div>연결 계정 · ${esc(S.user?.email||"")}</div>
+    <div>연결 계정 · ${esc(who())} ${S.me?"("+esc(S.me.role)+")":""} · 앱 버전 ${VERSION}</div>
     <div class="brow" style="margin-top:10px"><button class="btn sm" id="bk">백업 복사</button><button class="btn sm" id="seed">샘플 환자 추가</button><button class="btn sm ghost" id="lo">로그아웃</button></div>
     <p class="small">샘플 환자는 모두 가상의 인물입니다. 실제 환자 개인정보·의료자료는 보안 설정을 갖춘 정식 버전에서만 입력하세요.</p>
   </div>`;
@@ -665,7 +676,7 @@ function bindMain(){
     document.querySelectorAll("[data-h]").forEach(b=>b.onclick=()=>{S.hist=b.dataset.h;render()});
     document.querySelectorAll("[data-react]").forEach(b=>b.onclick=async()=>{const r=byId(b.dataset.react);if(await patch(r,{status:"active",canceled_at:null},"다시 활성화")){toast("다시 활성화되었습니다.");render()}});
     $("#bk").onclick=async()=>{const txt=JSON.stringify(S.rows,null,1);try{await navigator.clipboard.writeText(txt);toast("백업이 복사되었습니다.")}catch(e){toast("복사할 수 없습니다.")}};
-    $("#lo").onclick=async()=>{await sb.auth.signOut();S.user=null;S.rows=[];$("#app").hidden=true;$("#auth").hidden=false};
+    $("#lo").onclick=async()=>{await sb.auth.signOut();S.user=null;S.me=null;S.rows=[];$("#app").hidden=true;$("#auth").hidden=false;$("#aMsg").textContent=""};
   }
   const sd=$("#seed");if(sd)sd.onclick=seed;
 }
@@ -693,6 +704,7 @@ async function seed(){
   await load();S.tab="home";S.group="all";toast("샘플 환자 4명이 추가되었습니다.");render();
 }
 
+$("#aVer").textContent=VERSION;
 boot();
 </script>
 </body>
