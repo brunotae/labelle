@@ -279,7 +279,7 @@ const SB_URL="https://agdqlnaedojcgivwluty.supabase.co";
 const SB_KEY="sb_publishable_PKGxxrfpduzI7xY1_DWQyQ_cnJA9isP";
 const T="labelle_patients";
 const LOGIN_DOMAIN="@labelle.app";
-const VERSION="v1.4";
+const VERSION="v1.5";
 const sb=window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:true,autoRefreshToken:true,storageKey:"labelle-auth"}});
 
 /* ---------- constants ---------- */
@@ -403,7 +403,7 @@ async function load(){
 async function patch(r,p,logText){
   if(logText){p.log=[{at:nowStamp(),text:logText+(S.user?" · "+who():"")},...(r.log||[])].slice(0,200)}
   const {error}=await sb.from(T).update(p).eq("id",r.id);
-  if(error){toast("저장 실패: "+error.message);return false}
+  if(error){toast(/files/.test(error.message||"")?"Supabase에 labelle_files.sql을 먼저 실행해 주세요.":"저장 실패: "+error.message);return false}
   Object.assign(r,p);return true;
 }
 document.addEventListener("visibilitychange",async()=>{if(!document.hidden&&S.user&&!busy()){await load();render()}});
@@ -611,7 +611,9 @@ function evFormHTML(e){
   </div>`;
 }
 function filesHTML(r){
-  const fs=(r.files||[]).slice().sort((a,b)=>(b.date||"").localeCompare(a.date||""));
+  const real=(r.files||[]).length>0;
+  if(!real){S.preview=S.preview||{};S.preview[r.id]=S.preview[r.id]||sampleFiles(r,true)}
+  const fs=(real?r.files:S.preview[r.id]).slice().sort((a,b)=>(b.date||"").localeCompare(a.date||""));
   const grp=S.fGroup||"전체";
   const list=grp==="전체"?fs:fs.filter(f=>FGRP[grp].includes(f.kind));
   const have=new Set(fs.map(f=>f.kind));
@@ -630,6 +632,7 @@ function filesHTML(r){
   return `<div class="card">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><div class="h3" style="margin:0">의료자료 · 사진·검사·서류</div>${S.fAdd?"":`<button class="btn sm" id="fNew">+ 자료 추가</button>`}</div>
     ${S.fAdd?fFormHTML():""}
+    ${real?"":`<div class="warnbox" style="margin-top:10px">아직 등록된 자료가 없어 <b>예시 화면</b>을 보여드립니다. <button class="btn sm" id="fSeed" style="margin-left:6px">이 예시를 저장</button></div>`}
     <div class="h3" style="margin-top:12px">필수 서류</div>
     <div class="req">${FREQ.map(k=>have.has(k)?`<span class="rq ok">✓ ${k}</span>`:`<span class="rq miss">${k} 미제출 <button data-req="${k}">요청</button></span>`).join("")}</div>
     ${cmp}
@@ -639,7 +642,7 @@ function filesHTML(r){
       <div class="fb"><div class="ft">${esc(f.title||f.kind)}</div><div class="dim">${esc(f.kind)} · ${fD(f.date)}</div>
       <span class="share ${f.shared?"on":""}">${f.shared?"병원 공유 중":"병원 비공개"}</span>
       <div class="fr"><button class="btn" data-fview="${f.id}">열람</button><button class="btn" data-fshare="${f.id}">${f.shared?"해제":"공유"}</button></div></div></div>`).join("")}</div>`
-      :`<div class="dim small" style="padding:6px 0">등록된 자료가 없습니다.${fs.length?"":` <button class="btn sm" id="fSeed" style="margin-left:6px">샘플 자료 넣기</button>`}</div>`}
+      :`<div class="dim small" style="padding:6px 0">이 분류의 자료가 없습니다.</div>`}
     <div class="demo-note">데모 버전: 화면 구성 확인용 가상 이미지입니다. 실제 사진·의료영상 업로드는 암호화·접근기록을 갖춘 정식 버전에서 제공됩니다.</div>
   </div>`;
 }
@@ -652,10 +655,10 @@ function fFormHTML(){
    <div class="f"><label class="lb">파일</label><div class="dim small">데모에서는 실제 파일 대신 가상 이미지가 저장됩니다.</div></div>
    <div class="brow end"><button class="btn ghost sm" id="fiClose">닫기</button><button class="btn pri sm" id="fiSave">저장</button></div></div>`;
 }
-function sampleFiles(r){
+function sampleFiles(r,preview){
   const base=r.surgery_date||today(),F=(kind,title,date,shared)=>({id:uid(),kind,title,date,shared:!!shared,note:""});
   const out=[F("수술 전 사진","정면 사진",addDays(base,-20),true),F("수술 전 사진","측면 사진",addDays(base,-20),true),F("CT·MRI·X-ray","안면 CT",addDays(base,-15),true),F("혈액검사","혈액검사 결과지",addDays(base,-10),true),F("여권·비자","여권 사본",addDays(base,-30))];
-  if(r.surgery_date&&addDays(base,7)<=today()){out.push(F("수술 후 사진","수술 후 7일",addDays(base,7),true));if(addMonths(base,1)<=today())out.push(F("경과사진","1개월 경과",addMonths(base,1),true))}
+  if((r.surgery_date&&addDays(base,7)<=today())||preview){out.push(F("수술 후 사진","수술 후 7일",addDays(base,7),true));if(addMonths(base,1)<=today())out.push(F("경과사진","1개월 경과",addMonths(base,1),true))}
   return out;
 }
 function openLB(r,f){
@@ -674,12 +677,13 @@ function bindFiles(r){
   const cr=$("#cmpR");if(cr)cr.oninput=()=>{S.cmpX=Number(cr.value);$("#cmp").style.setProperty("--x",cr.value+"%")};
   document.querySelectorAll("[data-req]").forEach(b=>b.onclick=async()=>{const k=b.dataset.req;
     if(await patch(r,{},`서류 요청 발송: ${k} (${r.language||"환자 언어"})`)){toast(`${k} 제출 요청을 보냈습니다 (데모).`);render()}});
-  document.querySelectorAll("[data-fview]").forEach(b=>b.onclick=async()=>{const f=r.files.find(x=>x.id===b.dataset.fview);
-    await patch(r,{},`자료 열람: ${f.title||f.kind}`);openLB(r,f)});
-  document.querySelectorAll("[data-fshare]").forEach(b=>b.onclick=async()=>{const id=b.dataset.fshare;const f=r.files.find(x=>x.id===id);
+  const real=(r.files||[]).length>0,pool=real?r.files:(S.preview?.[r.id]||[]);
+  document.querySelectorAll("[data-fview]").forEach(b=>b.onclick=async()=>{const f=pool.find(x=>x.id===b.dataset.fview);
+    if(real)await patch(r,{},`자료 열람: ${f.title||f.kind}`);openLB(r,f)});
+  document.querySelectorAll("[data-fshare]").forEach(b=>b.onclick=async()=>{if(!real){toast("먼저 ‘이 예시를 저장’을 누르세요.");return}const id=b.dataset.fshare;const f=r.files.find(x=>x.id===id);
     const files=r.files.map(x=>x.id===id?{...x,shared:!x.shared}:x);
     if(await patch(r,{files},`${f.shared?"병원 공유 해제":"병원 공유"}: ${f.title||f.kind} → ${r.hospital||"병원"}`))render()});
-  const sd=$("#fSeed");if(sd)sd.onclick=async()=>{if(await patch(r,{files:sampleFiles(r)},"샘플 의료자료 등록")){toast("샘플 자료가 추가되었습니다.");render()}};
+  const sd=$("#fSeed");if(sd)sd.onclick=async()=>{const files=(S.preview?.[r.id]||sampleFiles(r,true));if(await patch(r,{files},"샘플 의료자료 등록")){toast("예시 자료가 저장되었습니다.");render()}};
   if(S.fAdd){
     bindForm(r);
     $("#fiClose").onclick=()=>{S.fAdd=false;render()};
