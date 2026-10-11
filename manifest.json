@@ -1,15 +1,15 @@
 {
-  "name": "LA BELLE 환자 여정",
+  "name": "LA BELLE LB",
   "short_name": "LA BELLE",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#09060A",
-  "theme_color": "#09060A",
+  "background_color": "#F4EFE6",
+  "theme_color": "#F4EFE6",
   "lang": "ko",
   "icons": [
-    { "src": "icon-v2.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
-    { "src": "icon-v2.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
-    { "src": "apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+    { "src": "icon-v3.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-v3.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "apple-touch-icon-v3.png", "sizes": "180x180", "type": "image/png" }
   ]
 }
