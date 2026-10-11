@@ -887,6 +887,18 @@ a.btn{text-decoration:none;display:inline-flex;align-items:center}
 .ptev span{color:var(--muted);min-width:120px}
 .ptev.done{opacity:.55}
 @media (max-width:760px){.ptkpi{grid-template-columns:repeat(2,minmax(0,1fr))}.ptag{order:5;margin-left:0;text-align:left;flex:1 1 100%}.ptkpi b{font-size:22px}}
+/* hero v2 — photo */
+.hero3.hv2{display:block;background:#F6F0E6}
+.hv2 .pic{position:absolute;inset:0;background:url(img/hero2.jpg) 34% 38%/cover no-repeat}
+.hv2 .pic::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(250,246,238,.96) 0%,rgba(250,246,238,.86) 30%,rgba(250,246,238,.35) 46%,rgba(250,246,238,0) 60%)}
+.hv2 .tx{position:relative;z-index:2;max-width:46%}
+.hv2 h1{text-shadow:0 1px 18px rgba(250,246,238,.8)}
+@media (max-width:760px){
+  .hero3.hv2{display:flex;flex-direction:column}
+  .hv2 .tx{max-width:none;order:1}
+  .hv2 .pic{position:relative;order:2;height:190px;margin:16px 0 0;background-image:url(img/hero2-m.jpg);background-position:62% 50%}
+  .hv2 .pic::after{background:linear-gradient(180deg,rgba(246,240,230,.9) 0%,rgba(246,240,230,0) 30%)}
+}
 </style>
 </head>
 <body>
@@ -943,7 +955,7 @@ const SB_URL="https://agdqlnaedojcgivwluty.supabase.co";
 const SB_KEY="sb_publishable_PKGxxrfpduzI7xY1_DWQyQ_cnJA9isP";
 const T="labelle_patients";
 const LOGIN_DOMAIN="@labelle.app";
-const VERSION="v3.2.1";
+const VERSION="v3.2.2";
 const sb=window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:true,autoRefreshToken:true,storageKey:"labelle-auth"}});
 
 /* ---------- constants ---------- */
@@ -3517,6 +3529,13 @@ async function showApp(){
   try{if(sessionStorage.getItem("lb-idle")){sessionStorage.removeItem("lb-idle")}}catch(e){}
 }
 try{if(sessionStorage.getItem("lb-idle")){setTimeout(()=>{const m=$("#aMsg");if(m)m.textContent="오래 사용하지 않아 자동 로그아웃되었습니다."},50);sessionStorage.removeItem("lb-idle")}}catch(e){}
+
+/* ---------- dashboard hero v2 (photo) ---------- */
+function heroHTML(){
+  return `<div class="hero3 hv2"><div class="pic" role="img" aria-label="LA BELLE LB"></div>
+   <div class="tx"><div class="ey">KOREAN HERITAGE<br>GLOBAL WELLNESS</div><h1>REAL STORY,<br>REAL CHANGE.</h1><div class="rule"></div>
+    <p data-hero>아름다움은 변화가 아니라<br>나다운 삶을 되찾는 여정입니다.</p></div></div>`;
+}
 
 /* ---------- partner portal (agency accounts) ---------- */
 const PT={tab:"list",rows:[],settles:[],q:"",open:null,busy:false,done:null,f:"all"};
