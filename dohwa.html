@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>청담도화 · CHEONGDAM DOHWA</title>
+<meta name="description" content="청담도화 — 한국의 뷰티 · 의료 · 웰니스 여정. by LA BELLE LB">
+<meta name="theme-color" content="#F7F3EC">
+<link rel="icon" href="img/dh/icon.svg" type="image/svg+xml">
+<link rel="icon" href="img/dh/icon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="img/dh/icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@400;500;600&family=Noto+Serif:wght@400;500&family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--iv:#F7F3EC;--paper:#FFFDF9;--bg2:#F1EBE1;--bu:#6B1E33;--bu2:#55152A;--ink:#2A2421;--mu:#857A71;--line:#E5DCD0;--gold:#B39B74;
+ --serif:'Noto Serif KR','Noto Serif',serif;--sans:'Noto Sans KR','Noto Sans',system-ui,sans-serif;--w:1120px}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--iv);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit}
+img{display:block;max-width:100%}
+.wrap{max-width:var(--w);margin:0 auto;padding:0 20px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+/* header */
+header{position:sticky;top:0;z-index:20;background:rgba(247,243,236,.94);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.hd{display:flex;align-items:center;gap:20px;height:64px}
+.logo{display:flex;align-items:center;gap:9px;flex:none}
+.logo svg{width:28px;height:28px}
+.logo b{font-family:var(--serif);font-weight:500;font-size:22px;letter-spacing:.06em;line-height:1}
+.logo small{display:block;font-size:8.5px;letter-spacing:.28em;color:var(--mu);margin-top:3px;font-weight:500}
+nav.mn{display:flex;gap:4px;margin:0 auto}
+nav.mn a{padding:8px 14px;font-size:14px;color:#4A403A;border-radius:999px}
+nav.mn a:hover,nav.mn a.on{color:var(--bu)}
+nav.mn a.on{font-weight:700}
+.hr{display:flex;align-items:center;gap:10px;flex:none}
+.lang{position:relative}
+.lang select{appearance:none;-webkit-appearance:none;border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:7px 30px 7px 32px;font-size:13px;cursor:pointer}
+.lang svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:15px;height:15px;pointer-events:none}
+.lang:after{content:"";position:absolute;right:13px;top:45%;width:6px;height:6px;border-right:1.5px solid var(--mu);border-bottom:1.5px solid var(--mu);transform:translateY(-50%) rotate(45deg);pointer-events:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 22px;border-radius:2px;border:1px solid var(--bu);background:var(--bu);color:#fff;font-size:14px;font-weight:500;letter-spacing:.02em;cursor:pointer;white-space:nowrap}
+.btn:hover{background:var(--bu2)}
+.btn.ghost{background:transparent;color:var(--bu)}
+.btn.sm{min-height:36px;padding:0 14px;font-size:13px}
+.arr{display:inline-block;width:14px;height:10px}
+/* hero */
+.hero{position:relative;height:clamp(360px,34vw,440px);overflow:hidden;background:#EFE6DA}
+.hero picture,.hero>picture img{position:absolute;inset:0;width:100%;height:100%}
+.hero>picture img{object-fit:cover;object-position:75% 30%}
+.hero:before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(247,243,236,.96) 0%,rgba(247,243,236,.86) 30%,rgba(247,243,236,0) 56%)}
+.htx{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:center;max-width:var(--w);margin:0 auto;padding:0 20px}
+.htx h1{margin:0;font-family:var(--serif);font-weight:400;font-size:clamp(34px,4.2vw,50px);line-height:1.22;letter-spacing:-.01em;max-width:520px}
+.htx .sub{margin:14px 0 22px;font-size:16px;color:#4A403A;letter-spacing:.04em}
+.srch{display:flex;max-width:500px;background:var(--paper);border:1px solid #D6CABA;box-shadow:0 8px 30px rgba(60,40,20,.06)}
+.srch label{flex:1;display:flex;align-items:center;gap:10px;padding:0 14px}
+.srch input{flex:1;min-width:0;border:0;background:transparent;font:inherit;font-size:14px;height:48px;outline:none;color:var(--ink)}
+.srch .btn{min-height:48px;border-radius:0}
+.tags{margin-top:20px;font-size:10.5px;letter-spacing:.3em;color:var(--mu)}
+.ai{position:absolute;right:10px;bottom:10px;z-index:3;font-size:10px;line-height:1;padding:4px 8px;border-radius:999px;background:rgba(30,24,16,.42);color:#fff;letter-spacing:.02em}
+/* categories */
+.cats{display:grid;grid-template-columns:repeat(6,1fr);padding:30px 0 6px}
+.cat{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 6px;background:none;border:0;border-left:1px solid var(--line);cursor:pointer;text-align:center}
+.cat:first-child{border-left:0}
+.cat svg{width:48px;height:40px;stroke:var(--bu);stroke-width:1.25;fill:none;stroke-linecap:round;stroke-linejoin:round;margin-bottom:6px;transition:transform .2s}
+.cat:hover svg{transform:translateY(-2px)}
+.cat b{font-weight:500;font-size:14px}
+.cat span{font-size:12px;color:var(--mu)}
+/* sections */
+.sec{padding:34px 0 8px}
+.sh{display:flex;align-items:center;gap:18px;margin-bottom:18px}
+.sh h2{margin:0;font-family:var(--serif);font-weight:500;font-size:26px;letter-spacing:.01em;white-space:nowrap}
+.sh i{flex:1;height:1px;background:#CDBFAE}
+.sh a{font-size:13px;color:var(--bu);white-space:nowrap;display:inline-flex;align-items:center;gap:6px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{display:block;align-self:start;background:none;border:0;padding:0;text-align:left;cursor:pointer;width:100%}
+.ph{position:relative;overflow:hidden;background:var(--bg2)}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.card:hover .ph img{transform:scale(1.03)}
+.r1 .ph{aspect-ratio:220/170}.r2 .ph{aspect-ratio:297/180}.r3 .ph{aspect-ratio:220/120}
+.ct{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:12px 2px 0}
+.ct b{display:block;font-family:var(--serif);font-weight:500;font-size:18px;margin-bottom:3px}
+.ct span{display:block;font-size:13px;color:var(--mu);line-height:1.55}
+.ct .arr{margin-top:8px;flex:none;color:#5A4E46}
+.cap{font-size:12.5px;color:#5A4E46;text-align:center;padding-top:8px}
+.note{font-size:12px;color:var(--mu);margin:12px 0 0}
+/* consult banner */
+.cb{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:20px;margin:40px 0 10px;min-height:120px;padding:20px 40px 20px 34%;background:#F1ECE4;overflow:hidden}
+.cb img{position:absolute;left:0;top:0;height:100%;width:34%;object-fit:cover;-webkit-mask-image:linear-gradient(90deg,#000 70%,transparent);mask-image:linear-gradient(90deg,#000 70%,transparent)}
+.cb h3{margin:0 0 4px;font-family:var(--serif);font-weight:500;font-size:24px}
+.cb p{margin:0;font-size:14px;color:#5A4E46}
+.cb.right{padding:26px 34% 26px 50px}
+.cb.right img{left:auto;right:0;-webkit-mask-image:linear-gradient(270deg,#000 70%,transparent);mask-image:linear-gradient(270deg,#000 70%,transparent)}
+.cb.right .btn{border-radius:999px}
+/* programs page */
+.ptop{text-align:center;padding:46px 0 10px}
+.ptop h1{margin:0;font-family:var(--serif);font-weight:400;font-size:44px;letter-spacing:.02em}
+.ptop p{margin:8px 0 0;font-size:16px;color:#5A4E46}
+.tabs{display:flex;justify-content:center;flex-wrap:wrap;gap:4px;margin:26px 0 8px}
+.tabs button{border:0;background:none;padding:6px 20px;font-size:14px;cursor:pointer;color:#4A403A;position:relative;border-radius:999px}
+.tabs button+button:before{content:"";position:absolute;left:-3px;top:25%;height:50%;width:1px;background:#CDBFAE}
+.tabs button.on{background:var(--bu);color:#fff}
+.tabs button.on:before,.tabs button.on+button:before{display:none}
+.chipq{display:flex;justify-content:center;margin:6px 0 14px}
+.chipq span{display:inline-flex;align-items:center;gap:8px;font-size:13px;padding:5px 8px 5px 14px;border:1px solid var(--line);border-radius:999px;background:var(--paper)}
+.chipq button{border:0;background:var(--bg2);width:22px;height:22px;border-radius:99px;cursor:pointer;line-height:1}
+.pk{background:var(--paper);border:1px solid var(--line);display:flex;flex-direction:column;text-align:left;cursor:pointer;padding:0;width:100%}
+.pk .ph{aspect-ratio:228/250}
+.pkb{padding:16px 18px 18px;display:flex;flex-direction:column;flex:1}
+.pkb .dd{font-size:11.5px;color:var(--gold);letter-spacing:.06em}
+.pkb b{font-family:var(--serif);font-weight:500;font-size:20px;line-height:1.3;margin:2px 0 6px}
+.pkb .ds{font-size:12.5px;color:var(--mu);line-height:1.55;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:39px}
+.pkb hr{width:36px;border:0;border-top:1px solid #CDBFAE;margin:12px 0}
+.pkf{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:auto}
+.pr{font-size:13px}.pr small{color:var(--mu);margin-right:3px}.pr strong{font-weight:700}
+.off{font-size:11px;color:var(--bu);border:1px solid #E3CDD2;padding:1px 7px;border-radius:999px}
+.more{font-size:13px;display:inline-flex;align-items:center;gap:6px;margin-top:10px}
+.empty{text-align:center;padding:40px 10px;color:var(--mu)}
+/* modal */
+.mdl{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(42,30,24,.45)}
+.mdl[hidden]{display:none}
+.mbox{position:relative;background:var(--paper);width:min(760px,100%);max-height:calc(100vh - 40px);overflow:auto;display:grid;grid-template-columns:300px minmax(0,1fr)}
+.mbox.wide{grid-template-columns:minmax(0,1fr)}
+.mbox .ph{aspect-ratio:auto;min-height:340px}
+.mtx{padding:28px 28px 24px}
+.mtx .dd{font-size:12px;color:var(--gold);letter-spacing:.06em}
+.mtx h3{margin:2px 0 10px;font-family:var(--serif);font-weight:500;font-size:26px}
+.mtx p{margin:0 0 12px;font-size:14px;line-height:1.75}
+.mtx ul,.mtx ol{margin:0 0 14px;padding-left:20px;font-size:14px;line-height:1.8}
+.mx{position:absolute;right:10px;top:10px;z-index:2;width:36px;height:36px;border-radius:99px;border:0;background:rgba(255,255,255,.9);cursor:pointer;font-size:18px}
+.chk{list-style:none;padding:0!important}
+.chk label{display:flex;gap:10px;align-items:flex-start;padding:6px 0;border-bottom:1px dashed var(--line);cursor:pointer}
+.chk input{accent-color:var(--bu);width:17px;height:17px;margin-top:4px;flex:none}
+.small{font-size:12px;color:var(--mu)}
+/* footer */
+footer{margin-top:44px;border-top:1px solid var(--line);padding:22px 0 34px}
+.ft{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap}
+.ft .logo b{font-size:18px}
+.ft .by{font-size:12px;color:var(--mu);margin-left:6px}
+.fl{display:flex;gap:16px;font-size:12px;color:#5A4E46;flex-wrap:wrap}
+.fl a{cursor:pointer}
+.disc{font-size:11.5px;color:var(--mu);margin:14px 0 0;line-height:1.7}
+.mcta{display:none}
+@media (max-width:980px){
+ nav.mn{display:none}.g4{grid-template-columns:repeat(2,1fr)}.cats{grid-template-columns:repeat(3,1fr);row-gap:8px}.cat:nth-child(4){border-left:0}
+}
+@media (max-width:720px){
+ body{font-size:14px}
+ .hd{height:58px;gap:10px}.logo b{font-size:19px}.logo svg{width:24px;height:24px}.hr{margin-left:auto}
+ .lang select{padding:6px 26px 6px 28px;font-size:12px}.lang svg{left:9px}
+ .hero{height:auto;background:none}
+ .hero:before{display:none}
+ .hero>picture{position:relative;display:block;height:auto}
+ .hero>picture img{position:relative;height:250px;object-position:80% 25%}
+ .htx{height:auto;padding:22px 20px 6px}
+ .htx h1{font-size:31px}.htx .sub{margin:10px 0 16px;font-size:14.5px}
+ .srch{flex-direction:column;border:0;background:none;box-shadow:none;gap:8px}
+ .srch label{background:var(--paper);border:1px solid #D6CABA}
+ .tags{margin-top:14px;letter-spacing:.22em}
+ .hero .ai{top:212px;bottom:auto}
+ .sec{padding:26px 0 4px}.sh{margin-bottom:12px;gap:10px}.sh h2{font-size:21px}
+ .g3{grid-template-columns:minmax(0,1fr);gap:18px}.g3.r2{grid-template-columns:minmax(0,1fr)}
+ .g4{gap:12px}.ct b{font-size:16px}.ct span{font-size:12px}
+ .cb,.cb.right{grid-template-columns:minmax(0,1fr);padding:20px;min-height:0;text-align:left}
+ .cb img,.cb.right img{position:relative;width:100%;height:110px;-webkit-mask-image:none;mask-image:none;margin:-20px -20px 4px;width:calc(100% + 40px);max-width:none}
+ .cb h3{font-size:20px}
+ .ptop{padding:30px 0 4px}.ptop h1{font-size:32px}.ptop p{font-size:14px}
+ .tabs button{padding:6px 14px}
+ .pkb{padding:12px 12px 14px}.pkb b{font-size:16px}.pkb .ds{font-size:11.5px;min-height:35px}.pkf{flex-wrap:wrap}
+ .mbox{grid-template-columns:minmax(0,1fr)}.mbox .ph{aspect-ratio:4/3;min-height:0}.mtx{padding:20px}
+ .mcta{display:flex;position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:30;box-shadow:0 10px 30px rgba(60,20,30,.25)}
+ footer{padding-bottom:90px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header><div class="wrap hd">
+ <a class="logo" href="#/" aria-label="청담도화 홈"><span id="lg1"></span><span><b>청담도화</b><small>CHEONGDAM DOHWA</small></span></a>
+ <nav class="mn" id="nav"></nav>
+ <div class="hr"><div class="lang"><svg viewBox="0 0 24 24" fill="none" stroke="#6B5E55" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>
+  <select id="lang" aria-label="Language"><option value="mn">Монгол</option><option value="ko">한국어</option><option value="en">English</option><option value="zh">中文</option><option value="pt">Português</option></select></div></div>
+</div></header>
+<main id="main"></main>
+<a class="btn mcta" id="mcta" href="#"></a>
+<footer><div class="wrap">
+ <div class="ft"><div><a class="logo" href="#/"><span id="lg2"></span><b>청담도화</b><span class="by">· by LA BELLE LB</span></a></div>
+  <div class="fl" id="fl"></div></div>
+ <p class="disc" id="disc"></p>
+</div></footer>
+<div class="mdl" id="mdl" hidden><div class="mbox" id="mbox" role="dialog" aria-modal="true"></div></div>
+<script>
+"use strict";
+/* ---------- brand ---------- */
+function flower(col,center){let s='<svg viewBox="0 0 100 100" aria-hidden="true">';
+ for(let i=0;i<5;i++)s+=`<ellipse cx="50" cy="25.6" rx="17.76" ry="20.16" fill="${col}" stroke="${center}" stroke-width="3.2" transform="rotate(${i*72} 50 52)"/>`;
+ let p=[];for(let i=0;i<10;i++){const a=(-90+i*36)*Math.PI/180,r=i%2?5.85:13;p.push((50+r*Math.cos(a)).toFixed(2)+","+(52+r*Math.sin(a)).toFixed(2))}
+ return s+`<polygon points="${p.join(" ")}" fill="${center}"/><circle cx="50" cy="52" r="3" fill="${col}"/></svg>`}
+document.getElementById("lg1").innerHTML=flower("#6B1E33","#F7F3EC");document.getElementById("lg2").innerHTML=flower("#6B1E33","#F7F3EC");
+const ARR='<svg class="arr" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M0 5h15M11 1l4 4-4 4"/></svg>';
+const ICON={
+ face:'<path d="M17 9c0-5 3-7 7-7s7 2 7 7c0 3-.6 5.5-2 7.5-1.3 1.8-3 3-5 3s-3.7-1.2-5-3C17.6 14.5 17 12 17 9z"/><path d="M19.5 18.5c-.3 3-1.5 5-4.5 6.5M28.5 18.5c.3 3 1.5 5 4.5 6.5M24 12v3M21.5 9.5h1M25.5 9.5h1"/>',
+ skin:'<path d="M24 4c5 7 9 12 9 17a9 9 0 0 1-18 0c0-5 4-10 9-17z"/><path d="M19.5 22.5a4.5 4.5 0 0 0 3 4"/>',
+ dental:'<path d="M14 9c0-3.5 3-5 6-4l4 1.4L28 5c3-1 6 .5 6 4 0 4-1.5 6-2 10-.6 4.5-1.3 9-3.5 9-1.8 0-2.2-3-3-6.5-.4-1.5-.8-2.2-1.5-2.2s-1.1.7-1.5 2.2C21.7 25 21.3 28 19.5 28 17.3 28 16.6 23.5 16 19c-.5-4-2-6-2-10z"/>',
+ wellness:'<path d="M24 31S9 22.5 9 13.5A7.5 7.5 0 0 1 24 10a7.5 7.5 0 0 1 15 3.5C39 22.5 24 31 24 31z"/>',
+ hair:'<path d="M10 22c8 0 12-3 15-9 1.5-3 3-6 6-8"/><path d="M24 15c-.5 5 .5 10 4 15M20 22v10"/><path d="M8 22h30"/>',
+ spa:'<ellipse cx="24" cy="27" rx="11" ry="4"/><ellipse cx="24" cy="18.5" rx="8" ry="3.5"/><ellipse cx="24" cy="10.5" rx="5" ry="3"/>'
+};
+const ic=k=>`<svg viewBox="0 0 48 36" aria-hidden="true">${ICON[k]}</svg>`;
+/* ---------- text ---------- */
+const T={
+ko:{nav:["프로그램","뷰티 가이드","의료기관","상담하기"],h1:"당신의 매력이<br>피어나는 곳.",sub:"한국의 뷰티 · 의료 · 웰니스 여정",ph:"어떤 여정을 꿈꾸시나요?",start:"상담 시작하기",ai:"연출 이미지",
+ cats:[["페이스 케어","더 조화로운 나"],["피부 케어","건강한 아름다움"],["치아 케어","자신 있는 미소"],["바디 & 웰니스","균형 있는 라이프"],["헤어 케어","건강한 변화"],["스파 & 힐링","온전한 휴식"]],
+ journey:"도화의 여정",allP:"모든 프로그램 보기",themes:[["서울 글로우","한국의 혁신적인 스킨케어와 아름다움을 경험하세요."],["나만의 컬러","한국에서 만나는 나만의 아름다운 컬러."],["뷰티 & 웰니스","아름다움과 건강이 함께하는 프리미엄 웰니스 여정."],["서울에서의 하루","뷰티를 넘어, 특별한 서울을 만나보세요."]],
+ guide:"당신을 위한 뷰티 가이드",allG:"모든 가이드 보기",clinics:"함께하는 의료기관",clinicNote:"제휴 의료기관은 상담 시 안내해 드립니다. 사진은 공간 연출 이미지이며 실제 제휴 병원 사진이 아닙니다.",clinicCap:"공간 연출 이미지",
+ cbT:"나에게 맞는 여정, 함께 찾아요.",cbP:"전문 컨설턴트가 당신만의 특별한 여정을 도와드립니다.",consult:"상담하기",
+ pTitle:"도화의 여정",pSub:"당신의 취향에 맞춘 한국 뷰티 · 웰니스 경험",tabs:{all:"전체",skin:"피부",beauty:"뷰티",medical:"의료",wellness:"웰니스"},
+ from:"부터",day:"일",more:"자세히 보기",imgNote:"이미지는 프로그램 이해를 위한 연출 이미지입니다.",priceNote:"표시된 가격은 최저가이며, 최종 견적은 상담 후 정해집니다. 숙소와 항공권은 포함되지 않습니다.",
+ pbT:"나에게 맞는 프로그램이 궁금하다면",search:"검색",clear:"지우기",none:"찾는 프로그램이 없나요? 상담으로 알려주시면 맞춤 일정을 안내해 드립니다.",
+ incl:"구성",ask:"이 프로그램 상담하기",close:"닫기",feat:{face:"페이스 케어",dental:"치아 케어",hair:"헤어 케어",spa:"스파 & 힐링"},
+ ft:["이용안내","개인정보처리방침","문의하기"],disc:"청담도화는 주식회사 라벨르엘비(LA BELLE LB)가 운영하는 의료관광 서비스입니다. 당사는 의료관광 유치업체이며 의료기관이 아닙니다. 치료 결정은 상담 후 의사가 내립니다.",
+ saved:"이 기기에 저장됩니다"},
+mn:{nav:["Хөтөлбөр","Гоо сайхны зөвлөмж","Эмнэлгүүд","Зөвлөгөө авах"],h1:"Таны гоо үзэсгэлэн<br>цэцэглэх газар.",sub:"Солонгосын гоо сайхан · эмнэлэг · велнесс аялал",ph:"Ямар аялал хүсэж байна вэ?",start:"Зөвлөгөө эхлүүлэх",ai:"Жишээ зураг",
+ cats:[["Нүүрний арчилгаа","Илүү зохицолтой би"],["Арьсны арчилгаа","Эрүүл гоо үзэсгэлэн"],["Шүдний арчилгаа","Итгэлтэй инээмсэглэл"],["Бие & велнесс","Тэнцвэртэй амьдрал"],["Үсний арчилгаа","Эрүүл өөрчлөлт"],["Спа & амралт","Бүрэн тайвшрал"]],
+ journey:"Дохвагийн аялал",allP:"Бүх хөтөлбөр",themes:[["Seoul Glow","Солонгосын шинэлэг арьс арчилгааг мэдрээрэй."],["Өөрийн өнгө","Солонгост өөрт тохирох өнгөө олоорой."],["Гоо сайхан & велнесс","Гоо сайхан, эрүүл мэнд хосолсон премиум аялал."],["Сөүлд нэг өдөр","Гоо сайхнаас гадна онцгой Сөүлтэй танилцаарай."]],
+ guide:"Танд зориулсан гоо сайхны зөвлөмж",allG:"Бүх зөвлөмж",clinics:"Хамтрагч эмнэлгүүд",clinicNote:"Хамтрагч эмнэлгүүдийг зөвлөгөөний үеэр танилцуулна. Зургууд нь орон зайн жишээ зураг бөгөөд бодит эмнэлгийн зураг биш.",clinicCap:"Орон зайн жишээ зураг",
+ cbT:"Танд тохирох аяллыг хамтдаа олъё.",cbP:"Мэргэжлийн зөвлөх таны онцгой аяллыг төлөвлөхөд туслана.",consult:"Зөвлөгөө авах",
+ pTitle:"Дохвагийн аялал",pSub:"Таны хүсэлд тохирсон Солонгосын гоо сайхан · велнесс",tabs:{all:"Бүгд",skin:"Арьс",beauty:"Гоо сайхан",medical:"Эмнэлэг",wellness:"Велнесс"},
+ from:"эхлэх үнэ",day:"өдөр",more:"Дэлгэрэнгүй",imgNote:"Зургууд нь хөтөлбөрийг ойлгоход зориулсан жишээ зураг юм.",priceNote:"Үнэ нь хамгийн бага үнэ бөгөөд эцсийн үнийг зөвлөгөөний дараа тогтооно. Буудал, нислэг ороогүй.",
+ pbT:"Танд аль хөтөлбөр тохирохыг мэдэхийг хүсвэл",search:"Хайх",clear:"Арилгах",none:"Хайсан хөтөлбөр олдсонгүй юу? Зөвлөгөөгөөр хэлбэл танд тохирох хуваарийг санал болгоно.",
+ incl:"Багтсан зүйлс",ask:"Энэ хөтөлбөрөөр зөвлөгөө авах",close:"Хаах",feat:{face:"Нүүрний арчилгаа",dental:"Шүдний арчилгаа",hair:"Үсний арчилгаа",spa:"Спа & амралт"},
+ ft:["Үйлчилгээний мэдээлэл","Хувийн мэдээллийн бодлого","Холбоо барих"],disc:"Cheongdam Dohwa нь LA BELLE LB Co., Ltd.-ийн эмнэлгийн аялал жуулчлалын үйлчилгээ юм. Бид эмнэлгийн аялал зохион байгуулагч бөгөөд эмнэлгийн байгууллага биш. Эмчилгээний шийдвэрийг зөвлөгөөний дараа эмч гаргана.",
+ saved:"Энэ төхөөрөмжид хадгалагдана"},
+en:{nav:["Programs","Beauty guide","Clinics","Consultation"],h1:"Where your<br>beauty blooms.",sub:"A Korean journey of beauty · medical · wellness",ph:"What journey are you dreaming of?",start:"Start consultation",ai:"Illustrative image",
+ cats:[["Face care","A more balanced you"],["Skin care","Healthy beauty"],["Dental care","A confident smile"],["Body & wellness","A balanced life"],["Hair care","Healthy change"],["Spa & healing","Complete rest"]],
+ journey:"The Dohwa journey",allP:"All programs",themes:[["Seoul Glow","Experience Korea's innovative skincare and beauty."],["Your colors","Find your own beautiful colors in Korea."],["Beauty & wellness","A premium wellness journey of beauty and health."],["A day in Seoul","Beyond beauty — discover a special Seoul."]],
+ guide:"Beauty guides for you",allG:"All guides",clinics:"Partner clinics",clinicNote:"Partner clinics are introduced during your consultation. Photos are illustrative interiors, not actual partner clinics.",clinicCap:"Illustrative interior",
+ cbT:"Let's find the right journey for you.",cbP:"An expert consultant will help plan your own special journey.",consult:"Consultation",
+ pTitle:"The Dohwa journey",pSub:"Korean beauty · wellness experiences tailored to you",tabs:{all:"All",skin:"Skin",beauty:"Beauty",medical:"Medical",wellness:"Wellness"},
+ from:"from",day:"days",more:"View details",imgNote:"Images are illustrative, to help explain each program.",priceNote:"Prices shown are starting prices; the final quote is set after consultation. Accommodation and flights are not included.",
+ pbT:"Not sure which program fits you?",search:"Search",clear:"Clear",none:"Can't find what you're looking for? Tell us in a consultation and we'll suggest a tailored plan.",
+ incl:"Includes",ask:"Ask about this program",close:"Close",feat:{face:"Face care",dental:"Dental care",hair:"Hair care",spa:"Spa & healing"},
+ ft:["About the service","Privacy policy","Contact"],disc:"Cheongdam Dohwa is a medical tourism service operated by LA BELLE LB Co., Ltd. We are a medical tourism agency, not a medical institution. Treatment decisions are made by a doctor after consultation.",
+ saved:"Saved on this device"},
+zh:{nav:["项目","美丽指南","合作医院","咨询"],h1:"让您的魅力<br>绽放之地。",sub:"韩国美容 · 医疗 · 康养之旅",ph:"您梦想怎样的旅程？",start:"开始咨询",ai:"示意图片",
+ cats:[["面部护理","更和谐的自己"],["皮肤护理","健康之美"],["牙齿护理","自信的笑容"],["身体与康养","平衡的生活"],["头发护理","健康的改变"],["水疗与疗愈","彻底的放松"]],
+ journey:"桃花之旅",allP:"查看全部项目",themes:[["首尔光彩","体验韩国创新护肤与美丽。"],["专属色彩","在韩国找到属于你的美丽色彩。"],["美容与康养","美丽与健康兼具的高端康养之旅。"],["首尔的一天","美容之外，遇见特别的首尔。"]],
+ guide:"为您准备的美丽指南",allG:"查看全部指南",clinics:"合作医疗机构",clinicNote:"合作医疗机构将在咨询时为您介绍。图片为空间示意图，并非实际合作医院照片。",clinicCap:"空间示意图",
+ cbT:"一起寻找适合您的旅程。",cbP:"专业顾问将帮助您规划专属的特别旅程。",consult:"咨询",
+ pTitle:"桃花之旅",pSub:"为您量身定制的韩国美容 · 康养体验",tabs:{all:"全部",skin:"皮肤",beauty:"美容",medical:"医疗",wellness:"康养"},
+ from:"起",day:"天",more:"查看详情",imgNote:"图片为帮助理解项目的示意图片。",priceNote:"所示价格为最低价，最终报价在咨询后确定。不含住宿和机票。",
+ pbT:"想知道哪个项目适合您？",search:"搜索",clear:"清除",none:"没有找到想要的项目？告诉顾问，我们为您推荐定制行程。",
+ incl:"包含内容",ask:"咨询此项目",close:"关闭",feat:{face:"面部护理",dental:"牙齿护理",hair:"头发护理",spa:"水疗与疗愈"},
+ ft:["服务说明","隐私政策","联系我们"],disc:"清潭桃花是 LA BELLE LB 株式会社运营的医疗旅游服务。本公司为医疗旅游招揽机构，并非医疗机构。治疗决定由医生在咨询后作出。",
+ saved:"保存在此设备上"},
+pt:{nav:["Programas","Guia de beleza","Clínicas","Consulta"],h1:"Onde a sua<br>beleza floresce.",sub:"Uma jornada coreana de beleza · medicina · bem-estar",ph:"Que jornada você sonha fazer?",start:"Iniciar consulta",ai:"Imagem ilustrativa",
+ cats:[["Cuidados faciais","Um eu mais harmonioso"],["Cuidados com a pele","Beleza saudável"],["Cuidados dentais","Um sorriso confiante"],["Corpo & bem-estar","Uma vida equilibrada"],["Cuidados capilares","Mudança saudável"],["Spa & relaxamento","Descanso completo"]],
+ journey:"A jornada Dohwa",allP:"Ver todos os programas",themes:[["Seoul Glow","Viva o skincare inovador e a beleza coreana."],["Suas cores","Descubra na Coreia as cores que valorizam você."],["Beleza & bem-estar","Uma jornada premium de beleza e saúde."],["Um dia em Seul","Além da beleza, descubra uma Seul especial."]],
+ guide:"Guias de beleza para você",allG:"Ver todos os guias",clinics:"Clínicas parceiras",clinicNote:"As clínicas parceiras são apresentadas na consulta. As fotos são ambientes ilustrativos, não fotos reais das clínicas parceiras.",clinicCap:"Ambiente ilustrativo",
+ cbT:"Vamos encontrar a jornada ideal para você.",cbP:"Um consultor especializado ajuda a planejar a sua jornada especial.",consult:"Consulta",
+ pTitle:"A jornada Dohwa",pSub:"Experiências coreanas de beleza · bem-estar sob medida",tabs:{all:"Todos",skin:"Pele",beauty:"Beleza",medical:"Médico",wellness:"Bem-estar"},
+ from:"a partir de",day:"dias",more:"Ver detalhes",imgNote:"As imagens são ilustrativas, para ajudar a entender cada programa.",priceNote:"Os preços são valores iniciais; o orçamento final é definido após a consulta. Hospedagem e passagens não incluídas.",
+ pbT:"Quer saber qual programa combina com você?",search:"Buscar",clear:"Limpar",none:"Não encontrou o que procura? Conte na consulta e sugerimos um roteiro sob medida.",
+ incl:"Inclui",ask:"Consultar sobre este programa",close:"Fechar",feat:{face:"Cuidados faciais",dental:"Cuidados dentais",hair:"Cuidados capilares",spa:"Spa & relaxamento"},
+ ft:["Sobre o serviço","Política de privacidade","Contato"],disc:"Cheongdam Dohwa é um serviço de turismo médico operado pela LA BELLE LB Co., Ltd. Somos uma agência de turismo médico, não uma instituição médica. As decisões de tratamento são tomadas pelo médico após a consulta.",
+ saved:"Salvo neste aparelho"}
+};
+/* ---------- packages (기존 확정 상품명·가격·기간 유지) ---------- */
+const PK=[
+ {id:"glow",img:"p-glow",d:3,krw:490000,off:8,cat:["skin","spa"],
+  n:{ko:"서울 글로우",mn:"Seoul Glow",en:"Seoul Glow",zh:"首尔光彩",pt:"Seoul Glow"},
+  t:{ko:"대표적인 한국 ‘유리 피부’ 여행: 피부과 스킨 부스터와 레이저, K-뷰티 페이셜, 편안한 헤드 스파.",mn:"Солонгосын алдарт «шилэн арьс» аялал: арьсны эмнэлгийн скин бустер, лазер, K-beauty нүүрний арчилгаа, тайвшруулах толгойн спа.",en:"The signature Korean ‘glass skin’ trip: dermatology skin boosters and laser, a K-beauty facial and a relaxing head spa.",zh:"经典韩国“玻璃肌”之旅：皮肤科水光与激光、K-beauty面部护理、放松头部水疗。",pt:"A clássica viagem da ‘pele de vidro’ coreana: skin booster e laser dermatológicos, facial K-beauty e head spa relaxante."}},
+ {id:"kbeauty",img:"p-color",d:2,krw:390000,off:9,cat:["beauty","spa"],
+  n:{ko:"첫 K-뷰티",mn:"Анхны K-beauty",en:"First K-Beauty",zh:"初体验K-Beauty",pt:"Primeira K-Beauty"},
+  t:{ko:"주사 없이 즐겁게: 퍼스널 컬러 진단, 사진 촬영을 곁들인 K-스타일 헤어 & 메이크업, 페이셜, 헤드 스파.",mn:"Тарилгагүй, хөгжилтэй: хувийн өнгөний оношилгоо, зураг авалттай K-style үс & будалт, нүүрний арчилгаа, толгойн спа.",en:"Fun and needle-free: personal colour analysis, K-style hair & makeup with a photo shoot, a facial and a head spa.",zh:"无需注射的轻松体验：个人色彩诊断、附拍摄的韩式发型与妆容、面部护理、头部水疗。",pt:"Divertido e sem agulhas: análise de coloração pessoal, cabelo e maquiagem K-style com ensaio fotográfico, facial e head spa."}},
+ {id:"eye",img:"p-eye",d:7,krw:1750000,off:7,cat:["medical","face"],
+  n:{ko:"아이 리프레시",mn:"Нүдний сэргэлт",en:"Eye Refresh",zh:"焕彩双眸",pt:"Eye Refresh"},
+  t:{ko:"성형외과 전문의의 쌍꺼풀 수술과 회복 기간 중 피부 관리.",mn:"Гоо сайхны мэс заслын эмчийн зовхины хагалгаа, сэргэх хугацааны арьс арчилгаа.",en:"Double-eyelid surgery by a board-certified plastic surgeon, with skin care during recovery.",zh:"由整形外科专科医生进行双眼皮手术，并在恢复期间提供皮肤护理。",pt:"Cirurgia de pálpebra dupla com cirurgião plástico especialista e cuidados com a pele durante a recuperação."}},
+ {id:"nose",img:"p-profile",d:10,krw:4250000,off:3,cat:["medical","face"],
+  n:{ko:"노즈 디자인",mn:"Хамрын загвар",en:"Nose Design",zh:"鼻型设计",pt:"Nose Design"},
+  t:{ko:"검증된 병원에서 3D 계획으로 진행하는 코 성형, 회복 기간 경과 확인, 마지막 날 스킨 부스터.",mn:"Баталгаат эмнэлэгт 3D төлөвлөгөөтэй хамрын хагалгаа, сэргэлтийн хяналт, сүүлийн өдөр скин бустер.",en:"Rhinoplasty planned in 3D at a verified clinic, recovery check-ups and a skin booster on the final day.",zh:"在认证医院以3D规划进行的鼻整形、恢复期复查，最后一天水光护理。",pt:"Rinoplastia planejada em 3D em clínica verificada, acompanhamento da recuperação e skin booster no último dia."}},
+ {id:"smile",img:"p-smile",d:5,krw:2450000,off:9,cat:["medical","dental"],
+  n:{ko:"스마일 메이크오버",mn:"Инээмсэглэлийн шинэчлэл",en:"Smile Makeover",zh:"微笑焕新",pt:"Smile Makeover"},
+  t:{ko:"더 밝고 고른 미소: 디지털 스마일 디자인, 라미네이트 4개, 전문 미백을 한 번의 여행으로.",mn:"Илүү гэгээлэг, жигд инээмсэглэл: дижитал инээмсэглэлийн загвар, 4 ламинат, мэргэжлийн цайруулалт нэг аялалд.",en:"A brighter, more even smile: digital smile design, 4 veneers and professional whitening in one trip.",zh:"更亮更整齐的笑容：数字微笑设计、4颗贴面与专业美白，一次旅程完成。",pt:"Um sorriso mais claro e uniforme: design digital do sorriso, 4 facetas e clareamento profissional em uma viagem."}},
+ {id:"lift",img:"p-lift",d:3,krw:2550000,off:9,cat:["skin","face"],
+  n:{ko:"리프트 & 리뉴",mn:"Lift & Renew",en:"Lift & Renew",zh:"提拉焕新",pt:"Lift & Renew"},
+  t:{ko:"더 탄탄한 턱선과 생기 있는 피부를 위한 비수술 리프팅: 울쎄라, 써마지, 스킨 부스터.",mn:"Илүү чийрэг эрүүний шугам, эрч хүчтэй арьсны мэс заслын бус лифтинг: Ultherapy, Thermage, скин бустер.",en:"Non-surgical lifting for a firmer jawline and livelier skin: Ultherapy, Thermage and skin boosters.",zh:"非手术提拉，打造紧致下颌线与焕活肌肤：超声刀、热玛吉、水光。",pt:"Lifting não cirúrgico para um contorno mais firme e pele revitalizada: Ultherapy, Thermage e skin boosters."}},
+ {id:"checkup",img:"p-well",d:2,krw:720000,off:8,cat:["wellness","medical","spa"],
+  n:{ko:"이그제큐티브 건강검진",mn:"Иж бүрэн эрүүл мэндийн үзлэг",en:"Executive Health Check-up",zh:"高端健康体检",pt:"Check-up Executivo"},
+  t:{ko:"서울 대형 검진센터에서 오전 한나절에 받는 종합 건강검진, 이어서 재충전을 위한 헤드 스파.",mn:"Сөүлийн томоохон үзлэгийн төвд нэг өглөөний иж бүрэн үзлэг, дараа нь сэргээх толгойн спа.",en:"A comprehensive check-up in one morning at a major Seoul health centre, followed by a recharging head spa.",zh:"在首尔大型体检中心用一个上午完成综合体检，随后享受恢复活力的头部水疗。",pt:"Check-up completo em uma manhã num grande centro de Seul, seguido de head spa revigorante."}},
+ {id:"bridal",img:"p-day",d:4,krw:590000,off:9,cat:["beauty","skin"],
+  n:{ko:"브라이덜 글로우",mn:"Bridal Glow",en:"Bridal Glow",zh:"新娘光彩",pt:"Bridal Glow"},
+  t:{ko:"결혼식 전 빛나는 피부: 스킨 부스터, 레이저, 약간의 보톡스, 페이셜, 전문 헤어 & 메이크업.",mn:"Хуримын өмнөх гэрэлтсэн арьс: скин бустер, лазер, бага зэргийн ботокс, нүүрний арчилгаа, мэргэжлийн үс & будалт.",en:"Glowing skin before the wedding: skin boosters, laser, a touch of Botox, a facial and professional hair & makeup.",zh:"婚礼前的光彩肌肤：水光、激光、少量肉毒、面部护理与专业发型妆容。",pt:"Pele radiante antes do casamento: skin booster, laser, um toque de Botox, facial e cabelo e maquiagem profissionais."}}
+];
+/* ---------- guides ---------- */
+const GD={
+ beauty:{img:"g-beauty",ko:["한국 뷰티 첫걸음","한국의 뷰티 트렌드와 시술, 이렇게 시작하세요.",[["원하는 변화를 정리해요","사진이 없어도 괜찮아요. 고민과 희망하는 날짜만 알려주세요."],["상담을 신청해요","담당 코디네이터가 내 언어로 연락드립니다."],["병원과 일정을 비교해요","엄선된 병원의 견적과 일정을 함께 확인합니다."],["방문과 시술","공항 픽업부터 통역·동행까지 준비합니다."],["귀국 후 사후관리","회복 경과를 함께 확인합니다."]]],
+  mn:["Солонгосын гоо сайхны эхний алхам","Солонгосын гоо сайхны чиг хандлага, процедурыг ингэж эхлээрэй.",[["Хүссэн өөрчлөлтөө тодорхойлох","Зураггүй ч болно. Санаа зовоосон зүйл, хүссэн огноогоо хэлээрэй."],["Зөвлөгөө хүсэх","Хариуцсан зохицуулагч таны хэлээр холбогдоно."],["Эмнэлэг, хуваарь харьцуулах","Шилдэг эмнэлгүүдийн үнэ, хуваарийг хамтдаа харна."],["Айлчлал ба процедур","Онгоцны буудлаас тосохоос орчуулга, дагалдах хүртэл бэлтгэнэ."],["Эх орондоо буцсаны дараах хяналт","Сэргэлтийн явцыг хамтдаа хянана."]]],
+  en:["First steps in K-beauty","How to start with Korean beauty trends and treatments.",[["Decide what you'd like to change","No photos needed. Just tell us your concerns and preferred dates."],["Request a consultation","Your coordinator contacts you in your language."],["Compare clinics and schedules","Review quotes and dates from selected clinics together."],["Visit and treatment","From airport pickup to interpreting and escort."],["Aftercare at home","We follow your recovery together."]]],
+  zh:["韩国美容第一步","这样开始了解韩国美容趋势与项目。",[["整理想要的改变","没有照片也没关系，告诉我们您的烦恼和希望的日期即可。"],["申请咨询","专属顾问会用您的语言联系您。"],["比较医院与日程","一起查看精选医院的报价与日程。"],["来访与治疗","从机场接送到翻译陪同全程安排。"],["回国后的术后管理","一起关注恢复情况。"]]],
+  pt:["Primeiros passos na K-beauty","Como começar com as tendências e tratamentos de beleza coreanos.",[["Defina o que quer mudar","Não precisa de fotos. Conte suas preocupações e datas preferidas."],["Peça uma consulta","Seu coordenador entra em contato no seu idioma."],["Compare clínicas e datas","Vemos juntos orçamentos e agendas de clínicas selecionadas."],["Visita e tratamento","Do traslado no aeroporto à interpretação e acompanhamento."],["Pós-atendimento em casa","Acompanhamos sua recuperação juntos."]]]},
+ travel:{img:"g-travel",check:true,ko:["방문 전 준비하기","더 편안하고 즐거운 여정을 위한 체크리스트.",["여권 유효기간 6개월 이상 남았는지 확인","비자 또는 전자여행허가(K-ETA) 필요 여부 확인","항공권과 숙소 예약 (회복 기간 여유 포함)","복용 중인 약과 지병은 담당 코디네이터에게 따로 알리기","여행자 보험 가입","편한 옷, 선글라스, 마스크, 모자 챙기기","한국에서 쓸 메신저 연락처를 코디네이터와 공유","귀국 후 사후관리 일정 확인"]],
+  mn:["Айлчлалын өмнөх бэлтгэл","Илүү тав тухтай аяллын шалгах жагсаалт.",["Паспортын хүчинтэй хугацаа 6 сараас дээш эсэхийг шалгах","Виз эсвэл K-ETA шаардлагатай эсэхийг шалгах","Нислэг, буудлаа захиалах (сэргэх хугацааг тооцох)","Ууж буй эм, архаг өвчнөө зөвхөн зохицуулагчдаа хэлэх","Аяллын даатгалд хамрагдах","Тав тухтай хувцас, нарны шил, маск, малгай авах","Солонгост ашиглах мессенжерээ зохицуулагчтай хуваалцах","Буцсаны дараах хяналтын хуваарийг шалгах"]],
+  en:["Before your visit","A checklist for a more comfortable journey.",["Passport valid for 6+ months","Check whether you need a visa or K-ETA","Book flights and accommodation (allow time for recovery)","Tell your coordinator privately about medications and conditions","Get travel insurance","Pack comfortable clothes, sunglasses, a mask and a hat","Share your messenger contact for Korea with your coordinator","Confirm your aftercare schedule after returning home"]],
+  zh:["来访前准备","让旅程更舒适愉快的检查清单。",["确认护照有效期在6个月以上","确认是否需要签证或K-ETA","预订机票与住宿（预留恢复时间）","服用的药物与既往病史请单独告知顾问","购买旅行保险","准备舒适衣物、墨镜、口罩、帽子","与顾问分享在韩国使用的通讯方式","确认回国后的术后管理日程"]],
+  pt:["Antes da visita","Um checklist para uma jornada mais tranquila.",["Passaporte com validade de 6+ meses","Verificar se precisa de visto ou K-ETA","Reservar voo e hospedagem (com tempo para recuperação)","Informar remédios e condições de saúde só ao seu coordenador","Contratar seguro-viagem","Levar roupas confortáveis, óculos de sol, máscara e chapéu","Compartilhar com o coordenador seu contato de mensageiro na Coreia","Confirmar a agenda de pós-atendimento após voltar"]]},
+ routine:{img:"g-routine",ko:["웰니스 루틴","아름다움이 지속되는, 일상의 작은 습관들.",["아침: 물 한 잔과 가벼운 스트레칭","외출 전: 자외선 차단제 꼼꼼히","오후: 짧은 산책으로 몸 깨우기","저녁: 순한 세안과 보습","밤: 7시간 이상 충분한 수면","시술 후에는 담당 의사의 안내를 가장 먼저 따르세요."]],
+  mn:["Велнесс дэглэм","Гоо үзэсгэлэнг удаан хадгалах өдөр тутмын жижиг дадал.",["Өглөө: нэг аяга ус, хөнгөн сунгалт","Гарахын өмнө: нарны хамгаалалт","Өдөр: богино алхалт","Орой: зөөлөн угаалга, чийгшүүлэлт","Шөнө: 7-оос дээш цаг унтах","Процедурын дараа эмчийнхээ зааврыг юуны түрүүнд дагаарай."]],
+  en:["Wellness routine","Small daily habits that help beauty last.",["Morning: a glass of water and light stretching","Before going out: thorough sunscreen","Afternoon: a short walk","Evening: gentle cleansing and moisturising","Night: 7+ hours of sleep","After any treatment, follow your doctor's instructions first."]],
+  zh:["康养日常","让美丽持久的日常小习惯。",["早晨：一杯水与轻度拉伸","出门前：认真涂防晒","下午：短暂散步","晚上：温和清洁与保湿","夜间：保证7小时以上睡眠","治疗后请首先遵循主治医生的指导。"]],
+  pt:["Rotina de bem-estar","Pequenos hábitos diários para a beleza durar.",["Manhã: um copo de água e alongamento leve","Antes de sair: protetor solar caprichado","Tarde: uma caminhada curta","Noite: limpeza suave e hidratação","À noite: 7+ horas de sono","Após qualquer procedimento, siga primeiro as orientações do seu médico."]]}
+};
+const THEMES=[["t-glow","skin"],["t-color","beauty"],["t-well","wellness"],["t-seoul","@travel"]];
+const CATK=["face","skin","dental","wellness","hair","spa"];
+/* ---------- state ---------- */
+const LS={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+const LANGS=["mn","ko","en","zh","pt"];
+function pickLang(){const q=new URLSearchParams(location.search).get("l");if(LANGS.includes(q))return q;const s=LS.get("dh-lang");if(LANGS.includes(s))return s;
+ const n=(navigator.language||"").slice(0,2).toLowerCase();return LANGS.includes(n)?n:"mn"}
+let L=pickLang();const t=()=>T[L];
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const won=n=>"₩"+n.toLocaleString("ko-KR");
+const formURL=p=>"index.html?form=1&l="+L+"&src=dohwa"+(p?"&p="+encodeURIComponent(p):"");
+const img=(k,alt="",eager)=>`<img src="img/dh/${k}.jpg" alt="${esc(alt)}" ${eager?"":'loading="lazy"'} decoding="async">`;
+/* ---------- views ---------- */
+function pkCard(p){const x=t();return `<button class="pk" data-pk="${p.id}"><div class="ph">${img(p.img,p.n[L])}</div><div class="pkb"><span class="dd">${p.d}${L==="ko"||L==="zh"?x.day:" "+x.day}</span><b>${esc(p.n[L])}</b><span class="ds">${esc(p.t[L])}</span><hr>
+ <div class="pkf"><span class="pr"><small>${esc(x.from)}</small><strong>${won(p.krw)}</strong></span><span class="off">-${p.off}%</span></div><span class="more">${esc(x.more)} ${ARR}</span></div></button>`}
+function home(){const x=t();
+ return `<section class="hero"><picture><source media="(max-width:720px)" srcset="img/dh/hero-m.jpg"><img src="img/dh/hero.jpg" alt="" fetchpriority="high"></picture><span class="ai">${esc(x.ai)}</span>
+  <div class="htx"><h1>${x.h1}</h1><p class="sub">${esc(x.sub)}</p>
+   <form class="srch" id="srch" role="search"><label><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B5E55" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><span class="sr">${esc(x.search)}</span><input id="q" type="search" placeholder="${esc(x.ph)}" autocomplete="off"></label>
+   <a class="btn" href="${formURL()}">${esc(x.start)} ${ARR}</a></form>
+   <div class="tags">BEAUTY · MEDICAL · WELLNESS · SEOUL</div></div></section>
+ <div class="wrap">
+  <div class="cats">${CATK.map((k,i)=>`<button class="cat" data-cat="${k}">${ic(k)}<b>${esc(x.cats[i][0])}</b><span>${esc(x.cats[i][1])}</span></button>`).join("")}</div>
+  <section class="sec"><div class="sh"><h2>${esc(x.journey)}</h2><i></i><a href="#/programs">${esc(x.allP)} ${ARR}</a></div>
+   <div class="g4 r1">${THEMES.map(([im,go],i)=>`<button class="card" data-theme="${go}"><div class="ph">${img(im,x.themes[i][0])}</div><div class="ct"><div><b>${esc(x.themes[i][0])}</b><span>${esc(x.themes[i][1])}</span></div>${ARR}</div></button>`).join("")}</div></section>
+  <section class="sec" id="guides"><div class="sh"><h2>${esc(x.guide)}</h2><i></i><a href="#/guides">${esc(x.allG)} ${ARR}</a></div>
+   <div class="g3 r2">${Object.entries(GD).map(([k,g])=>`<button class="card" data-guide="${k}"><div class="ph">${img(g.img,g[L][0])}</div><div class="ct"><div><b>${esc(g[L][0])}</b><span>${esc(g[L][1])}</span></div>${ARR}</div></button>`).join("")}</div></section>
+  <section class="sec" id="clinics"><div class="sh"><h2>${esc(x.clinics)}</h2><i></i></div>
+   <div class="g4 r3">${[1,2,3,4].map(i=>`<div><div class="ph">${img("c"+i,x.clinicCap)}<span class="ai">${esc(x.ai)}</span></div><div class="cap">${esc(x.clinicCap)}</div></div>`).join("")}</div>
+   <p class="note">${esc(x.clinicNote)}</p></section>
+  <section class="cb">${img("b-home")}<div><h3>${esc(x.cbT)}</h3><p>${esc(x.cbP)}</p></div><a class="btn" href="${formURL()}">${esc(x.consult)} ${ARR}</a></section>
+ </div>`}
+let F={tab:"all",feat:null,q:""};
+function matches(p){const q=F.q.trim().toLowerCase();
+ if(F.tab!=="all"&&!p.cat.includes(F.tab))return false;if(F.feat&&!p.cat.includes(F.feat))return false;
+ if(q){const hay=[p.n[L],p.t[L],p.n.ko,p.t.ko,p.n.en].join(" ").toLowerCase();return q.split(/\s+/).every(w=>hay.includes(w))}return true}
+function programs(){const x=t();const list=PK.filter(matches);
+ return `<div class="wrap"><div class="ptop"><h1>${esc(x.pTitle)}</h1><p>${esc(x.pSub)}</p></div>
+  <div class="tabs" role="tablist">${Object.entries(x.tabs).map(([k,v])=>`<button role="tab" aria-selected="${F.tab===k}" class="${F.tab===k?"on":""}" data-tab="${k}">${esc(v)}</button>`).join("")}</div>
+  ${F.feat||F.q?`<div class="chipq"><span>${esc(F.feat?x.feat[F.feat]||x.tabs[F.feat]:"")}${F.feat&&F.q?" · ":""}${F.q?"“"+esc(F.q)+"”":""}<button data-clr aria-label="${esc(x.clear)}">×</button></span></div>`:""}
+  ${list.length?`<div class="g4">${list.map(pkCard).join("")}</div>`:`<div class="empty"><p>${esc(x.none)}</p><a class="btn" href="${formURL(F.q||(F.feat?x.feat[F.feat]:""))}">${esc(x.consult)} ${ARR}</a></div>`}
+  <p class="note" style="text-align:center">${esc(x.imgNote)}<br>${esc(x.priceNote)}</p>
+  <section class="cb right">${img("b-pkg")}<div><h3>${esc(x.pbT)}</h3></div><a class="btn" href="${formURL()}">${esc(x.consult)} ${ARR}</a></section></div>`}
+function guides(){const x=t();return `<div class="wrap"><div class="ptop"><h1>${esc(x.guide)}</h1></div><div class="g3 r2" style="margin-top:20px">${Object.entries(GD).map(([k,g])=>`<button class="card" data-guide="${k}"><div class="ph">${img(g.img,g[L][0])}</div><div class="ct"><div><b>${esc(g[L][0])}</b><span>${esc(g[L][1])}</span></div>${ARR}</div></button>`).join("")}</div>
+ <section class="cb">${img("b-home")}<div><h3>${esc(x.cbT)}</h3><p>${esc(x.cbP)}</p></div><a class="btn" href="${formURL()}">${esc(x.consult)} ${ARR}</a></section></div>`}
+/* ---------- modal ---------- */
+const mdl=document.getElementById("mdl"),mbox=document.getElementById("mbox");let lastFocus=null;
+function openModal(html,wide){lastFocus=document.activeElement;mbox.className="mbox"+(wide?" wide":"");mbox.innerHTML=html+`<button class="mx" data-x aria-label="${esc(t().close)}">×</button>`;mdl.hidden=false;document.body.style.overflow="hidden";mbox.querySelector(".mx").focus()}
+function closeModal(){if(mdl.hidden)return;mdl.hidden=true;document.body.style.overflow="";const h=location.hash;if(/^#\/(p|g)\//.test(h))history.replaceState(null,"",h.startsWith("#/p/")?"#/programs":"#/guides");if(lastFocus)lastFocus.focus()}
+function showPk(id){const p=PK.find(x=>x.id===id);if(!p)return;const x=t();
+ openModal(`<div class="ph">${img(p.img,p.n[L],1)}<span class="ai">${esc(x.ai)}</span></div><div class="mtx"><span class="dd">${p.d}${L==="ko"||L==="zh"?x.day:" "+x.day}</span><h3>${esc(p.n[L])}</h3>
+  <p>${esc(p.t[L])}</p><p class="pr"><small>${esc(x.from)}</small> <strong style="font-size:20px">${won(p.krw)}</strong> <span class="off">-${p.off}%</span></p>
+  <p class="small">${esc(x.priceNote)}</p><a class="btn" href="${formURL(p.n.ko)}">${esc(x.ask)} ${ARR}</a></div>`)}
+function showGuide(k){const g=GD[k];if(!g)return;const [ti,su,items]=g[L];const x=t();
+ let body;if(g.check){const st=JSON.parse(LS.get("dh-check")||"{}");body=`<ul class="chk">${items.map((it,i)=>`<li><label><input type="checkbox" data-ck="${i}" ${st[i]?"checked":""}><span>${esc(it)}</span></label></li>`).join("")}</ul><p class="small">✓ ${esc(x.saved)}</p>`}
+ else if(Array.isArray(items[0]))body=`<ol>${items.map(([a,b])=>`<li><b>${esc(a)}</b><br><span class="small" style="font-size:13px">${esc(b)}</span></li>`).join("")}</ol>`;
+ else body=`<ul>${items.map(i=>`<li>${esc(i)}</li>`).join("")}</ul>`;
+ openModal(`<div class="ph">${img(g.img,ti,1)}</div><div class="mtx"><h3>${esc(ti)}</h3><p>${esc(su)}</p>${body}<a class="btn" href="${formURL()}">${esc(x.consult)} ${ARR}</a></div>`)}
+/* ---------- render ---------- */
+const main=document.getElementById("main");
+function route(){const h=location.hash||"#/";const x=t();let view="home";
+ if(h.startsWith("#/programs")||h.startsWith("#/p/"))view="programs";else if(h.startsWith("#/guides")||h.startsWith("#/g/"))view="guides";
+ document.documentElement.lang=L;
+ document.getElementById("nav").innerHTML=[["#/programs",0,"programs"],["#/guides",1,"guides"],["#/#clinics",2,"clinics"],[formURL(),3,""]].map(([u,i,v])=>`<a href="${u}" class="${view===v?"on":""}">${esc(x.nav[i])}</a>`).join("");
+ document.getElementById("fl").innerHTML=`<a href="#/guides">${esc(x.ft[0])}</a><a href="index.html?form=1&l=${L}#privacy">${esc(x.ft[1])}</a><a href="${formURL()}">${esc(x.ft[2])}</a>`;
+ document.getElementById("disc").textContent=x.disc+"  © 2026 청담도화 · LA BELLE LB";
+ const m=document.getElementById("mcta");m.href=formURL();m.innerHTML=esc(x.start)+" "+ARR;
+ main.innerHTML=view==="programs"?programs():view==="guides"?guides():home();
+ const pm=/^#\/p\/(\w+)/.exec(h),gm=/^#\/g\/(\w+)/.exec(h);if(pm)showPk(pm[1]);else if(gm)showGuide(gm[1]);else if(!mdl.hidden)closeModal();
+ if(h==="#/#clinics"){const c=document.getElementById("clinics");if(c)c.scrollIntoView()}
+ bind()}
+function bind(){
+ const f=document.getElementById("srch");if(f)f.onsubmit=e=>{e.preventDefault();F={tab:"all",feat:null,q:document.getElementById("q").value};go("#/programs")};
+ const q=document.getElementById("q");if(q)q.onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();f.onsubmit(e)}};
+}
+function go(h){if(location.hash===h)route();else location.hash=h;scrollTo(0,0)}
+document.addEventListener("click",e=>{
+ const c=e.target.closest("[data-cat]");if(c){const k=c.dataset.cat;F={tab:["skin","wellness"].includes(k)?k:"all",feat:["skin","wellness"].includes(k)?null:k,q:""};go("#/programs");return}
+ const th=e.target.closest("[data-theme]");if(th){const g=th.dataset.theme;if(g[0]==="@"){location.hash="#/g/"+g.slice(1);return}F={tab:g,feat:null,q:""};go("#/programs");return}
+ const tb=e.target.closest("[data-tab]");if(tb){F.tab=tb.dataset.tab;route();return}
+ if(e.target.closest("[data-clr]")){F={tab:F.tab,feat:null,q:""};route();return}
+ const pk=e.target.closest("[data-pk]");if(pk){location.hash="#/p/"+pk.dataset.pk;return}
+ const gd=e.target.closest("[data-guide]");if(gd){location.hash="#/g/"+gd.dataset.guide;return}
+ if(e.target.closest("[data-x]")||e.target===mdl){closeModal();return}
+});
+document.addEventListener("change",e=>{const c=e.target.closest("[data-ck]");if(!c)return;const st=JSON.parse(LS.get("dh-check")||"{}");st[c.dataset.ck]=c.checked;LS.set("dh-check",JSON.stringify(st))});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
+const sel=document.getElementById("lang");sel.value=L;sel.onchange=()=>{L=sel.value;LS.set("dh-lang",L);const h=location.hash;closeModal();route();if(/^#\/(p|g)\//.test(h))location.hash=h};
+addEventListener("hashchange",()=>{route();if(!/^#\/(p|g)\//.test(location.hash)&&location.hash!=="#/#clinics")scrollTo(0,0)});
+route();
+</script>
+</body>
+</html>
