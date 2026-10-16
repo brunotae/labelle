@@ -1102,6 +1102,10 @@ a.btn{text-decoration:none;display:inline-flex;align-items:center}
   .bnf .g2,.bnf .g3{grid-template-columns:minmax(0,1fr)}.bnf .hide{display:none}
 }
 @media (prefers-reduced-motion:reduce){.bns{transition:none!important}}
+.bnall{position:absolute;inset:0;z-index:2;border:0;background:transparent;cursor:pointer}
+.bns img[src$="rs/hero.jpg"]{object-position:50% 38%}
+.bns source[srcset$="rs/hero-m.jpg"]+img{object-position:50% 38%}
+.sc4::after{width:56%}
 </style>
 </head>
 <body>
@@ -1158,7 +1162,7 @@ const SB_URL="https://agdqlnaedojcgivwluty.supabase.co";
 const SB_KEY="sb_publishable_PKGxxrfpduzI7xY1_DWQyQ_cnJA9isP";
 const T="labelle_patients";
 const LOGIN_DOMAIN="@labelle.app";
-const VERSION="v3.7";
+const VERSION="v3.6.1";
 const sb=window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:true,autoRefreshToken:true,storageKey:"labelle-auth"}});
 
 /* ---------- constants ---------- */
@@ -2397,7 +2401,7 @@ function heroHTML(){
 }
 function statCards(){
   const a=active(),m=ym();
-  const C=[["consult","상담 · 견적","people",r=>(r.stage||0)<=3,"c1"],["ready","입국 예정","plane",r=>r.stage===4||r.stage===5,"c2"],["korea","한국 체류 중","cal",r=>r.stage>=6&&r.stage<=9,"c3"],["after","출국 · 사후관리","out",r=>r.stage===10||r.stage===11,"c4"]];
+  const C=[["consult","상담 · 견적","people",r=>(r.stage||0)<=3,"bn/s1"],["ready","입국 예정","plane",r=>r.stage===4||r.stage===5,"bn/s2"],["korea","한국 체류 중","cal",r=>r.stage>=6&&r.stage<=9,"bn/s3"],["after","출국 · 사후관리","out",r=>r.stage===10||r.stage===11,"bn/s4"]];
   return `<div class="stats4">${C.map(([k,l,ic,f,img])=>{const n=a.filter(f).length,nw=a.filter(r=>f(r)&&(r.created_at||"").startsWith(m)).length;
     return `<button class="sc4" data-dpt="${k}" style="--img:url(img/${img}.jpg)"><div class="lb4">${svgI(ic)}${l}</div><div class="nn">${n}${nw?`<small>이번 달 +${nw}</small>`:""}</div></button>`}).join("")}</div>`;
 }
@@ -4477,10 +4481,7 @@ const BN_PRESET=[["bn/b1","AI 상담"],["bn/b2","안전·글로벌"],["bn/b3","�
 const BN_MOBILE=new Set(["bn/b1","bn/b2","bn/b3","bn/b4","rs/hero"]);
 const BN_DEF={
  hero:[
-  {on:true,img:"bn/b1",title:"AI SOFIA 사전상담",sub:"다국어 상담·번역·상담 요약으로 방문 전 상담을 준비합니다.",cta:"상담 관리",go:"leads",url:""},
-  {on:true,img:"bn/b2",title:"안전한 의료관광 여정",sub:"상담부터 귀국 후 사후관리까지 한 곳에서 관리합니다.",cta:"환자 여정",go:"home",url:""},
-  {on:true,img:"bn/b3",title:"Reset美 프리미엄 의료관광",sub:"서울의 엄선된 병원·클리닉과 함께합니다.",cta:"서비스 보기",go:"svc",url:""},
-  {on:true,img:"bn/b4",title:"입국부터 출국까지",sub:"공항 픽업·입국·출국 일정을 놓치지 않게 관리합니다.",cta:"일정 관리",go:"cal",url:""}],
+  {on:true,img:"rs/hero",title:"",sub:"",cta:"",go:"svc",url:""}],
  side:[
   {on:true,img:"rs/hero",title:"Reset美 서비스",sub:"고객에게 소개할 프로그램을 확인하세요.",cta:"서비스 보기",go:"svc",url:""},
   {on:true,img:"rs/consult",title:"상담 신청서 링크",sub:"내 담당 링크를 고객에게 보내면 바로 나에게 배정됩니다.",cta:"상담 관리",go:"leads",url:""}]};
@@ -4496,7 +4497,7 @@ function bnBtn(b){if(!b.cta)return "";
 heroHTML=function(){
   const L=bnList("hero");if(!L.length)return "";const i=S.bnI.hero%L.length;
   return `<div class="bnh" id="bnh" aria-roledescription="carousel">${L.map((b,j)=>`<div class="bns ${j===i?"on":""}" data-bi="${j}" ${j===i?"":'aria-hidden="true"'}>${bnPic(b,j===0)}
-    <div class="bntx"><span class="ey">LA BELLE LB · Reset美</span><b>${esc(b.title||"")}</b>${b.sub?`<span class="bnsub">${esc(b.sub)}</span>`:""}${bnBtn(b)}</div></div>`).join("")}
+    ${b.title?`<div class="bntx"><span class="ey">LA BELLE LB · Reset美</span><b>${esc(b.title)}</b>${b.sub?`<span class="bnsub">${esc(b.sub)}</span>`:""}${bnBtn(b)}</div>`:(b.go?`<button type="button" class="bnall" data-go="${esc(b.go)}" aria-label="${esc(b.go)}"></button>`:"")}</div>`).join("")}
    ${rsAiTag(uiLang())}
    ${L.length>1?`<div class="bnctl"><span class="bndots">${L.map((_,j)=>`<button type="button" class="${j===i?"on":""}" data-bdot="${j}" aria-label="${j+1}"></button>`).join("")}</span>
      <button type="button" class="bnpp" id="bnPP" aria-label="${S.bnPause?"재생":"일시정지"}">${S.bnPause?"▶":"❚❚"}</button></div>`:""}</div>`;
